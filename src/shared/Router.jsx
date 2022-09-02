@@ -19,16 +19,12 @@ const Router = () => {
     return (
         <>
         <div>
-        <button onClick={()=>{navigate("/")}}> 메인 </button>
-        <button onClick={()=>{navigate("/login")}}> 로그인 </button>
-        <button onClick={()=>{navigate("/signup")}}> 회원가입 </button>
-        <button onClick={()=>{navigate("/user/:id")}}> 정보페이지 </button>
-        <button onClick={()=>{navigate("/ranking")}}> 랭킹 페이지 </button>
-        <button onClick={()=>{navigate("/admin/:id")}}> 관리자페이지 </button>
-        <button onClick={()=>{navigate("/game/counter")}}> 카운터 </button>
-        <button onClick={()=>{navigate("/game/oddeven")}}> 홀짝 </button>
-        <button onClick={()=>{navigate("/game/dice")}}> 주사위 </button>
-        <button onClick={()=>{navigate("/game/lotto")}}> 로또 </button>
+            <button onClick={()=>{navigate("/")}}> 메인 </button>
+            <button onClick={()=>{navigate("/login")}}> 로그인 </button>
+            <button onClick={()=>{navigate("/signup")}}> 회원가입 </button>
+            <button onClick={()=>{navigate("/user/:id")}}> 정보페이지 </button>
+            <button onClick={()=>{navigate("/ranking")}}> 랭킹 페이지 </button>
+            <button onClick={()=>{navigate("/admin/:id")}}> 관리자페이지 </button>
         </div>
         <Routes>
             <Route path ="/" exact element={<Home/>}/>

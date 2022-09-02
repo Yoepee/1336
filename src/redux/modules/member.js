@@ -14,30 +14,30 @@ export const __getMember = createAsyncThunk(
   );
 
 export const member = createSlice({
-    name:"posts",
+    name:"member",
     initialState: {
-        posts: [],
-        isLoading: false,
+        data: [],
+        success: false,
         error: null,
       },
     reducers:{
         createMember(state, action){
-          state.posts.push(action.payload);
+          state.member.push(action.payload);
           axios.post("https://localhost:3001/member", action.payload );
         },
         removeMember(state, action){
-          let  index = state.posts.findIndex(post =>  post.id === action.payload);
+          let  index = state.member.findIndex(post =>  post.id === action.payload);
 			    state.posts.splice(index,1);
           axios.delete(`https://localhost:3001/member/${action.payload}`);
         },
         updateMember(state, action){
-          let  index = state.posts.findIndex(post =>  post.id === action.payload.id);
-			    state.posts.splice(index, 1, action.payload);
+          let  index = state.member.findIndex(post =>  post.id === action.payload.id);
+			    state.member.splice(index, 1, action.payload);
           axios.patch(`https://localhost:3001/member/${action.payload.id}`, action.payload);
         },
         likeMember(state, action){
-          let index = state.posts.findIndex(post => post.id === action.payload.id);
-			    state.posts[index].count +=1;
+          let index = state.member.findIndex(post => post.id === action.payload.id);
+			    state.member[index].count +=1;
           axios.patch(`https://localhost:3001/member/${action.payload.id}`, action.payload);
         },
     },

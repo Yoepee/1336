@@ -2,12 +2,10 @@ const Manage = () => {
     return (
         <div>
             <div>
-                <label>UserID</label>
-                <input></input>
+                <input placeholder="아이디"></input>
             </div>
             <div>
-                <label>지급할 포인트</label>
-                <input></input>
+                <input placeholder="지급 포인트"></input>
             </div>
             <div>
                 <button>지급하기</button>
