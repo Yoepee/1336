@@ -5,8 +5,8 @@ import member from "./modules/member"
 
 export default configureStore({
     reducer: { 
-        comment : comment.reducer,
-        lotto : lotto.reducer,
+        // comment : comment.reducer,
+        // lotto : lotto.reducer,
         member : member.reducer
     }
 })

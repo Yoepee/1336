@@ -1,6 +1,13 @@
+import { useState } from "react";
+
 const Dice = () => {
+    let [count, setCount] = useState(0);
+    let [choice, setChoice] = useState("");
     return (
-        <div>주사위</div>
+        <div>
+            <p>주사위</p>
+            <button>잘되는지</button>
+        </div>
     )
 }
 

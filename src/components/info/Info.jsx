@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const Info = () => {
+    let navigate = useNavigate();
     return (
         <div>
             <div>
@@ -11,7 +14,7 @@ const Info = () => {
                 <p>보유코인 :</p>
             </div>
             <div>
-                <button>회원탈퇴</button>
+                <button onClick={()=>{navigate("/login")}}>회원탈퇴</button>
             </div>
         </div>
     )
