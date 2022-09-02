@@ -24,6 +24,9 @@ const FormSignup = () => {
                 <input></input>
                 <button>성인인증</button>
             </div>
+            <div>
+                <button>회원가입</button>
+            </div>
         </div>
     )
 }

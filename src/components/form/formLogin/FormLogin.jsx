@@ -9,6 +9,10 @@ const FormLogin = () => {
                 <label>PW</label>
                 <input></input>
             </div>
+            <div>
+                <button>로그인</button>
+                <button>회원가입</button>
+            </div>
         </div>
     )
 }
