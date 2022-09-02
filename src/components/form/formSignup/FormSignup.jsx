@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const FormSignup = () => {
+    let navigate = useNavigate();
     return (
         <div>
             <div>
@@ -25,7 +28,7 @@ const FormSignup = () => {
                 <button>성인인증</button>
             </div>
             <div>
-                <button>회원가입</button>
+                <button onClick={()=>{navigate("/login")}}>회원가입</button>
             </div>
         </div>
     )
