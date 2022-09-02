@@ -14,13 +14,16 @@ const Router = () => {
     return (
         <>
         <div>
-        <button onClick={()=>{navigate("/")}}> 나는 메인입니다. </button>
-        <button onClick={()=>{navigate("/login")}}> 나는 로그인입니다. </button>
-        <button onClick={()=>{navigate("/signup")}}> 나는 가입입니다. </button>
-        <button onClick={()=>{navigate("/user/:id")}}> 나는 정보입니다. </button>
-        <button onClick={()=>{navigate("/ranking")}}> 나는 랭킹입니다. </button>
-        <button onClick={()=>{navigate("/game")}}> 나는 게임입니다. </button>
-        <button onClick={()=>{navigate("/admin/:id")}}> 나는 관리자페이지입니다. </button>
+        <button onClick={()=>{navigate("/")}}> 메인 </button>
+        <button onClick={()=>{navigate("/login")}}> 로그인 </button>
+        <button onClick={()=>{navigate("/signup")}}> 회원가입 </button>
+        <button onClick={()=>{navigate("/user/:id")}}> 정보페이지 </button>
+        <button onClick={()=>{navigate("/ranking")}}> 랭킹 페이지 </button>
+        <button onClick={()=>{navigate("/admin/:id")}}> 관리자페이지 </button>
+        <button onClick={()=>{navigate("/game/a")}}> 게임1 </button>
+        <button onClick={()=>{navigate("/game/b")}}> 게임2 </button>
+        <button onClick={()=>{navigate("/game/c")}}> 게임3 </button>
+        <button onClick={()=>{navigate("/game/d")}}> 게임4 </button>
         </div>
         <Routes>
             <Route path ="/" exact element={<Home/>}/>
@@ -29,10 +32,10 @@ const Router = () => {
             <Route path ="/user/:id" exact element={<User/>}/>
             <Route path ="/ranking" exact element={<Ranking/>}/>
             <Route path ="/game" exact element={<Game/>}>
-                <Route path ="a" exact element={<Game/>}/>
-                <Route path ="b" exact element={<Game/>}/>
-                <Route path ="c" exact element={<Game/>}/>
-                <Route path ="d" exact element={<Game/>}/>
+                <Route path ="a" exact element={<div>카운터</div>}/>
+                <Route path ="b" exact element={<div>홀짝</div>}/>
+                <Route path ="c" exact element={<div>주사위</div>}/>
+                <Route path ="d" exact element={<div>로또</div>}/>
             </Route>
             <Route path ="/admin/:id" exact element={<Admin/>}/>
             <Route path ="*" element={<div>404 Not Found</div>}/>
