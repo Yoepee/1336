@@ -1,0 +1,15 @@
+const FormLogin = () => {
+    return (
+        <div>
+            <div>
+                <label>ID</label>
+                <input></input>
+            </div>
+            <div>
+                <label>PW</label>
+                <input></input>
+            </div>
+        </div>
+    )
+}
+export default FormLogin;
