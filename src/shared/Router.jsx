@@ -9,6 +9,11 @@ import Ranking from "../pages/Ranking"
 import Game from "../pages/Game"
 import Admin from "../pages/Admin"
 
+import Counter from "../components/game/counter/Counter"
+import Oddeven from "../components/game/oddeven/Oddeven"
+import Dice from "../components/game/dice/Dice"
+import Lotto from "../components/game/lotto/Lotto"
+
 const Router = () => {
     let navigate =useNavigate();
     return (
@@ -20,10 +25,10 @@ const Router = () => {
         <button onClick={()=>{navigate("/user/:id")}}> 정보페이지 </button>
         <button onClick={()=>{navigate("/ranking")}}> 랭킹 페이지 </button>
         <button onClick={()=>{navigate("/admin/:id")}}> 관리자페이지 </button>
-        <button onClick={()=>{navigate("/game/a")}}> 게임1 </button>
-        <button onClick={()=>{navigate("/game/b")}}> 게임2 </button>
-        <button onClick={()=>{navigate("/game/c")}}> 게임3 </button>
-        <button onClick={()=>{navigate("/game/d")}}> 게임4 </button>
+        <button onClick={()=>{navigate("/game/counter")}}> 카운터 </button>
+        <button onClick={()=>{navigate("/game/oddeven")}}> 홀짝 </button>
+        <button onClick={()=>{navigate("/game/dice")}}> 주사위 </button>
+        <button onClick={()=>{navigate("/game/lotto")}}> 로또 </button>
         </div>
         <Routes>
             <Route path ="/" exact element={<Home/>}/>
@@ -32,10 +37,10 @@ const Router = () => {
             <Route path ="/user/:id" exact element={<User/>}/>
             <Route path ="/ranking" exact element={<Ranking/>}/>
             <Route path ="/game" exact element={<Game/>}>
-                <Route path ="a" exact element={<div>카운터</div>}/>
-                <Route path ="b" exact element={<div>홀짝</div>}/>
-                <Route path ="c" exact element={<div>주사위</div>}/>
-                <Route path ="d" exact element={<div>로또</div>}/>
+                <Route path ="counter" exact element={<Counter/>}/>
+                <Route path ="oddeven" exact element={<Oddeven/>}/>
+                <Route path ="dice" exact element={<Dice/>}/>
+                <Route path ="lotto" exact element={<Lotto/>}/>
             </Route>
             <Route path ="/admin/:id" exact element={<Admin/>}/>
             <Route path ="*" element={<div>404 Not Found</div>}/>

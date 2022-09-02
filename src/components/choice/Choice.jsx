@@ -7,10 +7,10 @@ const Choice = () => {
                 <p>전체게임</p>
             </div>
             <div>
-                <div onClick={()=>navigate("/game/a")}>게임1</div>
-                <div onClick={()=>navigate("/game/b")}>게임2</div>
-                <div onClick={()=>navigate("/game/c")}>게임3</div>
-                <div onClick={()=>navigate("/game/d")}>게임4</div>
+                <button onClick={() => { navigate("/game/counter") }}> 카운터 </button>
+                <button onClick={() => { navigate("/game/oddeven") }}> 홀짝 </button>
+                <button onClick={() => { navigate("/game/dice") }}> 주사위 </button>
+                <button onClick={() => { navigate("/game/lotto") }}> 로또 </button>
             </div>
         </div>
     )
