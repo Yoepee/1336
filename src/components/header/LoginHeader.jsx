@@ -3,18 +3,16 @@ import styled from "styled-components"
 import bg from "../../img/HeaderImg.jpg"
 
 // 상세페이지, 로그아웃 연결되는 페이지
-const Header = () => {
+const LoginHeader = () => {
     // navigate를 통한 경로지정
     let navigate = useNavigate();
     return (
         <div>
             <div>
             <HeaderBox>
-                <StHeadbtn onClick={() => { navigate("/user/:id") }}>마이페이지</StHeadbtn>
-                <StHeadbtn onClick={() => { navigate("/login") }}>로그아웃</StHeadbtn>
             </HeaderBox>
             </div>
-            <Title_bg className="main-bg" onClick={() => { navigate("/") }}/>
+            <Title_bg className="main-bg" onClick={() => { navigate("/login") }}/>
         </div>
     )
 }
@@ -30,18 +28,17 @@ const Headbtn = styled.button`
 position: static
 `
 
-export default Header;
+export default LoginHeader;
 
 const HeaderBox = styled.form`
     display: flex;
     flex-direction: row;
     -webkit-box-align: center;
     align-items: center;
-    float: right;
 `;
 
 const StHeadbtn = styled.button `
-    outline: none;
+outline: none;
     border-width: 1px;
     border-radius: 12px;
     border-style: solid;

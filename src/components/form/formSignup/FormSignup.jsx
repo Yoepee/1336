@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // 달력을 위한 라이브러리 생성 (yarn add react-calendar || npm install react-calendar)
 import Calendar from 'react-calendar'
 // 기본으로 제공하는 달력 css 적용
@@ -15,6 +15,7 @@ import { createMember } from "../../../redux/modules/member";
 const FormSignup = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
+    const [check, setCheck] = useState(false);
     const [date, setDate] = useState(new Date());
     let initialState = {
         id: "",
@@ -40,6 +41,10 @@ const FormSignup = () => {
         // 회원가입 성공여부를 받아서 메세지로 띄워주면 끝날듯
         navigate("/login");
       };
+
+      useEffect(()=>{
+        setCheck(false);
+      },[date]) 
     return (
 
         <AddInputGroup>
@@ -87,19 +92,21 @@ const FormSignup = () => {
             <Label>
                 <Input placeholder="생년월일"
                     onChange={onChangeHandler}
+                    onClick={()=>{setCheck(true);console.log(check);}}
                     name="birthDate"
                     value={moment(date).format("YYYY-MM-DD")}
                     type="text" readOnly />
 
                 {/* form 내부에서 버튼 type은 submit으로 누르면 새로고침 기능동작 */}
                 {/* type="button"으로 지정해주면 새로고침 동작x */}
-                <Button type="button" onClick={() => { setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") }) }}>성인인증</Button>
                 </Label>
-
+                {check?
                 <div>
                     <Calendar onChange={setDate} value={date} name="birthDate" />
-            
                 </div>
+                :null
+                }
+                <Button type="button" onClick={() => { setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") }) }}>성인인증</Button>
             </div>
             
             <div>

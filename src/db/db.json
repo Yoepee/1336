@@ -55,6 +55,13 @@
       "passwordConfirm": "",
       "nickName": "",
       "birthDate": "20220903"
+    },
+    {
+      "id": 6,
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "",
+      "birthDate": "20220903"
     }
   ],
   "lotto": [],
