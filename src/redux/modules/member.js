@@ -22,6 +22,7 @@ export const __getMember = createAsyncThunk(
         try {
             const data =  await axios.post("https://3.34.5.30/api/member/chkName", payload);
             console.log(data);
+            console.log(payload);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -34,6 +35,7 @@ export const __getMember = createAsyncThunk(
         try {
             const data =  await axios.post("https://3.34.5.30/api/member/chkId", payload);
             console.log(data);
+            console.log(payload);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -50,6 +52,7 @@ export const __getMember = createAsyncThunk(
                   RefreshToken: localStorage.setItem('login-token2'),
             }});
             console.log(data);
+            console.log(payload);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
