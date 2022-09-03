@@ -97,8 +97,9 @@ const FormSignup = () => {
                 </Label>
 
                 <div>
+                    <CalenderForm>
                     <Calendar onChange={setDate} value={date} name="birthDate" />
-            
+                    </CalenderForm>
                 </div>
             </div>
             
@@ -122,6 +123,13 @@ padding:12px 24px 24px 24px;
 background-size: 240px;
 
 `;
+
+const CalenderForm = styled.div `
+margin: 0 auto;
+margin-top: 2rem;
+padding:4px 24px 12px 24px;
+    
+`
 
 const Label = styled.label `
     overflow: hidden;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 
+
 const Counter = () => {
     let [count, setCount] = useState(0);
     let [timer, setTimer] = useState(30);
@@ -52,6 +53,7 @@ const Counter = () => {
 
 export default Counter;
 
+
 const StContainer = styled.div `
 width:450px;
 margin: 0 auto;
@@ -75,6 +77,7 @@ const StButton = styled.button`
     display: inline-block;
     line-height: normal;
     text-transform: uppercase;
+    
     `
 
 const Label = styled.label `
@@ -87,7 +90,7 @@ color: #8F8F91;
 `;
 
 const Input = styled.input`
-width: 75%;
+width: 55%;
 height: 25px;
 line-height: 28px;
 padding: 0px 0px 2px 5px;

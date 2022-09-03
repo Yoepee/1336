@@ -46,6 +46,7 @@ const Button = styled.button `
     text-align: center;
     font-weight: 400;
     text-transform: uppercase;
+   
 `;
 
 const StButton = styled.button `
@@ -69,11 +70,12 @@ const StButton = styled.button `
     white-space: nowrap;
     max-width: 100%;
     height: 42px;
-    font-size: 15px;
+    font-size: 18px;
     padding: 0px 22px;
     min-width: 64px;
     background-color: transparent;
     border-color: transparent;
     color: rgb(48, 52, 65);
     margin-right: 16px;
+   
     `
