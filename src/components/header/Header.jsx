@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
-import bg from "../../img/bg.jpg"
+import bg from "../../img/HeaderImg.jpg"
 
 // 상세페이지, 로그아웃 연결되는 페이지
 const Header = () => {

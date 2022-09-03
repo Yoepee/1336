@@ -75,7 +75,6 @@ const Chart = () => {
     return (
         <div>
             <div>
-                <p>랭킹리스트</p>
                 <button onClick={() => setCheck(true)}>갱신하기</button>
             </div>
             <div>
