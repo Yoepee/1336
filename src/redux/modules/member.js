@@ -5,7 +5,11 @@ export const __getMember = createAsyncThunk(
     "member/getMember",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.get("https://localhost:3001/member");
+            const data =  await axios.get("http://localhost:3001/member", {
+              headers: {
+                  Authorization: ``
+              }}
+          );console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -19,26 +23,30 @@ export const member = createSlice({
         data: [],
         success: false,
         error: null,
+        isLoading: false
       },
     reducers:{
         createMember(state, action){
-          state.member.push(action.payload);
-          axios.post("https://localhost:3001/member", action.payload );
+          state.data.push(action.payload);
+          axios.post("http://localhost:3001/member", action.payload, {
+            headers: {
+                Authorization: ``
+            }} );
         },
         removeMember(state, action){
-          let  index = state.member.findIndex(post =>  post.id === action.payload);
-			    state.posts.splice(index,1);
-          axios.delete(`https://localhost:3001/member/${action.payload}`);
+          let  index = state.data.findIndex(post =>  post.id === action.payload);
+			    state.data.splice(index,1);
+          axios.delete(`http://localhost:3001/member/${action.payload}`);
         },
         updateMember(state, action){
-          let  index = state.member.findIndex(post =>  post.id === action.payload.id);
-			    state.member.splice(index, 1, action.payload);
-          axios.patch(`https://localhost:3001/member/${action.payload.id}`, action.payload);
+          let  index = state.data.findIndex(post =>  post.id === action.payload.id);
+			    state.data.splice(index, 1, action.payload);
+          axios.patch(`http://localhost:3001/member/${action.payload.id}`, action.payload);
         },
         likeMember(state, action){
-          let index = state.member.findIndex(post => post.id === action.payload.id);
-			    state.member[index].count +=1;
-          axios.patch(`https://localhost:3001/member/${action.payload.id}`, action.payload);
+          let index = state.data.findIndex(post => post.id === action.payload.id);
+			    state.data[index].count +=1;
+          axios.patch(`http://localhost:3001/member/${action.payload.id}`, action.payload);
         },
     },
     extraReducers: {
@@ -47,7 +55,7 @@ export const member = createSlice({
         },
         [__getMember.fulfilled]: (state, action) => {
           state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-          state.posts = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
+          state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
         },
         [__getMember.rejected]: (state, action) => {
           state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.

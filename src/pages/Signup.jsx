@@ -2,10 +2,11 @@ import FormSignup from "../components/form/formSignup/FormSignup";
 
 const Signup = () => {
     return (
-        <>
-        <FormSignup/>
-        <div>나는 회원가입입니다.</div>
-        </>
+        <div>
+            <div>회원가입</div>
+            <FormSignup />
+            <div>나는 회원가입입니다.</div>
+        </div>
     )
 }
 

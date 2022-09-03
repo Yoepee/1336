@@ -1,5 +1,27 @@
 {
-    "member":[],
-    "lotto":[],
-    "comment":[]
+  "member": [
+    {
+      "id": 1,
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "test",
+      "birthDate": "20220903"
+    },
+    {
+      "id": "adsadas",
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "",
+      "birthDate": "20220903"
+    },
+    {
+      "id": "dasd",
+      "password": "qeqe",
+      "passwordConfirm": "qewqe",
+      "nickName": "qewq",
+      "birthDate": "20220903"
+    }
+  ],
+  "lotto": [],
+  "comment": []
 }
