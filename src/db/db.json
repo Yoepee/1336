@@ -27,6 +27,13 @@
       "passwordConfirm": "",
       "nickName": "",
       "birthDate": "20220903"
+    },
+    {
+      "id": "ㅇㅁㅁㅁㄴㅇ",
+      "password": "asda",
+      "passwordConfirm": "dasdas",
+      "nickName": "qwewq",
+      "birthDate": "20220903"
     }
   ],
   "lotto": [],
@@ -70,6 +77,11 @@
       "content": "ㅇㄴㅁㅇㅁㄴ",
       "game": "oddeven",
       "id": 8
+    },
+    {
+      "content": "dsaasd",
+      "game": "counter",
+      "id": 9
     }
   ],
   "ranking": []

@@ -5,6 +5,7 @@ import { __getComment, createComment } from "../../redux/modules/comment";
 const Comment = () => {
     const dispatch = useDispatch();
     let a = window.location.href.split('/')
+    console.log(a)
     let game = a[4];
     const initialState = {
         content: "",

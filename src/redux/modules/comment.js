@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
-
+// async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
 export const __getComment = createAsyncThunk(
     "member/getMember",
     async (payload, thunkAPI) => {
@@ -15,7 +15,7 @@ export const __getComment = createAsyncThunk(
           }
     }
   );
-
+// createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
 export const comment = createSlice({
     name:"comment",
     initialState: {
@@ -48,6 +48,7 @@ export const comment = createSlice({
           axios.patch(`http://localhost:3001/comment/${action.payload.id}`, action.payload);
         },
     },
+    // 내부에서 동작하는 함수 외 외부에서 선언해준 함수 동작을 보조하는 기능
     extraReducers: {
         [__getComment.pending]: (state) => {
           state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
