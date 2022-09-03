@@ -9,7 +9,7 @@ const Choice = () => {
                 <StButton onClick={() => { navigate("/chart") }}> 랭킹보기 </StButton>
                 <StButton onClick={() => { navigate("/admin/:id") }}> 관리자 </StButton>
             <div>
-                <h4>전체게임</h4>
+
             </div>
             <div>
             <GameBox>
@@ -69,7 +69,7 @@ const StButton = styled.button `
     white-space: nowrap;
     max-width: 100%;
     height: 42px;
-    font-size: 20px;
+    font-size: 15px;
     padding: 0px 22px;
     min-width: 64px;
     background-color: transparent;
