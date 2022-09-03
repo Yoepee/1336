@@ -20,8 +20,57 @@
       "passwordConfirm": "qewqe",
       "nickName": "qewq",
       "birthDate": "20220903"
+    },
+    {
+      "id": 2,
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "",
+      "birthDate": "20220903"
     }
   ],
   "lotto": [],
-  "comment": []
+  "comment": [
+    {
+      "content": "ㅇㄴㅁㅇㅁㄴ",
+      "game": "oddeven",
+      "id": 1
+    },
+    {
+      "content": "ㅇㄴㅁㅇㅁㄴ",
+      "game": "oddeven",
+      "id": 2
+    },
+    {
+      "content": "ㅇㅁㄴㅇㄴㅁ",
+      "game": "oddeven",
+      "id": 3
+    },
+    {
+      "content": "ㅋㅋ",
+      "game": "dice",
+      "id": 4
+    },
+    {
+      "content": "테스트",
+      "game": "counter",
+      "id": 5
+    },
+    {
+      "content": "ㅇㅁㄴㅇㅁ",
+      "game": "counter",
+      "id": 6
+    },
+    {
+      "content": "ㅇㅁㄴㅇㅁㄴ",
+      "game": "counter",
+      "id": 7
+    },
+    {
+      "content": "ㅇㄴㅁㅇㅁㄴ",
+      "game": "oddeven",
+      "id": 8
+    }
+  ],
+  "ranking": []
 }

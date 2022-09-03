@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
-// import comment from "./modules/comment"
+import comment from "./modules/comment"
 // import lotto from "./modules/lotto"
 import member from "./modules/member"
+import table from "./modules/table"
 
 export default configureStore({
     reducer: { 
-        // comment : comment.reducer,
+        comment : comment.reducer,
         // lotto : lotto.reducer,
-        member : member.reducer
+        member : member.reducer,
+        table : table.reducer
     }
 })

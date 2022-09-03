@@ -22,7 +22,7 @@ const Info = () => {
         return <div>{error.message}</div>;
     }
     let info = data.find((user)=>{
-        return String(user.id) == id
+        return String(user.id) === id
     })
     return (
         <div>
