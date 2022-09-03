@@ -7,6 +7,7 @@ import 'react-calendar/dist/Calendar.css';
 // 현재날짜를 위한 라이브러리 생성 (yarn add moment || npm install moment)
 import moment from 'moment';
 import { useDispatch } from "react-redux";
+import styled from "styled-components";
 
 // 리덕스에서 필요한 함수 소환 (데이터베이스 연결후 내용변경될 예정)
 import { createMember } from "../../../redux/modules/member";
@@ -40,54 +41,127 @@ const FormSignup = () => {
         navigate("/login");
       };
     return (
+
+        <AddInputGroup>
         <form onSubmit={onSubmitHandler} className="add-form">
             <div>
-                <input placeholder="아이디"
+            <Label>
+                <Input placeholder="아이디"
                     onChange={onChangeHandler}
                     name="id"
                     value={member.id}
                     type="text" />
-                <button>중복확인</button>
+                <CkButton>중복확인</CkButton>
+            </Label>
             </div>
             <div>
-                <input placeholder="비밀번호"
+                <Label>
+                <Input placeholder="비밀번호"
                     onChange={onChangeHandler}
                     name="password"
                     value={member.password}
                     type="password" />
+                </Label>
+
             </div>
             <div>
-                <input placeholder="비밀번호 확인"
+            <Label>
+                <Input placeholder="비밀번호 확인"
                     onChange={onChangeHandler}
                     name="passwordConfirm"
                     value={member.passwordConfirm}
                     type="password" />
+             </Label>
             </div>
             <div>
-                <input placeholder="닉네임"
+            <Label>
+                <Input placeholder="닉네임"
                     onChange={onChangeHandler}
                     name="nickName"
                     value={member.nickName}
                     type="text" />
-                <button>중복확인</button>
+                <CkButton>중복확인</CkButton>
+          </Label>
             </div>
             <div>
-                <input placeholder="생년월일"
+            <Label>
+                <Input placeholder="생년월일"
                     onChange={onChangeHandler}
                     name="birthDate"
                     value={moment(date).format("YYYY-MM-DD")}
                     type="text" readOnly />
+
                 {/* form 내부에서 버튼 type은 submit으로 누르면 새로고침 기능동작 */}
                 {/* type="button"으로 지정해주면 새로고침 동작x */}
-                <button type="button" onClick={() => { setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") }) }}>성인인증</button>
+                <Button type="button" onClick={() => { setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") }) }}>성인인증</Button>
+                </Label>
+
                 <div>
                     <Calendar onChange={setDate} value={date} name="birthDate" />
+            
                 </div>
             </div>
+            
             <div>
-                <button>회원가입</button>
+                
+                <Button>회원가입</Button>
             </div>
         </form>
+        </AddInputGroup>
     )
 }
 export default FormSignup;
+
+const AddInputGroup = styled.div `
+width:450px;
+margin: 0 auto;
+margin-top: 4rem;
+border : 4px solid #eee;
+border-radius: 12px;
+padding:12px 24px 24px 24px;
+background-size: 240px;
+
+`;
+
+const Label = styled.label `
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    margin: 0 0 8px 0;
+    border: 1px solid #eee;
+    color: #8F8F91;
+`;
+
+const Input = styled.input`
+    width: 75%;
+    height: 40px;
+    line-height: 28px;
+    padding: 0px 0px 2px 7px;
+    border: 0 none;
+    color: #8F8F91;
+    
+`;
+
+const Button = styled.button `
+    border: 1px solid #333;
+    background: #333;
+    color: #fff;
+    font-size: 17px;
+    padding: 13px 0;
+    margin: 15px 0 0;
+    width: 400px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+`;
+
+const CkButton = styled.button`
+    border: 1px;
+    margin: 15px 0 0;
+    display: inline-block;
+    text-align: center;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    text-transform: uppercase;
+`

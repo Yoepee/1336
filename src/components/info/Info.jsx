@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux/";
 import { useEffect } from "react";
+import styled from "styled-components";
 
 import { __getMember } from "../../redux/modules/member";
 //  유저 세부정보를 출력하는 페이지
@@ -33,25 +34,66 @@ const Info = () => {
     // 아이디, 닉네임, 보유코인, 승리횟수, 탈퇴기능까지 연결 (프로필 사진과 정보수정 기능 추가 예정?)
     return (
         <div>
+            <InfoBox>
             <div>
-                {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
-                <p>ID : {info?.id}</p>
+
+           {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
+                <Label>
+                <p>ID : {info?.id}</p></Label>
             </div>
             <div>
-                {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
-                <p>닉네임 : {info?.nickName}</p>
+            <Label>
+             {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
+                <p>닉네임 : {info?.nickName}</p></Label>
+
             </div>
             <div>
-                <p>보유코인 : (받을 예정)</p>
+            <Label>
+                <p>보유코인 : (받을 예정)</p></Label>
             </div>
             <div>
-                <p>승리 수 : (받을 예정)</p>
+            <Label>
+                <p>승리 수 : (받을 예정)</p></Label>
             </div>
             <div>
-                <button onClick={()=>{navigate("/login")}}>회원탈퇴</button>
+                <Button onClick={()=>{navigate("/login")}}>회원탈퇴</Button>
             </div>
+            </InfoBox>
         </div>
     )
 }
 
 export default Info;
+
+const InfoBox = styled.div `
+width:450px;
+margin: 0 auto;
+margin-top: 4rem;
+border : 4px solid #eee;
+border-radius: 12px;
+padding:12px 24px 24px 24px;
+background-size: 240px;
+
+`;
+const Label = styled.label `
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    margin: 0 0 8px 0;
+    border: 1px solid #eee;
+    color: #8F8F91;
+`;
+
+const Button = styled.button `
+    border: 1px solid #333;
+    background: #333;
+    color: #fff;
+    font-size: 17px;
+    padding: 13px 0;
+    margin: 15px 0 0;
+    width: 400px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+`;
