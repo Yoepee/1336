@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 const Oddeven = () => {
     let [count, setCount] = useState(Math.random);
@@ -18,19 +19,61 @@ const Oddeven = () => {
         setCheck(true);
     }
     return (
-        <>
+        <> <StContainer>
             <div>
+           
                 <p>홀짝</p>
+            
+
                 {check ? <p>{result}</p> : null}
                 <p>당신의 선택은 ? {choice}</p>
-                <button onClick={() => { setChoice("홀"); setNum(1) }}>홀</button>
-                <button onClick={() => { setChoice("짝"); setNum(0) }}>짝</button>
+                <StButton onClick={() => { setChoice("홀"); setNum(1) }}>홀</StButton>
+                <StButton onClick={() => { setChoice("짝"); setNum(0) }}>짝</StButton>
+            
             </div>
             <div>
-                <button onClick={() => { test(choice) }}>도전</button>
+                <GoButton onClick={() => { test(choice) }}>도전</GoButton>
+                
+            
             </div>
+            </StContainer>
         </>
     )
 }
 
 export default Oddeven;
+
+const StContainer = styled.div `
+width:450px;
+margin: 0 auto;
+margin-top: 4rem;
+border : 4px solid #eee;
+border-radius: 12px;
+padding:12px 24px 24px 24px;
+background-size: 240px;
+
+`;
+
+const StButton = styled.button`
+    padding: 8px 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    border: 1px solid #c00a0a;
+    background: #c90a0a;
+    color : #fff;
+    margin: 15px 8px 15px;
+    
+    `;
+
+const GoButton = styled.button`
+padding: 8px 15px;
+font-size: 20px;
+border-radius: 5px;
+border: 1px solid ;
+margin: 15px 8px 15px;
+background: #ffcc01;
+color: #c00a0a;
+display: inline-block;
+line-height: normal;
+text-transform: uppercase;
+`;
