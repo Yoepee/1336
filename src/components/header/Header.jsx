@@ -18,7 +18,7 @@ const Header = () => {
         </div>
     )
 }
-// styled-components (아마 지우게 될ㄷ...)
+
 const Title_bg = styled.div`
 height:300px;
 background-image: url(${bg});
