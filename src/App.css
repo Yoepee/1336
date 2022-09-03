@@ -37,10 +37,3 @@
   }
 }
 
-
-.login-bg{
-  height:300px;
-  background-image: url("./img/login_bg.jpg");
-  background-size: cover;
-  background-position: center;
-}

@@ -7,6 +7,7 @@ const Oddeven = () => {
     let [result, setResult] = useState("골라주세요.");
     let [check, setCheck] = useState(false)
 
+    // 홀짝을 골라서 정답이 나오는지 알 수 있는 알고리즘
     const test = (choice) => {
         if (number === null) return alert("홀, 짝을 골라주세요.");
         setCount(Math.floor(Math.random() * 1000));

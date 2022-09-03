@@ -1,10 +1,10 @@
 import FormLogin from "../components/form/formLogin/FormLogin"
+// 로그인 페이지
 const Login = () => {
     return (
         <div>
             <div>로그인</div>
             <FormLogin />
-            <div>나는 로그인페이지입니다.</div>
         </div>
     )
 }
