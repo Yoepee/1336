@@ -10,7 +10,7 @@ const FormLogin = () => {
         password: ""
     }
     let [member, setMember] = useState(initialState);
-
+    // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setMember({ ...member, [name]: value });
@@ -38,10 +38,12 @@ const FormLogin = () => {
             </div>
             
             <div>
-                
+
+                {/* 현재 테스트용도로 navigate로 경로지정 */}
                 <Button onClick={()=>{navigate("/")}}>로그인</Button>
                 <Button onClick={()=>{navigate("/signup")}}>회원가입</Button>
                
+
             </div>
              </StContainer>
         </div>
