@@ -6,11 +6,10 @@ const Choice = () => {
     let navigate = useNavigate();
     return (
         <div>
-            <p>전체게임</p>
                 <StButton onClick={() => { navigate("/chart") }}> 랭킹보기 </StButton>
                 <StButton onClick={() => { navigate("/admin/:id") }}> 관리자 </StButton>
             <div>
-                
+
             </div>
             <div>
             <GameBox>
@@ -19,6 +18,7 @@ const Choice = () => {
                 <Button onClick={() => { navigate("/game/dice") }}> 주사위 </Button>
                 <Button onClick={() => { navigate("/game/lotto") }}> 로또 </Button>
             </GameBox>
+
             </div>
         </div>
     )

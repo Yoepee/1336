@@ -7,8 +7,8 @@ export const __getMember = createAsyncThunk(
         try {
             const data =  await axios.get("http://localhost:3001/member", {
               headers: {
-                  Authorization: ``,
-                  RefreshToken: ``
+                  Authorization: localStorage.getItem('login-token'),
+                  RefreshToken: localStorage.getItem('login-token2'),
             }});
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
