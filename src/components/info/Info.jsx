@@ -16,13 +16,16 @@ const Info = () => {
         dispatch(__getMember());
     }, [dispatch]);
 
-    if (isLoading) {
+     //isLoading이 true이면 컴포넌트의 return값 변경
+     if (isLoading) {
         return <div>로딩 중....</div>;
     }
-
+    //error이 true이면 컴포넌트의 return값 변경
     if (error) {
         return <div>{error.message}</div>;
     }
+    // 조건문에 넣었을 때 false가 되는 경우를 찾아보시면 좋을듯 (ex> null, undefined 등)
+    
     // params에서 제공하는 url id값과 데이터베이스에서 보내준 정보와 대조 (아마 연결하고나서는 다르게 써야할듯)
     let info = data.find((user)=>{
         return String(user.id) === id
