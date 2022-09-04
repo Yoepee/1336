@@ -108,6 +108,5 @@ line-height: 28px;
 padding: 0px 0px 2px 5px;
 border: 0 none;
 color: #c00a0a;
-
 `;
   

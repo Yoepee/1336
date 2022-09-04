@@ -21,7 +21,7 @@ const Counter = () => {
     }, [timer, start])
     return (
         <div>
-            <p>카운터</p>
+            <h2>카운터</h2>
             <StContainer>
             <p>{count}</p>
             {timer <= 10 ? <p style={{ color: "red" }}>남은 시간: {timer}초</p> : <p>남은 시간: {timer}초</p>}
