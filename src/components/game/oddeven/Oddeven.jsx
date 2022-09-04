@@ -24,16 +24,21 @@ const Oddeven = () => {
         <StContainer>
 
             <div>
-           
                 <p>홀짝</p>
-            
-
                 {check ? <p>{result}</p> : null}
                 <p>당신의 선택은 ? {choice}</p>
                 <StButton onClick={() => { setChoice("홀"); setNum(1) }}>홀</StButton>
                 <StButton onClick={() => { setChoice("짝"); setNum(0) }}>짝</StButton>
-
-            
+            </div>
+            <div>
+                <Label>
+                <Input placeholder="배팅금액"
+                    onChange={(e) => { setBet(e.target.value) }}
+                    name="bet"
+                    value={bet}
+                    type="text" />
+                <StButton>배팅하기</StButton>
+                </Label>
             </div>
             <div>
                 <GoButton onClick={() => { test(choice) }}>도전</GoButton>
@@ -84,3 +89,20 @@ line-height: normal;
 text-transform: uppercase;
 `;
 
+const Label = styled.label `
+overflow: hidden;
+display: block;
+width: 100%;
+margin: 0 0 8px 0;
+border: 1px solid #eee;
+color: #8F8F91;
+`;
+
+const Input = styled.input`
+width: 75%;
+height: 25px;
+line-height: 28px;
+padding: 0px 0px 2px 5px;
+border: 0 none;
+color: #c00a0a;
+`;

@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 // 리덕스에서 필요한 함수 소환 (데이터베이스 연결후 내용변경될 예정)
-import { createMember } from "../../../redux/modules/member";
+import { createMember,__chkName, __chkId, __signUp } from "../../../redux/modules/member";
 
 const FormSignup = () => {
     let navigate = useNavigate();
@@ -35,6 +35,7 @@ const FormSignup = () => {
         event.preventDefault();
         //member을 데이터베이스에 보내줘야하는 동작과 동일하게 전달 (api참조)
         dispatch(createMember(member));
+        dispatch(__signUp(member));
         // 값을 보낸 후에는 초기값으로 초기화
         setMember(initialState);
         // 로그인이 완료 되었으면 로그인페이지로 이동
@@ -46,7 +47,6 @@ const FormSignup = () => {
         setCheck(false);
       },[date]) 
     return (
-
         <AddInputGroup>
         <form onSubmit={onSubmitHandler} className="add-form">
             <div>
@@ -56,7 +56,11 @@ const FormSignup = () => {
                     name="id"
                     value={member.id}
                     type="text" />
-                <CkButton>중복확인</CkButton>
+                <CkButton type="button" 
+                 onClick={()=>{
+                    dispatch(__chkName(member.id))
+                    console.log(member.id)
+                }}>중복확인</CkButton>
             </Label>
             </div>
             <div>
@@ -85,7 +89,11 @@ const FormSignup = () => {
                     name="nickName"
                     value={member.nickName}
                     type="text" />
-                <CkButton>중복확인</CkButton>
+                <CkButton type="button" 
+                onClick={()=>{
+                    dispatch(__chkName(member.nickName));
+                    console.log(member.nickName)
+                }}>중복확인</CkButton>
           </Label>
             </div>
             <div>
@@ -111,7 +119,9 @@ const FormSignup = () => {
                 </div>
                 :null
                 }
-                <Button type="button" onClick={() => { setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") }) }}>성인인증</Button>
+                <Button type="button" onClick={() => { 
+                    setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
+                    }}>성인인증</Button>
             </div>
             
             <div>

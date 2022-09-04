@@ -16,6 +16,49 @@ export const __getMember = createAsyncThunk(
           }
     }
   );
+  export const __chkName = createAsyncThunk(
+    "api/member/chkName",
+    async (payload, thunkAPI) => {
+        try {
+            const data =  await axios.post("http://3.34.5.30/api/member/chkName", payload);
+            console.log(data);
+            console.log(payload);
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
+  export const __chkId = createAsyncThunk(
+    "api/member/chkId",
+    async (payload, thunkAPI) => {
+        try {
+            const data =  await axios.post("http://3.34.5.30/api/member/chkId", payload);
+            console.log(data);
+            console.log(payload);
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
+  export const __signUp = createAsyncThunk(
+    "api/member/signup",
+    async (payload, thunkAPI) => {
+        try {
+            const data =  await axios.post("http://3.34.5.30/api/member/signup", payload, {
+              headers: {
+                  // Authorization: localStorage.setItem('login-token'),
+                  RefreshToken: localStorage.setItem('login-token2'),
+            }});
+            console.log(data);
+            console.log(payload);
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
 export const member = createSlice({
     name:"member",
