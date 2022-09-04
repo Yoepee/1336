@@ -21,7 +21,9 @@ const Counter = () => {
     }, [timer, start])
     return (
         <div>
-            <p>카운터</p>
+            <LogoBox>
+            <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FmVKkd%2FbtrLlEKEVIX%2Fq26DpMhttrso3fCsOUT7e0%2Fimg.jpg"></Title_logo>
+            </LogoBox>
             <StContainer>
             <p>{count}</p>
             {timer <= 10 ? <p style={{ color: "red" }}>남은 시간: {timer}초</p> : <p>남은 시간: {timer}초</p>}
@@ -57,7 +59,7 @@ export default Counter;
 const StContainer = styled.div `
 width:450px;
 margin: 0 auto;
-margin-top: 4rem;
+margin-top: 1rem;
 border : 4px solid #eee;
 border-radius: 12px;
 padding:12px 24px 24px 24px;
@@ -98,4 +100,23 @@ border: 0 none;
 color: #8F8F91;
 
 `;
+
+const LogoBox = styled.div `
+width:450px;
+margin: 0 auto;
+margin-top: 4rem;
+border : 4px solid transparent;
+
+padding:12px 24px 24px 24px;
+background-size: 240px; 
+
+
+`
+const Title_logo = styled.img`
+display: inline-block;
+max-width: 100%;
+box-sizing: border-box;
+margin-bottom: 1rem;
+
+`
   
