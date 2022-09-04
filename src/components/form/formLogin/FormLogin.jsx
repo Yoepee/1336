@@ -1,10 +1,14 @@
 import { useNavigate } from "react-router-dom";
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import styled from "styled-components";
+import { useDispatch } from "react-redux/es/exports";
+
+import { __login } from "../../../redux/modules/member";
 
 
 const FormLogin = () => {
     let navigate = useNavigate();
+    let dispatch = useDispatch();
     let initialState = {
         id: "",
         password: ""
@@ -40,7 +44,7 @@ const FormLogin = () => {
             <div>
 
                 {/* 현재 테스트용도로 navigate로 경로지정 */}
-                <Button onClick={()=>{navigate("/")}}>로그인</Button>
+                <Button onClick={()=>{dispatch(__login(member));}}>로그인</Button>
                 <Button onClick={()=>{navigate("/signup")}}>회원가입</Button>
                
 

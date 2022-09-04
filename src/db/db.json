@@ -62,6 +62,27 @@
       "passwordConfirm": "",
       "nickName": "",
       "birthDate": "20220903"
+    },
+    {
+      "id": "kdy2975",
+      "password": "rla123",
+      "passwordConfirm": "rla123",
+      "nickName": "nowsun",
+      "birthDate": "19960706"
+    },
+    {
+      "id": 7,
+      "nickName": "",
+      "password": "",
+      "passwordConfirm": "",
+      "birthDate": "20220904"
+    },
+    {
+      "id": "rla1234",
+      "nickName": "aa",
+      "password": "rla123",
+      "passwordConfirm": "rla123",
+      "birthDate": "19960706"
     }
   ],
   "lotto": [],
@@ -127,6 +148,7 @@
       "id": 12
     },
     {
+
       "content": "sdfsdf",
       "game": "lotto",
       "id": 13
@@ -135,6 +157,7 @@
       "content": "산와 산와 산와머니",
       "game": "counter",
       "id": 14
+
     }
   ],
   "ranking": []
