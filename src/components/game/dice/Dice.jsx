@@ -5,7 +5,8 @@ const Dice = () => {
     let [count, setCount] = useState(Math.floor(Math.random() * 1000));
     let [choice, setChoice] = useState("");
     let [result, setResult] = useState("골라주세요.");
-    let [check, setCheck] = useState(false)
+    let [check, setCheck] = useState(false);
+    let [bet, setBet] = useState("");
 
     const test = (choice) => {
         if (choice === "골라주세요.") return alert("번호를 골라주세요.");
@@ -33,9 +34,19 @@ const Dice = () => {
                 })}
             </div>
             <div>
-                <GoButton onClick={() => { test(choice) }}>도전</GoButton>
-               
+                <Label>
+                <Input placeholder="배팅금액"
+                    onChange={(e) => { setBet(e.target.value) }}
+                    name="bet"
+                    value={bet}
+                    type="text" />
+                <StButton>배팅하기</StButton>
+                </Label>
             </div>
+            <div>
+                <GoButton onClick={() => { test(choice) }}>도전</GoButton>
+            </div>
+
             </StContainer> 
         </>
     )
@@ -59,7 +70,7 @@ const StButton = styled.button`
     padding: 8px 15px;
     font-size: 18px;
     border-radius: 5px;
-    border: 1px solid#c90a0a;
+    border: 1px solid #c90a0a;
     margin: 15px 8px 15px;
     background: #c90a0a;
     color: #fff;

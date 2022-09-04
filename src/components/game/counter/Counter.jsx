@@ -70,7 +70,7 @@ const StButton = styled.button`
     padding: 8px 15px;
     font-size: 13px;
     border-radius: 5px;
-    border: 1px solid#353535;
+    border: 1px solid #333;
     margin: 15px 8px 15px;
     background: #333;
     color: #fff;

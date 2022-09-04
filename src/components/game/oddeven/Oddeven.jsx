@@ -6,7 +6,8 @@ const Oddeven = () => {
     let [choice, setChoice] = useState("");
     let [number, setNum] = useState(null)
     let [result, setResult] = useState("골라주세요.");
-    let [check, setCheck] = useState(false)
+    let [check, setCheck] = useState(false);
+    let [bet, setBet] = useState("");
 
     // 홀짝을 골라서 정답이 나오는지 알 수 있는 알고리즘
     const test = (choice) => {
@@ -19,7 +20,9 @@ const Oddeven = () => {
         setCheck(true);
     }
     return (
-        <> <StContainer>
+        <>
+        <StContainer>
+
             <div>
            
                 <p>홀짝</p>
@@ -29,6 +32,7 @@ const Oddeven = () => {
                 <p>당신의 선택은 ? {choice}</p>
                 <StButton onClick={() => { setChoice("홀"); setNum(1) }}>홀</StButton>
                 <StButton onClick={() => { setChoice("짝"); setNum(0) }}>짝</StButton>
+
             
             </div>
             <div>
@@ -38,6 +42,7 @@ const Oddeven = () => {
             </div>
             </StContainer>
         </>
+
     )
 }
 
@@ -53,6 +58,7 @@ padding:12px 24px 24px 24px;
 background-size: 240px;
 
 `;
+
 
 const StButton = styled.button`
     padding: 8px 15px;
@@ -77,3 +83,4 @@ display: inline-block;
 line-height: normal;
 text-transform: uppercase;
 `;
+

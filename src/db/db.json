@@ -34,6 +34,34 @@
       "passwordConfirm": "dasdas",
       "nickName": "qwewq",
       "birthDate": "20220903"
+    },
+    {
+      "id": 3,
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "",
+      "birthDate": "20220903"
+    },
+    {
+      "id": 4,
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "",
+      "birthDate": "20220903"
+    },
+    {
+      "id": 5,
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "",
+      "birthDate": "20220903"
+    },
+    {
+      "id": 6,
+      "password": "",
+      "passwordConfirm": "",
+      "nickName": "",
+      "birthDate": "20220903"
     }
   ],
   "lotto": [],
@@ -87,6 +115,26 @@
       "content": "dsda",
       "game": "counter",
       "id": 10
+    },
+    {
+      "content": "ㅇㄴㅁㅇㅁㅇㄴ",
+      "game": "counter",
+      "id": 11
+    },
+    {
+      "content": "zxczxc",
+      "game": "oddeven",
+      "id": 12
+    },
+    {
+      "content": "sdfsdf",
+      "game": "lotto",
+      "id": 13
+    },
+    {
+      "content": "산와 산와 산와머니",
+      "game": "counter",
+      "id": 14
     }
   ],
   "ranking": []
