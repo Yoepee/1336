@@ -1,5 +1,4 @@
 import {Routes, Route} from "react-router-dom"
-import { useNavigate } from "react-router-dom"
 
 import Home from "../pages/Home"
 import Login from "../pages/Login"
@@ -15,7 +14,6 @@ import Dice from "../components/game/dice/Dice"
 import Lotto from "../components/game/lotto/Lotto"
 
 const Router = () => {
-    let navigate =useNavigate();
     return (
         <>
         {/* Routes, Route를 이용한 경로지정 */}

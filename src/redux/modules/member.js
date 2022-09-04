@@ -20,9 +20,9 @@ export const __getMember = createAsyncThunk(
     "api/member/chkName",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.post("http://3.34.5.30/api/member/chkName", payload);
-            console.log(data);
             console.log(payload);
+            const data =  await axios.post("http://3.34.5.30:8080/api/member/chkName", payload);
+            console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -33,9 +33,22 @@ export const __getMember = createAsyncThunk(
     "api/member/chkId",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.post("http://3.34.5.30/api/member/chkId", payload);
-            console.log(data);
             console.log(payload);
+            const data =  await axios.post("http://3.34.5.30:8080/api/member/chkId", payload);
+            console.log(data);
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
+  export const __chkAdult = createAsyncThunk(
+    "api/member/chkAdult",
+    async (payload, thunkAPI) => {
+        try {
+            console.log(payload);
+            const data =  await axios.post("http://3.34.5.30:8080/api/member/chkAdult", payload);
+            console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -46,13 +59,22 @@ export const __getMember = createAsyncThunk(
     "api/member/signup",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.post("http://3.34.5.30/api/member/signup", payload, {
-              headers: {
-                  // Authorization: localStorage.setItem('login-token'),
-                  RefreshToken: localStorage.setItem('login-token2'),
-            }});
-            console.log(data);
             console.log(payload);
+            const data =  await axios.post("http://3.34.5.30:8080/api/member/signup", payload);
+            console.log(data);
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
+  export const __login = createAsyncThunk(
+    "api/member/login",
+    async (payload, thunkAPI) => {
+        try {
+            console.log(payload);
+            const data =  await axios.post("http://3.34.5.30:8080/api/member/login", payload);
+            console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);

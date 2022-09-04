@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 
 // 리덕스에서 필요한 함수 소환 (데이터베이스 연결후 내용변경될 예정)
-import { createMember,__chkName, __chkId, __signUp } from "../../../redux/modules/member";
+import { createMember,__chkName, __chkId, __signUp, __chkAdult } from "../../../redux/modules/member";
 
 const FormSignup = () => {
     let navigate = useNavigate();
@@ -19,11 +19,11 @@ const FormSignup = () => {
     const [date, setDate] = useState(new Date());
     let initialState = {
         id: "",
+        nickname: "",
         password: "",
-        passwordConfirm: "",
-        nickName: "",
         birthDate: moment(date).format("YYYYMMDD")
     }
+    let [pw, setPw] = useState("")
     let [member, setMember] = useState(initialState);
     // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
     const onChangeHandler = (event) => {
@@ -34,13 +34,12 @@ const FormSignup = () => {
     const onSubmitHandler = (event) => {
         event.preventDefault();
         //member을 데이터베이스에 보내줘야하는 동작과 동일하게 전달 (api참조)
-        dispatch(createMember(member));
+        // dispatch(createMember(member));
         dispatch(__signUp(member));
         // 값을 보낸 후에는 초기값으로 초기화
         setMember(initialState);
         // 로그인이 완료 되었으면 로그인페이지로 이동
         // 회원가입 성공여부를 받아서 메세지로 띄워주면 끝날듯
-        navigate("/login");
       };
 
       useEffect(()=>{
@@ -58,7 +57,7 @@ const FormSignup = () => {
                     type="text" />
                 <CkButton type="button" 
                  onClick={()=>{
-                    dispatch(__chkName(member.id))
+                    dispatch(__chkId({id:member.id}))
                     console.log(member.id)
                 }}>중복확인</CkButton>
             </Label>
@@ -76,9 +75,9 @@ const FormSignup = () => {
             <div>
             <Label>
                 <Input placeholder="비밀번호 확인"
-                    onChange={onChangeHandler}
+                    onChange={(e)=>setPw(e.target.value)}
                     name="passwordConfirm"
-                    value={member.passwordConfirm}
+                    value={pw}
                     type="password" />
              </Label>
             </div>
@@ -86,13 +85,13 @@ const FormSignup = () => {
             <Label>
                 <Input placeholder="닉네임"
                     onChange={onChangeHandler}
-                    name="nickName"
-                    value={member.nickName}
+                    name="nickname"
+                    value={member.nickname}
                     type="text" />
                 <CkButton type="button" 
                 onClick={()=>{
-                    dispatch(__chkName(member.nickName));
-                    console.log(member.nickName)
+                    dispatch(__chkName({nickname:member.nickname}));
+                    console.log(member.nickname)
                 }}>중복확인</CkButton>
           </Label>
             </div>
@@ -100,13 +99,17 @@ const FormSignup = () => {
             <Label>
                 <Input placeholder="생년월일"
                     onChange={onChangeHandler}
-                    onClick={()=>{setCheck(true);console.log(check);}}
+                    onClick={()=>{setCheck(true);}}
                     name="birthDate"
                     value={moment(date).format("YYYY-MM-DD")}
                     type="text" readOnly />
 
                 {/* form 내부에서 버튼 type은 submit으로 누르면 새로고침 기능동작 */}
                 {/* type="button"으로 지정해주면 새로고침 동작x */}
+                <CkButton type="button" onClick={() => { 
+                    setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
+                    dispatch(__chkAdult({birthDate: moment(date).format("YYYYMMDD")}))
+                    }}>성인인증</CkButton>
                 </Label>
                 {check?
                 <div>
@@ -114,9 +117,6 @@ const FormSignup = () => {
                 </div>
                 :null
                 }
-                <Button type="button" onClick={() => { 
-                    setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
-                    }}>성인인증</Button>
             </div>
             
             <div>
