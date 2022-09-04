@@ -38,7 +38,7 @@ const Dice = () => {
             </div>
             <div>
                 <Label>
-                <Input placeholder="배팅금액"
+                <Input placeholder="배팅할 코인금액을 적어주세요"
                     onChange={(e) => { setBet(e.target.value) }}
                     name="bet"
                     value={bet}
@@ -109,6 +109,7 @@ width: 75%;
 height: 25px;
 line-height: 28px;
 padding: 0px 0px 2px 5px;
+text-align: center;
 border: 0 none;
 color: #c00a0a;
 
