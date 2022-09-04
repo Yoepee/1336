@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { __getComment, createComment } from "../../redux/modules/comment";
+import styled from "styled-components";
 
 const Comment = () => {
     const dispatch = useDispatch();
@@ -35,26 +36,101 @@ const Comment = () => {
       })
     return (
         <>
+        <AddInputGroup>
             <div>
-                <input placeholder="내용"
+            <Label>
+                <Input placeholder="내용"
                     onChange={(e)=>{setComment({...comment,content:e.target.value})}}
                     name="comment"
                     value={comment.content}
                     type="text" />
-                <button onClick={()=>dispatch(createComment(comment))}>댓글 작성</button>
+                <CkButton onClick={()=>dispatch(createComment(comment))}>댓글 작성</CkButton>
+            </Label>
             </div>
             <div>
+               
                 {commentList?.map((review)=>{
                     return (
-                        <div key={review.id}>
-                            <p>작성자 :</p>
-                            <p>내용: {review.content}</p>
-                        </div>
+                        <ReplyBox key={review.id}>
+                        <Replier>작성자 </Replier>
+                        <Reply>{review.content}</Reply>
+                        
+                        </ReplyBox>   
                     )
                 })}
+               
             </div>
+            </AddInputGroup>
         </>
     )
 }
 
 export default Comment;
+
+const Input = styled.input`
+    width: 75%;
+    height: 40px;
+    line-height: 28px;
+    padding: 0px 0px 2px 7px;
+    border: 0 none;
+    color: #8F8F91;
+    
+`;
+const AddInputGroup = styled.div `
+width:500px;
+margin: 0 auto;
+margin-top: 1rem;
+border : 4px solid transparent;
+padding:12px 24px 24px 24px;
+background-size: 300px;
+`;
+
+const Label = styled.label `
+    overflow: hidden;
+    margin-top: 1rem;
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin: 0 0 8px 0;
+    border: 1px solid #eee;
+    color: #8F8F91;
+`;
+
+const CkButton = styled.button`
+    border: 1px;
+    margin: 15px 0 0;
+    display: inline-block;
+    text-align: center;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    text-transform: uppercase;
+`;
+
+
+const ReplyBox = styled.div `
+    display: flex;
+    align-items: center;
+    padding:10px 8px 10px 8px;
+    width: 100%;
+    border-top: 1px solid #dfdfdf;
+    border-bottom: 1px solid #dfdfdf;
+    color: #353535;
+    vertical-align: middle;
+    word-break: break-all;
+    word-wrap: break-word;  
+`
+const Replier = styled.div`
+    width: 20%;
+    text-align: left;
+    font-weight: 400;
+    font-size: 18px;
+`
+const Reply = styled.div`
+    width: 80%;
+    text-align: left;
+    font-weight: 400;
+    font-size: 18px;
+`
+
+
+
