@@ -1,21 +1,35 @@
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import bg from "../../img/HeaderImg.jpg"
 
+import { logout } from "../../redux/modules/login";
+
 // 상세페이지, 로그아웃 연결되는 페이지
 const Header = () => {
+    let dispatch = useDispatch();
     // navigate를 통한 경로지정
+    const result = useSelector((state=>state.login))
     let navigate = useNavigate();
+    useEffect(()=>{
+        if(localStorage.getItem("token1")===null){
+            navigate("/login")
+        }
+        if(localStorage.getItem("token2")===null){
+            navigate("/login")
+        }
+    },[dispatch])
     return (
         <div>
             <div>
             <HeaderBox>
              <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fs9yqx%2FbtrLkuA8r9v%2Fvd5HwKxEMOtvcuv1w2xiMK%2Fimg.png" onClick={() => { navigate("/") }}></Title_logo>
                 <div>
-                <StHeadbtn onClick={() => { navigate("/user/:id") }}>마이페이지</StHeadbtn>
-                <StHeadbtn onClick={() => { navigate("/login") }}>로그아웃</StHeadbtn>
+                {localStorage.getItem("name")}님 반갑습니다.
+                <StHeadbtn onClick={() => { navigate("/user") }}>마이페이지</StHeadbtn>
+                <StHeadbtn onClick={() => { dispatch(logout()); }}>로그아웃</StHeadbtn>
                 </div>
-              
             </HeaderBox>
             </div>
             <Title_bg className="main-bg" />

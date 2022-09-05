@@ -1,7 +1,6 @@
 import { useSelector, useDispatch } from "react-redux/";
 import styled from "styled-components";
 
-
 // 관리자페이지 핵심 기능 (아이디, 포인트 작성 후 서버전달예정)
 const Manage = () => {
     

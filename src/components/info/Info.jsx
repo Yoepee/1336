@@ -11,26 +11,27 @@ const Info = () => {
     // 경로를 통해 id값을 받아옴 (아마 토큰을 통해 권한 설정기능 필요하게 될 듯)
     let {id} = useParams();
     // 데이터받아오기
-    const { isLoading, error, data } = useSelector((state) => state.member);
+    const result= useSelector((state) => state.login);
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
-        dispatch(__getMember());
+        dispatch(__getMember(result.data.data))
     }, [dispatch]);
 
-     //isLoading이 true이면 컴포넌트의 return값 변경
-     if (isLoading) {
-        return <div>로딩 중....</div>;
-    }
-    //error이 true이면 컴포넌트의 return값 변경
-    if (error) {
-        return <div>{error.message}</div>;
-    }
+    //  //isLoading이 true이면 컴포넌트의 return값 변경
+    //  if (isLoading) {
+    //     return <div>로딩 중....</div>;
+    // }
+    // //error이 true이면 컴포넌트의 return값 변경
+    // if (error) {
+    //     return <div>{error.message}</div>;
+    // }
     // 조건문에 넣었을 때 false가 되는 경우를 찾아보시면 좋을듯 (ex> null, undefined 등)
     
     // params에서 제공하는 url id값과 데이터베이스에서 보내준 정보와 대조 (아마 연결하고나서는 다르게 써야할듯)
-    let info = data.find((user)=>{
-        return String(user.id) === id
-    })
+    // let info = data.find((user)=>{
+    //     return String(user.id) === id
+    // })
+    console.log(result);
     // 아이디, 닉네임, 보유코인, 승리횟수, 탈퇴기능까지 연결 (프로필 사진과 정보수정 기능 추가 예정?)
     return (
         <div>
@@ -39,21 +40,27 @@ const Info = () => {
 
            {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
                 <Label>
-                <p>ID : {info?.id}</p></Label>
+                <p>ID : {result?.data.id}</p>
+                </Label>
             </div>
             <div>
             <Label>
              {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
-                <p>닉네임 : {info?.nickName}</p></Label>
+                <p>닉네임 : {result?.data.nickName}</p>
+            </Label>
 
             </div>
             <div>
             <Label>
-                <p>보유코인 : (받을 예정)</p></Label>
+                <p>보유코인 : {result?.data.point}</p></Label>
             </div>
             <div>
             <Label>
-                <p>승리 수 : (받을 예정)</p></Label>
+                <p>홀짝 승리 수 : {result?.data.winCountOfOddEven}</p></Label>
+                <Label>
+                <p>주사위 승리 수 : {result?.data.winCountOfDice}</p></Label>
+                <Label>
+                <p>로또 승리 수 : {result?.data.winCountOfLotto}</p></Label>
             </div>
             <div>
                 <Button onClick={()=>{navigate("/login")}}>회원탈퇴</Button>

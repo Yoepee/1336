@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import comment from "./modules/comment"
 // import lotto from "./modules/lotto"
 import member from "./modules/member"
-import table from "./modules/table"
+import login from "./modules/login"
 
 import id from './modules/id'
 import name from './modules/name'
@@ -17,7 +17,7 @@ export default configureStore({
         comment : comment.reducer,
         // lotto : lotto.reducer,
         member : member.reducer,
-        table : table.reducer,
+        login : login.reducer,
 
         id : id.reducer,
         name : name.reducer,

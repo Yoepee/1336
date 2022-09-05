@@ -1,12 +1,34 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
   
+export const __getid = createAsyncThunk(
+    "member/getMember",
+    async (payload, thunkAPI) => {
+        try {
+            const data =  await axios.get("http://localhost:3001/member", {
+              headers: {
+                  Authorization: localStorage.getItem('login-token'),
+                  RefreshToken: localStorage.getItem('login-token2'),
+            }}).then(()=>{
+              alert(data.success)
+            });
+            return thunkAPI.fulfillWithValue(data.data);
+          } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+          }
+    }
+  );
+
   export const __chkId = createAsyncThunk(
     "api/member/chkId",
     async (payload, thunkAPI) => {
         try {
             console.log(payload);
             const data =  await axios.post("http://3.34.5.30:8080/api/member/chkId", payload);
+            if(data.data.success===true)
+              alert(data.data.data);
+            else
+              alert(data.data.error.message);
             console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
@@ -26,6 +48,14 @@ export const id = createSlice({
         isLoading: false
       },
     reducers:{
+      resetId(state){
+        state ={
+          data: [],
+          success: false,
+          error: null,
+          isLoading: false
+        }
+      }
         
     },
     // 내부에서 동작하는 함수 외 외부에서 선언해준 함수 동작을 보조하는 기능

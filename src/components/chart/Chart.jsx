@@ -29,7 +29,7 @@ const Chart = () => {
                 case "홀짝": dispatch(__getGame(1)); break;
                 case "주사위": dispatch(__getGame(2)); break;
                 case "로또": dispatch(__getGame(3)); break;
-                default: dispatch(__getRanking());  break;
+                default: dispatch(__getRanking(""));  break;
             }
         }
         if (title === "승리 랭킹") {
@@ -38,7 +38,7 @@ const Chart = () => {
                 case "홀짝": dispatch(__getGame(1)); break;
                 case "주사위": dispatch(__getGame(2)); break;
                 case "로또": dispatch(__getGame(3)); break;
-                default: dispatch(__getRanking()); break;
+                default: dispatch(__getRanking("")); break;
             }
         }
         //dispatch와 갱신 버튼 변동일 때만 반응
@@ -52,7 +52,7 @@ const Chart = () => {
                 case "홀짝": setArr(new Array(30).fill("c")); break;
                 case "주사위": setArr(new Array(30).fill("d")); break;
                 case "로또": setArr(new Array(30).fill("e")); break;
-                default: setArr(data?.data.totalPointList); break;
+                default: setArr(new Array(30).fill("a")); break;
             }
         }
         if (title === "승리 랭킹") {
@@ -61,7 +61,7 @@ const Chart = () => {
                 case "홀짝": setArr(new Array(30).fill("cc")); break;
                 case "주사위": setArr(new Array(30).fill("dd")); break;
                 case "로또": setArr(new Array(30).fill("ee")); break;
-                default: setArr(data?.data.totalWinCountList); break;
+                default: setArr(new Array(30).fill("aa")); break;
             }
         }
     }, [title, desc])
@@ -84,7 +84,6 @@ const Chart = () => {
             <div>
                 {/* 버튼을 누르면 포인트, 승리에 따라 출력하도록 변경 */}
                 <CkButton onClick={() => setTitle("포인트 랭킹")}>포인트 랭킹</CkButton>
-                <RsButton onClick={() => setCheck(true)}> | 갱신하기 |</RsButton>
                 <CkButton onClick={() => setTitle("승리 랭킹")}>승리 랭킹</CkButton>
                 
             </div>
@@ -107,7 +106,7 @@ const Chart = () => {
                 <Table>
                     <thead>
                         <tr>
-                            <th>순위</th>
+                            <th>🏆순위</th>
                             <th>이름</th>
                             {title === "포인트 랭킹" ? <th>점수</th> : <th>승리</th>}
                         </tr>
@@ -118,7 +117,7 @@ const Chart = () => {
                             return (
 
                                     <tr key={i+1}>
-                                        <td><div></div>🏆{i+1}</td>
+                                        <td><div></div>{i+1}</td>
                                         <td>{a}</td>
                                         <td>Otto</td>
                                     </tr>

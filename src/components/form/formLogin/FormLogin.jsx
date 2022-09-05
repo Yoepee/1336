@@ -1,24 +1,35 @@
 import { useNavigate } from "react-router-dom";
 import {useState, useEffect} from "react"
 import styled from "styled-components";
-import { useDispatch } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 
-import { __login } from "../../../redux/modules/member";
+import { __login} from "../../../redux/modules/login";
+
 
 
 const FormLogin = () => {
+    let result = useSelector((state)=>state.login)
     let navigate = useNavigate();
     let dispatch = useDispatch();
     let initialState = {
         id: "",
         passWord: ""
     }
+    console.log(result)
     let [member, setMember] = useState(initialState);
     // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
     const onChangeHandler = (event) => {
         const { name, value } = event.target;
         setMember({ ...member, [name]: value });
       };
+    const onSubmit = ()=>{
+        dispatch(__login(member));
+    }
+    useEffect(()=>{
+        if (result.data.success) {
+            navigate('/');
+        }
+    })
     return (
         <div>
             <StContainer>
@@ -44,7 +55,7 @@ const FormLogin = () => {
             <div>
 
                 {/* 현재 테스트용도로 navigate로 경로지정 */}
-                <Button onClick={()=>{dispatch(__login(member));}}>로그인</Button>
+                <Button onClick={()=>{onSubmit()}}>로그인</Button>
                 <Button onClick={()=>{navigate("/signup")}}>회원가입</Button>
                
 
@@ -53,6 +64,7 @@ const FormLogin = () => {
         </div>
     )
 }
+    
 export default FormLogin;
 
 const StContainer = styled.div `
