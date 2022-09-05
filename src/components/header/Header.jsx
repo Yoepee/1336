@@ -10,7 +10,7 @@ const Header = () => {
         <div>
             <div>
             <HeaderBox>
-                <StHeadbtn onClick={() => { navigate("/user/:id") }}>마이페이지</StHeadbtn>
+                <StHeadbtn onClick={() => { navigate("/user") }}>마이페이지</StHeadbtn>
                 <StHeadbtn onClick={() => { navigate("/login") }}>로그아웃</StHeadbtn>
             </HeaderBox>
             </div>

@@ -11,7 +11,7 @@ const FormLogin = () => {
     let dispatch = useDispatch();
     let initialState = {
         id: "",
-        password: ""
+        passWord: ""
     }
     let [member, setMember] = useState(initialState);
     // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
@@ -35,8 +35,8 @@ const FormLogin = () => {
             <Form>
             <Input placeholder="비밀번호"
                     onChange={onChangeHandler}
-                    name="password"
-                    value={member.password}
+                    name="passWord"
+                    value={member.passWord}
                     type="password"/>
              </Form>
             </div>

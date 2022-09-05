@@ -2,12 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 // async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
 export const __getComment = createAsyncThunk(
-    "member/getMember",
+    "/api/comment",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.get("http://localhost:3001/comment", {
+            const data =  await axios.get("http://3.34.5.30:8080//api/comment", {
               headers: {
-                  Authorization: ``
+                  Authorization: localStorage.getItem('login-token'),
+                  RefreshToken: localStorage.getItem('login-token2'),
             }});
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {

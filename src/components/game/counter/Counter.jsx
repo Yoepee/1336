@@ -5,8 +5,7 @@ const Counter = () => {
     let [count, setCount] = useState(0);
     let [timer, setTimer] = useState(30);
     let [start, setStart] = useState(false);
-    let [bet, setBet] = useState("")
-
+    
     useEffect(() => {
         if(start){
             if (timer > 0) {
@@ -25,16 +24,6 @@ const Counter = () => {
             <p>{count}</p>
             {timer <= 10 ? <p style={{ color: "red" }}>남은 시간: {timer}초</p> : <p>남은 시간: {timer}초</p>}
             <StButton onClick={()=>{setStart(true)}}>시작</StButton>
-            <div>
-                <Label>
-                <Input placeholder="배팅금액"
-                    onChange={(e) => { setBet(e.target.value) }}
-                    name="bet"
-                    value={bet}
-                    type="text" />
-                <StButton>배팅하기</StButton>
-                </Label>
-            </div>
             <div>
             <StButton onClick={() => {
                 if (timer > 0) { setCount(count + 1) }
