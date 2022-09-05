@@ -5,13 +5,11 @@ export const __chkAdult = createAsyncThunk(
     "api/member/chkAdult",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload);
             const data =  await axios.post("http://3.34.5.30:8080/api/member/chkAdult", payload);
             if(data.data.success===true)
               alert(data.data.data);
             else
               alert(data.data.error.message);
-            console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
