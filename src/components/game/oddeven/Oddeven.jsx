@@ -21,8 +21,11 @@ const Oddeven = () => {
     }
     return (
         <>
-        <StContainer>
+        <LogoBox>
+        <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FclYy2e%2FbtrLqcfSSqY%2F5fobM3ap99PubvzjagNSNk%2Fimg.jpg"></Title_logo>
+        </LogoBox>
 
+        <StContainer>
             <div>
                 <p>홀짝</p>
                 {check ? <p>{result}</p> : null}
@@ -56,7 +59,7 @@ export default Oddeven;
 const StContainer = styled.div `
 width:450px;
 margin: 0 auto;
-margin-top: 4rem;
+margin-top: 1rem;
 border : 4px solid #eee;
 border-radius: 12px;
 padding:12px 24px 24px 24px;
@@ -102,7 +105,26 @@ const Input = styled.input`
 width: 75%;
 height: 25px;
 line-height: 28px;
+text-align: center;
 padding: 0px 0px 2px 5px;
 border: 0 none;
 color: #c00a0a;
 `;
+
+const LogoBox = styled.div `
+width:450px;
+margin: 0 auto;
+margin-top: 4rem;
+border : 4px solid transparent;
+padding:12px 24px 24px 24px;
+background-size: 240px; 
+
+
+`
+const Title_logo = styled.img`
+display: inline-block;
+max-width: 100%;
+box-sizing: border-box;
+margin-bottom: 1rem;
+
+`

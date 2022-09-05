@@ -3,7 +3,10 @@ import { useState, useEffect } from "react"
 import { Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux/";
 
+
+import styled from "styled-components";
 import { __getRanking, __getGame } from "../../redux/modules/ranking";
+
 
 const Chart = () => {
     //module 함수선언을 위한 dispatch
@@ -76,21 +79,28 @@ const Chart = () => {
 
     return (
         <div>
+            <GameBox>
 
             <div>
                 {/* 버튼을 누르면 포인트, 승리에 따라 출력하도록 변경 */}
-                <button onClick={() => setTitle("포인트 랭킹")}>포인트 랭킹</button>
-                <button onClick={() => setTitle("승리 랭킹")}>승리 랭킹</button>
+                <CkButton onClick={() => setTitle("포인트 랭킹")}>포인트 랭킹</CkButton>
+                <RsButton onClick={() => setCheck(true)}> | 갱신하기 |</RsButton>
+                <CkButton onClick={() => setTitle("승리 랭킹")}>승리 랭킹</CkButton>
+                
             </div>
+            </GameBox>
             <div>
+            <GameBox>
                 {/* 게임 세부종목을 볼 수 있음 */}
-                <button onClick={() => setDesc("전체")}>전체</button>
-                <button onClick={() => setDesc("카운터")}>카운터</button>
-                <button onClick={() => setDesc("홀짝")}>홀짝</button>
-                <button onClick={() => setDesc("주사위")}>주사위</button>
-                <button onClick={() => setDesc("로또")}>로또</button>
+                <Button onClick={() => setDesc("전체")}>전체</Button>
+                <Button onClick={() => setDesc("카운터")}>카운터</Button>
+                <Button onClick={() => setDesc("홀짝")}>홀짝</Button>
+                <Button onClick={() => setDesc("주사위")}>주사위</Button>
+                <Button onClick={() => setDesc("로또")}>로또</Button>
+            </GameBox>
             </div>
             <div>
+                <Group>
                 <h4>{title}</h4>
                 <p>{desc}</p>
                 {/* 부트스트랩을 통한 테이블 생성 */}
@@ -106,21 +116,96 @@ const Chart = () => {
                         {/* map함수를 통한 차트 내용 출력 */}
                         {arr?.map((a, i) => {
                             return (
-                                <tr key={i}>
-                                    <td>1</td>
-                                    <td>{a?.nickName}</td>
-                                    {title === "포인트 랭킹" ?
-                                        <td>{a?.totalPoint}</td> :
-                                        <td>{a?.totalWinCount}</td>
-                                    }
-                                </tr>
+
+                                    <tr key={i+1}>
+                                        <td><div></div>🏆{i+1}</td>
+                                        <td>{a}</td>
+                                        <td>Otto</td>
+                                    </tr>
+
                             )
                         })}
                     </tbody>
                 </Table>
+                </Group>
             </div>
         </div>
     )
 }
 
 export default Chart;
+
+
+const Button = styled.button `
+    border: 3px solid #333;
+    background-color: #fff;
+    border-radius: 8px;
+    color: #333;
+    font-size: 22px;
+    padding: 13px 0;
+    margin: 15px 15px 15px;
+    width: 120px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+   
+`;
+
+
+const GameBox = styled.div `
+display: flex;
+//flex,justify,align-item  많이쓰는세트
+margin-top: 4rem;
+padding:12px 12px 24px auto;
+background-size: 240px;
+justify-content: center;
+margin-top: 1rem;
+//border:1px solid red
+
+`;
+
+const Group = styled.div `
+width:450px;
+margin: 0 auto;
+margin-top: 4rem;
+justify-content: space-between;
+border : 4px solid #eee;
+border-radius: 12px;
+padding:12px 24px 24px 24px;
+background-size: 240px;
+
+`;
+
+const CkButton = styled.button`
+    border: 1px solid #333;
+    background:#333;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 19px;
+    padding: 13px 0;
+    margin: 15px 15px 15px;
+    width: 200px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+   
+`;
+    
+const RsButton = styled.button`
+    border: 1px solid #c90a0a;
+    background:#c90a0a;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 19px;
+    padding: 13px 0;
+    margin: 15px 15px 15px;
+    width: 200px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+   
+`;
+    

@@ -10,10 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 
 // 리덕스에서 필요한 함수 소환 (데이터베이스 연결후 내용변경될 예정)
+
 import { createMember, __signUp} from "../../../redux/modules/member";
 import {__chkId} from "../../../redux/modules/id"
 import {__chkName} from "../../../redux/modules/name"
 import { __chkAdult } from "../../../redux/modules/adult";
+
 
 const FormSignup = () => {
     const userid = useSelector((state) => state.id);
@@ -30,7 +32,6 @@ const FormSignup = () => {
         passWord: "",
         birthDate: moment(date).format("YYYYMMDD")
     }
-    let [pw, setPw] = useState("")
     let [member, setMember] = useState(initialState);
     // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
     const onChangeHandler = (event) => {
@@ -40,6 +41,7 @@ const FormSignup = () => {
     // form을 통한 제줄이라 submit
     const onSubmitHandler = (event) => {
         event.preventDefault();
+
         if(userid.data.success&&username.data.success&&useradult.data.success){
             //member을 데이터베이스에 보내줘야하는 동작과 동일하게 전달 (api참조)
             // dispatch(createMember(member));
@@ -50,8 +52,9 @@ const FormSignup = () => {
             // 회원가입 성공여부를 받아서 메세지로 띄워주면 끝날듯
         }
         else{
-            alert(userid.data.data,username.data.data,useradult.data.data)
+            alert(userid.data.data,username.data.data,useradult.data.data
         }
+
       };
 
       useEffect(()=>{
@@ -89,9 +92,9 @@ const FormSignup = () => {
             <div>
             <Label>
                 <Input placeholder="비밀번호 확인"
-                    onChange={(e)=>setPw(e.target.value)}
+                    onChange={onChangeHandler}
                     name="passwordConfirm"
-                    value={pw}
+                    value={member.passwordConfirm}
                     type="password" />
              </Label>
              {pw.trim()!=="" && member.passWord.trim()!=="" && member.passWord !== pw?
@@ -121,13 +124,14 @@ const FormSignup = () => {
             <Label>
                 <Input placeholder="생년월일"
                     onChange={onChangeHandler}
-                    onClick={()=>{setCheck(true);}}
+                    onClick={()=>{setCheck(true);console.log(check);}}
                     name="birthDate"
                     value={moment(date).format("YYYY-MM-DD")}
                     type="text" readOnly />
 
                 {/* form 내부에서 버튼 type은 submit으로 누르면 새로고침 기능동작 */}
                 {/* type="button"으로 지정해주면 새로고침 동작x */}
+
                 <CkButton type="button" onClick={() => { 
                     setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
                     dispatch(__chkAdult({birthDate: moment(date).format("YYYYMMDD")}));
@@ -136,10 +140,18 @@ const FormSignup = () => {
                 </Label>
                 {check?
                 <div>
+                    <CalenderForm>
                     <Calendar onChange={setDate} value={date} name="birthDate" />
+
+                    </CalenderForm>
+
+
                 </div>
                 :null
                 }
+                <Button type="button" onClick={() => { 
+                    setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
+                    }}>성인인증</Button>
             </div>
             
             <div>
@@ -162,6 +174,13 @@ padding:12px 24px 24px 24px;
 background-size: 240px;
 
 `;
+
+const CalenderForm = styled.div `
+margin: 0 auto;
+margin-top: 2rem;
+padding:4px 24px 12px 24px;
+    
+`
 
 const Label = styled.label `
     overflow: hidden;

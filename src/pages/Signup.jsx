@@ -6,8 +6,10 @@ const Signup = () => {
         <div>
             <LoginHeader/>
             <FormSignup />
+           
         </div>
     )
 }
 
 export default Signup;
+

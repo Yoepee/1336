@@ -10,11 +10,15 @@ const Header = () => {
         <div>
             <div>
             <HeaderBox>
-                <StHeadbtn onClick={() => { navigate("/user") }}>마이페이지</StHeadbtn>
+             <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fs9yqx%2FbtrLkuA8r9v%2Fvd5HwKxEMOtvcuv1w2xiMK%2Fimg.png" onClick={() => { navigate("/") }}></Title_logo>
+                <div>
+                <StHeadbtn onClick={() => { navigate("/user/:id") }}>마이페이지</StHeadbtn>
                 <StHeadbtn onClick={() => { navigate("/login") }}>로그아웃</StHeadbtn>
+                </div>
+              
             </HeaderBox>
             </div>
-            <Title_bg className="main-bg" onClick={() => { navigate("/") }}/>
+            <Title_bg className="main-bg" />
         </div>
     )
 }
@@ -25,6 +29,11 @@ background-image: url(${bg});
 background-size: contain;
 background-position: center;
 background-repeat: no-repeat;
+
+`
+const Title_logo = styled.img`
+height:70px;
+
 `
 const Headbtn = styled.button`
 position: static
@@ -37,11 +46,13 @@ const HeaderBox = styled.form`
     flex-direction: row;
     -webkit-box-align: center;
     align-items: center;
-    float: right;
+    justify-content: space-between;
+    margin: 15px 15px 15px;
+
 `;
 
 const StHeadbtn = styled.button `
-    outline: none;
+outline: none;
     border-width: 1px;
     border-radius: 12px;
     border-style: solid;

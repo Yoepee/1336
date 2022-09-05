@@ -18,6 +18,9 @@ const Dice = () => {
     }
     return (
         <> 
+        <LogoBox>
+        <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbbFMeH%2FbtrLiVsMoN5%2Fxe0tjUQkFRqxnLTDkDzVyk%2Fimg.jpg"></Title_logo>
+        </LogoBox>
         <StContainer>
             <div>
             <Label>
@@ -35,7 +38,7 @@ const Dice = () => {
             </div>
             <div>
                 <Label>
-                <Input placeholder="배팅금액"
+                <Input placeholder="배팅할 코인금액을 적어주세요"
                     onChange={(e) => { setBet(e.target.value) }}
                     name="bet"
                     value={bet}
@@ -57,7 +60,7 @@ export default Dice;
 const StContainer = styled.div `
 width:450px;
 margin: 0 auto;
-margin-top: 4rem;
+margin-top: 1rem;
 border : 4px solid #eee;
 border-radius: 12px;
 padding:12px 24px 24px 24px;
@@ -68,9 +71,9 @@ background-size: 240px;
 
 const StButton = styled.button`
     padding: 8px 15px;
-    font-size: 13px;
+    font-size: 18px;
     border-radius: 5px;
-    border: 1px solid#c90a0a;
+    border: 1px solid #c90a0a;
     margin: 15px 8px 15px;
     background: #c90a0a;
     color: #fff;
@@ -106,7 +109,27 @@ width: 75%;
 height: 25px;
 line-height: 28px;
 padding: 0px 0px 2px 5px;
+text-align: center;
 border: 0 none;
 color: #c00a0a;
+
 `;
+
+const LogoBox = styled.div `
+width:450px;
+margin: 0 auto;
+margin-top: 4rem;
+border : 4px solid transparent;
+padding:12px 24px 24px 24px;
+background-size: 240px; 
+
+
+`
+const Title_logo = styled.img`
+display: inline-block;
+max-width: 100%;
+box-sizing: border-box;
+margin-bottom: 1rem;
+
+`
   
