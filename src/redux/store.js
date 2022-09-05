@@ -3,6 +3,13 @@ import comment from "./modules/comment"
 // import lotto from "./modules/lotto"
 import member from "./modules/member"
 import table from "./modules/table"
+
+import id from './modules/id'
+import name from './modules/name'
+import adult from './modules/adult'
+
+import ranking from './modules/ranking'
+
 // import값을 .reducer로 넘겨줄시에는 밑에 리듀서에 .reducer적지 말 것
 export default configureStore({
     reducer: { 
@@ -10,6 +17,12 @@ export default configureStore({
         comment : comment.reducer,
         // lotto : lotto.reducer,
         member : member.reducer,
-        table : table.reducer
+        table : table.reducer,
+
+        id : id.reducer,
+        name : name.reducer,
+        adult : adult.reducer,
+
+        ranking: ranking.reducer
     }
 })

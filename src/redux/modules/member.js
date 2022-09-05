@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+
 // async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
 export const __getMember = createAsyncThunk(
-    "member/getMember",
+    "api/user",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.get("http://localhost:3001/member", {
+            const data =  await axios.get("http://3.34.5.30:8080/api/user", {
               headers: {
                   Authorization: localStorage.getItem('login-token'),
                   RefreshToken: localStorage.getItem('login-token2'),
@@ -16,52 +17,20 @@ export const __getMember = createAsyncThunk(
           }
     }
   );
-  export const __chkName = createAsyncThunk(
-    "api/member/chkName",
-    async (payload, thunkAPI) => {
-        try {
-            console.log(payload);
-            const data =  await axios.post("http://3.34.5.30:8080/api/member/chkName", payload);
-            console.log(data);
-            return thunkAPI.fulfillWithValue(data.data);
-          } catch (error) {
-            return thunkAPI.rejectWithValue(error);
-          }
-    }
-  );
-  export const __chkId = createAsyncThunk(
-    "api/member/chkId",
-    async (payload, thunkAPI) => {
-        try {
-            console.log(payload);
-            const data =  await axios.post("http://3.34.5.30:8080/api/member/chkId", payload);
-            console.log(data);
-            return thunkAPI.fulfillWithValue(data.data);
-          } catch (error) {
-            return thunkAPI.rejectWithValue(error);
-          }
-    }
-  );
-  export const __chkAdult = createAsyncThunk(
-    "api/member/chkAdult",
-    async (payload, thunkAPI) => {
-        try {
-            console.log(payload);
-            const data =  await axios.post("http://3.34.5.30:8080/api/member/chkAdult", payload);
-            console.log(data);
-            return thunkAPI.fulfillWithValue(data.data);
-          } catch (error) {
-            return thunkAPI.rejectWithValue(error);
-          }
-    }
-  );
+  
+
   export const __signUp = createAsyncThunk(
     "api/member/signup",
     async (payload, thunkAPI) => {
         try {
             console.log(payload);
             const data =  await axios.post("http://3.34.5.30:8080/api/member/signup", payload);
-            console.log(data);
+            // .then((response)=> {
+            // console.log(response)  
+            // const {accessToken} = response.data;
+              // axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+            // });
+            // console.log(data.headers.Authorization)
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -72,9 +41,14 @@ export const __getMember = createAsyncThunk(
     "api/member/login",
     async (payload, thunkAPI) => {
         try {
+          // localStorage.setItem("",)
             console.log(payload);
             const data =  await axios.post("http://3.34.5.30:8080/api/member/login", payload);
             console.log(data);
+            console.log(data.headers.authorization)
+            console.log(data.headers.refreshtoken)
+            localStorage.setItem("token1", data.headers.authorization)
+            localStorage.setItem("token2", data.headers.refreshtoken)
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);

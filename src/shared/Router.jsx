@@ -21,7 +21,7 @@ const Router = () => {
             <Route path ="/" exact element={<Home/>}/>
             <Route path ="/login" exact element={<Login/>}/>
             <Route path ="/signup" exact element={<Signup/>}/>
-            <Route path ="/user/:id" exact element={<User/>}/>
+            <Route path ="/user" exact element={<User/>}/>
             <Route path ="/chart" exact element={<Ranking/>}/>
             {/* 중첩 라우터 nested route 기능 (검색해보시면 좋을듯) */}
             <Route path ="/game" exact element={<Game/>}>
