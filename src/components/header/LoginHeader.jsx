@@ -12,11 +12,10 @@ const LoginHeader = () => {
             <HeaderBox>
             </HeaderBox>
             </div>
-            <Title_bg className="main-bg" onClick={() => { navigate("/login") }}/>
+            <Title_bg className="main-bg"/>
         </div>
     )
 }
-// styled-components (아마 지우게 될ㄷ...)
 const Title_bg = styled.div`
 height:300px;
 background-image: url(${bg});

@@ -25,6 +25,7 @@ const FormSignup = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
     const [check, setCheck] = useState(false);
+    const [pw, setPw] = useState("")
     const [date, setDate] = useState(new Date());
     let initialState = {
         id: "",
@@ -48,18 +49,31 @@ const FormSignup = () => {
             dispatch(__signUp(member));
             // 값을 보낸 후에는 초기값으로 초기화
             setMember(initialState);
+            navigate("/login")
             // 로그인이 완료 되었으면 로그인페이지로 이동
             // 회원가입 성공여부를 받아서 메세지로 띄워주면 끝날듯
         }
         else{
-            alert(userid.data.data,username.data.data,useradult.data.data
+            alert("중복확인 및 성인인증을 해주세요.");
         }
 
       };
-
+    // 달력 체크 후 달력사라지기
       useEffect(()=>{
         setCheck(false);
       },[date]) 
+    //   useEffect(()=>{
+    //     if(userid.data.success)alert(userid?.data.data)
+    //     else if(userid.data.error!==null&&userid.data.error) alert(userid?.data?.error.message)
+    //   },[userid])
+    //   useEffect(()=>{
+    //     if(username.data.success)alert(username?.data.data)
+    //     // else if(username.data.error!==null&&username.data.error) alert(username?.data?.error.message)
+    //   },[username]) 
+    //   useEffect(()=>{
+    //     if(useradult.data.success)alert(useradult?.data.data);
+    //     // else if(useradult.data.error!==null&&useradult.data.error) alert(useradult?.data?.error.message)
+    //   },[useradult]) 
     return (
         <AddInputGroup>
         <form onSubmit={onSubmitHandler} className="add-form">
@@ -74,7 +88,6 @@ const FormSignup = () => {
                  onClick={()=>{
                     dispatch(__chkId({id:member.id}));
                     console.log(member.id);
-                    if(userid.data.success)alert(userid.data.data)
                 }}>중복확인</CkButton>
             </Label>
             {member.id.length<2 && member.id.trim()!==""?
@@ -92,13 +105,14 @@ const FormSignup = () => {
             <div>
             <Label>
                 <Input placeholder="비밀번호 확인"
-                    onChange={onChangeHandler}
+                    onChange={(e)=>{setPw(e.target.value)}}
                     name="passwordConfirm"
-                    value={member.passwordConfirm}
+                    value={pw}
                     type="password" />
              </Label>
              {pw.trim()!=="" && member.passWord.trim()!=="" && member.passWord !== pw?
-                    <p style={{color:"red"}}>패스워드가 일치하지 않습니다.</p>:null}
+                    <p style={{color:"red"}}>패스워드가 일치하지 않습니다.</p>
+                    :null}
             </div>
             {
 
@@ -114,7 +128,6 @@ const FormSignup = () => {
                 onClick={()=>{
                     dispatch(__chkName({nickName:member.nickName}));
                     console.log(member.nickName)
-                    if(username.data.success)alert(username.data.data)
                 }}>중복확인</CkButton>
           </Label>
             {member.nickName.length<2 && member.nickName.trim()!==""?
@@ -135,28 +148,21 @@ const FormSignup = () => {
                 <CkButton type="button" onClick={() => { 
                     setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
                     dispatch(__chkAdult({birthDate: moment(date).format("YYYYMMDD")}));
-                    if(useradult.data.success)alert(useradult.data.data);
                     }}>성인인증</CkButton>
                 </Label>
                 {check?
                 <div>
                     <CalenderForm>
                     <Calendar onChange={setDate} value={date} name="birthDate" />
-
                     </CalenderForm>
-
-
                 </div>
                 :null
                 }
-                <Button type="button" onClick={() => { 
-                    setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
-                    }}>성인인증</Button>
             </div>
             
             <div>
-                
                 <Button>회원가입</Button>
+                <Button type="button" onClick={()=>{navigate("/login")}}>취소</Button>
             </div>
         </form>
         </AddInputGroup>

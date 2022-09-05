@@ -1,164 +1,53 @@
 {
-  "member": [
-    {
-      "id": 1,
-      "password": "",
-      "passwordConfirm": "",
-      "nickName": "test",
-      "birthDate": "20220903"
-    },
-    {
-      "id": "adsadas",
-      "password": "",
-      "passwordConfirm": "",
-      "nickName": "",
-      "birthDate": "20220903"
-    },
-    {
-      "id": "dasd",
-      "password": "qeqe",
-      "passwordConfirm": "qewqe",
-      "nickName": "qewq",
-      "birthDate": "20220903"
-    },
-    {
-      "id": 2,
-      "password": "",
-      "passwordConfirm": "",
-      "nickName": "",
-      "birthDate": "20220903"
-    },
-    {
-      "id": "ㅇㅁㅁㅁㄴㅇ",
-      "password": "asda",
-      "passwordConfirm": "dasdas",
-      "nickName": "qwewq",
-      "birthDate": "20220903"
-    },
-    {
-      "id": 3,
-      "password": "",
-      "passwordConfirm": "",
-      "nickName": "",
-      "birthDate": "20220903"
-    },
-    {
-      "id": 4,
-      "password": "",
-      "passwordConfirm": "",
-      "nickName": "",
-      "birthDate": "20220903"
-    },
-    {
-      "id": 5,
-      "password": "",
-      "passwordConfirm": "",
-      "nickName": "",
-      "birthDate": "20220903"
-    },
-    {
-      "id": 6,
-      "password": "",
-      "passwordConfirm": "",
-      "nickName": "",
-      "birthDate": "20220903"
-    },
-    {
-      "id": "kdy2975",
-      "password": "rla123",
-      "passwordConfirm": "rla123",
-      "nickName": "nowsun",
-      "birthDate": "19960706"
-    },
-    {
-      "id": 7,
-      "nickName": "",
-      "password": "",
-      "passwordConfirm": "",
-      "birthDate": "20220904"
-    },
-    {
-      "id": "rla1234",
-      "nickName": "aa",
-      "password": "rla123",
-      "passwordConfirm": "rla123",
-      "birthDate": "19960706"
-    }
-  ],
+  "member": [],
   "lotto": [],
-  "comment": [
+  "comment": [],
+  "ranking": [],
+  "login": [
     {
-      "content": "ㅇㄴㅁㅇㅁㄴ",
-      "game": "oddeven",
-      "id": 1
-    },
-    {
-      "content": "ㅇㄴㅁㅇㅁㄴ",
-      "game": "oddeven",
+      "success": true,
+      "data": "",
+      "error": null,
       "id": 2
     },
     {
-      "content": "ㅇㅁㄴㅇㄴㅁ",
-      "game": "oddeven",
+      "success": true,
+      "data": "aaaa",
+      "error": null,
       "id": 3
     },
     {
-      "content": "ㅋㅋ",
-      "game": "dice",
+      "success": true,
+      "data": "test2",
+      "error": null,
       "id": 4
     },
     {
-      "content": "테스트",
-      "game": "counter",
+      "success": true,
+      "data": "qwerrr",
+      "error": null,
       "id": 5
     },
     {
-      "content": "ㅇㅁㄴㅇㅁ",
-      "game": "counter",
+      "success": true,
+      "data": "qwerrr",
+      "error": null,
       "id": 6
     },
     {
-      "content": "ㅇㅁㄴㅇㅁㄴ",
-      "game": "counter",
+      "success": false,
+      "data": null,
+      "error": {
+        "code": "Not Found Member",
+        "message": "존재하지 않는 ID입니다."
+      },
       "id": 7
     },
     {
-      "content": "ㅇㄴㅁㅇㅁㄴ",
-      "game": "oddeven",
+      "success": true,
+      "data": "qwerrr",
+      "error": null,
       "id": 8
-    },
-    {
-      "content": "dsaasd",
-      "game": "counter",
-      "id": 9
-    },
-    {
-      "content": "dsda",
-      "game": "counter",
-      "id": 10
-    },
-    {
-      "content": "ㅇㄴㅁㅇㅁㅇㄴ",
-      "game": "counter",
-      "id": 11
-    },
-    {
-      "content": "zxczxc",
-      "game": "oddeven",
-      "id": 12
-    },
-    {
-
-      "content": "sdfsdf",
-      "game": "lotto",
-      "id": 13
-    },
-    {
-      "content": "산와 산와 산와머니",
-      "game": "counter",
-      "id": 14
-
     }
-  ],
-  "ranking": []
+  ]
 }

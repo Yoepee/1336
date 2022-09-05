@@ -5,9 +5,11 @@ export const __chkAdult = createAsyncThunk(
     "api/member/chkAdult",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload);
             const data =  await axios.post("http://3.34.5.30:8080/api/member/chkAdult", payload);
-            console.log(data);
+            if(data.data.success===true)
+              alert(data.data.data);
+            else
+              alert(data.data.error.message);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -26,7 +28,14 @@ export const adult = createSlice({
         isLoading: false
     },
     reducers: {
-
+        resetAdult(state){
+            state ={
+              data: [],
+              success: false,
+              error: null,
+              isLoading: false
+            }
+          }
     },
     // 내부에서 동작하는 함수 외 외부에서 선언해준 함수 동작을 보조하는 기능
     extraReducers: {

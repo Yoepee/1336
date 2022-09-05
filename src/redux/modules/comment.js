@@ -5,10 +5,10 @@ export const __getComment = createAsyncThunk(
     "/api/comment",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.get("http://3.34.5.30:8080//api/comment", {
+            const data =  await axios.get("http://3.34.5.30:8080/api/comment", {
               headers: {
-                  Authorization: localStorage.getItem('login-token'),
-                  RefreshToken: localStorage.getItem('login-token2'),
+                  Authorization: localStorage.getItem('token1'),
+                  RefreshToken: localStorage.getItem('token2'),
             }});
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
@@ -30,7 +30,8 @@ export const comment = createSlice({
           state.data.push(action.payload);
           axios.post("http://localhost:3001/comment", action.payload, {
             headers: {
-                Authorization: ``
+                Authorization: localStorage.getItem('login-token'),
+                RefreshToken: localStorage.getItem('login-token2'),
             }} );
         },
         removeComment(state, action){
