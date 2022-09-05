@@ -23,9 +23,7 @@ export const __getMember = createAsyncThunk(
     "api/member/signup",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload);
             const data =  await axios.post("http://3.34.5.30:8080/api/member/signup", payload);
-            console.log(data)
             if(data.data.success===true)
                 alert(data.data.data);
             return thunkAPI.fulfillWithValue(data.data);

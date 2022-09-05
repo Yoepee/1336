@@ -8,11 +8,10 @@ import { __getMember } from "../../redux/modules/member";
 const Info = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
-    // 경로를 통해 id값을 받아옴 (아마 토큰을 통해 권한 설정기능 필요하게 될 듯)
-    let {id} = useParams();
+
     // 데이터받아오기
     const result= localStorage.getItem("name")
-    const user = useSelector(state=>state.member)
+    const user = useSelector((state)=>state.member)
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
         dispatch(__getMember(result))
@@ -32,7 +31,6 @@ const Info = () => {
     // let info = data.find((user)=>{
     //     return String(user.id) === id
     // })
-    console.log(user);
     // 아이디, 닉네임, 보유코인, 승리횟수, 탈퇴기능까지 연결 (프로필 사진과 정보수정 기능 추가 예정?)
     return (
         <div>
@@ -41,27 +39,27 @@ const Info = () => {
 
            {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
                 <Label>
-                <p>ID : {user?.data.data.id}</p>
+                <p>ID : {user?.data?.data?.id}</p>
                 </Label>
             </div>
             <div>
             <Label>
              {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
-                <p>닉네임 : {user?.data.data.nickName}</p>
+                <p>닉네임 : {user?.data?.data?.nickName}</p>
             </Label>
 
             </div>
             <div>
             <Label>
-                <p>보유코인 : {user?.data.data.point}</p></Label>
+                <p>보유코인 : {user?.data?.data?.point}</p></Label>
             </div>
             <div>
             <Label>
-                <p>홀짝 승리 수 : {user?.data.data.winCountOfOddEven}</p></Label>
+                <p>홀짝 승리 수 : {user?.data?.data?.winCountOfOddEven}</p></Label>
                 <Label>
-                <p>주사위 승리 수 : {user?.data.data.winCountOfDice}</p></Label>
+                <p>주사위 승리 수 : {user?.data?.data?.winCountOfDice}</p></Label>
                 <Label>
-                <p>로또 승리 수 : {user?.data.data.winCountOfLotto}</p></Label>
+                <p>로또 승리 수 : {user?.data?.data?.winCountOfLotto}</p></Label>
             </div>
             <div>
                 <Button onClick={()=>{navigate("/login")}}>회원탈퇴</Button>
