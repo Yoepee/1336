@@ -5,14 +5,17 @@ import styled from "styled-components"
 import bg from "../../img/HeaderImg.jpg"
 
 import { logout } from "../../redux/modules/login";
+import { __admin } from "../../redux/modules/admin";
 
 // 상세페이지, 로그아웃 연결되는 페이지
 const Header = () => {
     let dispatch = useDispatch();
     // navigate를 통한 경로지정
     const result = useSelector((state=>state.login))
+    const admin = useSelector((state=>state.admin))
     let navigate = useNavigate();
     useEffect(()=>{
+        dispatch(__admin());
         if(localStorage.getItem("token1")===null){
             navigate("/login")
         }
@@ -27,6 +30,7 @@ const Header = () => {
              <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fs9yqx%2FbtrLkuA8r9v%2Fvd5HwKxEMOtvcuv1w2xiMK%2Fimg.png" onClick={() => { navigate("/") }}></Title_logo>
                 <div>
                 {localStorage.getItem("name")}님 반갑습니다.
+
                 <StHeadbtn onClick={() => { navigate("/user") }}>마이페이지</StHeadbtn>
                 <StHeadbtn onClick={() => { dispatch(logout()); }}>로그아웃</StHeadbtn>
                 </div>

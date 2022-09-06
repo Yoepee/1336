@@ -1,21 +1,24 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { __dice } from "../../../redux/modules/game/game";
 
 const Dice = () => {
+    const dispatch = useDispatch();
     let [count, setCount] = useState(Math.floor(Math.random() * 1000));
     let [choice, setChoice] = useState("");
     let [result, setResult] = useState("골라주세요.");
     let [check, setCheck] = useState(false);
     let [bet, setBet] = useState("");
 
-    const test = (choice) => {
-        if (choice === "골라주세요.") return alert("번호를 골라주세요.");
-        setCount(Math.floor(Math.random() * 1000));
-        (count % 6) + 1 === choice ? setResult(`결과 : ${(count % 6) + 1} 정답입니다!!`)
-            : setResult(`결과 : ${(count % 6) + 1} 틀렸습니다!`);
-        setChoice("골라주세요.");
-        setCheck(true);
-    }
+    // const test = (choice) => {
+    //     if (choice === "골라주세요.") return alert("번호를 골라주세요.");
+    //     setCount(Math.floor(Math.random() * 1000));
+    //     (count % 6) + 1 === choice ? setResult(`결과 : ${(count % 6) + 1} 정답입니다!!`)
+    //         : setResult(`결과 : ${(count % 6) + 1} 틀렸습니다!`);
+    //     setChoice("골라주세요.");
+    //     setCheck(true);
+    // }
     return (
         <> 
         <LogoBox>
@@ -43,11 +46,11 @@ const Dice = () => {
                     name="bet"
                     value={bet}
                     type="text" />
-                <StButton>배팅하기</StButton>
+                {/* <StButton>배팅하기</StButton> */}
                 </Label>
             </div>
             <div>
-                <GoButton onClick={() => { test(choice) }}>도전</GoButton>
+                <GoButton onClick={() => { dispatch(__dice({point:bet,number:choice})) }}>도전</GoButton>
             </div>
 
             </StContainer> 
