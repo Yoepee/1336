@@ -25,7 +25,7 @@ const Oddeven = () => {
     return (
         <>
         <LogoBox>
-        <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FclYy2e%2FbtrLqcfSSqY%2F5fobM3ap99PubvzjagNSNk%2Fimg.jpg"></Title_logo>
+        <Title_logo src="https://blog.kakaocdn.net/dn/beE3WF/btrLzRWXwk6/KrL0myPpLv7cs3nGBklCh1/img.gif"></Title_logo>
         </LogoBox>
 
         <StContainer>

@@ -6,7 +6,8 @@ const Choice = () => {
     let navigate = useNavigate();
     return (
         <div>
-                <StButton onClick={() => { navigate("/chart") }}> 랭킹보기 </StButton>
+            
+                <Chart_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLHzXN%2FbtrLxZHXxbQ%2FFQL1KdYmGgo7ImbcxuxdC0%2Fimg.png" onClick={() => { navigate("/chart") }}></Chart_logo>
             <div>
 
             </div>
@@ -27,11 +28,16 @@ export default Choice;
 
 const GameBox = styled.div `
 display: flex;
-margin-top: 4rem;
+margin-top: 1rem;
 padding:12px 24px 24px 24px;
 background-size: 240px;
 
 `;
+
+const Chart_logo = styled.img`
+height:120px;
+
+`
 
 const Button = styled.button `
     border: 1px solid #333;

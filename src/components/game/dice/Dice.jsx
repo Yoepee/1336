@@ -22,7 +22,7 @@ const Dice = () => {
     return (
         <> 
         <LogoBox>
-        <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbbFMeH%2FbtrLiVsMoN5%2Fxe0tjUQkFRqxnLTDkDzVyk%2Fimg.jpg"></Title_logo>
+        <Title_logo src="https://blog.kakaocdn.net/dn/8fk7W/btrLuyEMwUU/31Uj2cGMCm1oMRyopBl9X1/img.gif"></Title_logo>
         </LogoBox>
         <StContainer>
             <div>

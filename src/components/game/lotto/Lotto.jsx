@@ -51,7 +51,9 @@ const Lotto = () => {
         <LogoBox>
         <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb8biDm%2FbtrLhuiHAfk%2FMQ9K80EacwCII7bbKkvzuk%2Fimg.jpg"></Title_logo>
         </LogoBox>
+        <StForm>
             <Form>
+                <LottoBox src="">
                 <Boxchk>
                 {['checkbox'].map((type) => (
                     <div key={`inline-${type}`} className="mb-3">
@@ -73,14 +75,21 @@ const Lotto = () => {
                     </div>
                 ))}
                 </Boxchk>
+                </LottoBox>
                 <GoButton type="button" onClick={()=>{sellLotto()}}>로또구매</GoButton>
                 <GoButton type="button" onClick={()=>{dispatch(__result())}}>당첨번호조회</GoButton>
             </Form>
+            </StForm>
         </div>
     )
 }
 
 export default Lotto;
+
+const StForm = styled.div`
+    display: flex;
+    justify-content: center;
+`
 
 const LogoBox = styled.div `
 width:450px;
@@ -97,15 +106,24 @@ box-sizing: border-box;
 margin-bottom: 1rem;
 `;
 
+const LottoBox = styled.div `
+   width: 400px;
+   height: 500px;
+   background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fcc6PEY%2FbtrLukfDTE7%2FENpAWcpuOL68elVc4SQov1%2Fimg.png");
+   display: flex;
+   justify-content: center;
+   align-items: center;
+`;
+
 const StLotto = styled.div`
     padding: 4px 6px;
     font-size: 15px;
     border-radius: 15px;
-    border: 1px solid #c90a0a;
+    border: 1px solid #E04F5C;
     margin: 15px 8px 15px;
-    background: #c90a0a;
+    background: #fff;
     text-align: center;
-    color: #fff;
+    color: #E04F5C;
     display: inline-block;
     line-height: normal;
     text-transform: uppercase;
