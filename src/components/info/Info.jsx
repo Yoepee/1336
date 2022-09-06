@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import axios from "axios"
-//mport { __image } from "../../redux/modules/img";
+import { __image } from "../../redux/modules/img";
 
 import { logout } from "../../redux/modules/login";
 
