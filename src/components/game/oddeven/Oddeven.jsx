@@ -1,7 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { __oddeven } from "../../../redux/modules/game/game";
 
 const Oddeven = () => {
+    const dispatch = useDispatch();
     let [count, setCount] = useState(Math.random);
     let [choice, setChoice] = useState("");
     let [number, setNum] = useState(null)
@@ -10,15 +13,15 @@ const Oddeven = () => {
     let [bet, setBet] = useState("");
 
     // 홀짝을 골라서 정답이 나오는지 알 수 있는 알고리즘
-    const test = (choice) => {
-        if (number === null) return alert("홀, 짝을 골라주세요.");
-        setCount(Math.floor(Math.random() * 1000));
-        console.log(count)
-        count % 2 === number ? setResult("정답입니다!!") : setResult("틀렸습니다!");
-        setChoice("골라주세요.");
-        setNum(null)
-        setCheck(true);
-    }
+    // const test = (choice) => {
+    //     if (number === null) return alert("홀, 짝을 골라주세요.");
+    //     setCount(Math.floor(Math.random() * 1000));
+    //     console.log(count)
+    //     count % 2 === number ? setResult("정답입니다!!") : setResult("틀렸습니다!");
+    //     setChoice("골라주세요.");
+    //     setNum(null)
+    //     setCheck(true);
+    // }
     return (
         <>
         <LogoBox>
@@ -31,7 +34,7 @@ const Oddeven = () => {
                 {check ? <p>{result}</p> : null}
                 <p>당신의 선택은 ? {choice}</p>
                 <StButton onClick={() => { setChoice("홀"); setNum(1) }}>홀</StButton>
-                <StButton onClick={() => { setChoice("짝"); setNum(0) }}>짝</StButton>
+                <StButton onClick={() => { setChoice("짝"); setNum(2) }}>짝</StButton>
             </div>
             <div>
                 <Label>
@@ -40,11 +43,11 @@ const Oddeven = () => {
                     name="bet"
                     value={bet}
                     type="text" />
-                <StButton>배팅하기</StButton>
+                {/* <StButton>배팅하기</StButton> */}
                 </Label>
             </div>
             <div>
-                <GoButton onClick={() => { test(choice) }}>도전</GoButton>
+                <GoButton onClick={() => { dispatch(__oddeven({point:bet,number:number})) }}>도전</GoButton>
                 
             
             </div>

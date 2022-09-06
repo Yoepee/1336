@@ -5,17 +5,35 @@ export const __getComment = createAsyncThunk(
     "/api/comment",
     async (payload, thunkAPI) => {
         try {
-            const data =  await axios.get("http://3.34.5.30:8080/api/comment", {
+            const data =  await axios.get(`http://3.34.5.30:8080/api/comment?gameId=${payload}`, {
               headers: {
                   Authorization: localStorage.getItem('token1'),
                   RefreshToken: localStorage.getItem('token2'),
             }});
+            console.log(data)
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
           }
     }
   );
+  // export const __postComment = createAsyncThunk(
+  //   "/api/comment",
+  //   async (payload, thunkAPI) => {
+  //       try {
+  //         console.log(payload.game);
+  //         console.log({content: payload.content})
+            // const data =  await axios.post(`http://3.34.5.30:8080/api/comment?gameId=${payload.game}`, {content: payload.content}, {
+            //   headers: {
+            //       Authorization: localStorage.getItem('token1'),
+            //       RefreshToken: localStorage.getItem('token2'),
+            // }});
+  //           return;
+  //         } catch (error) {
+  //           return thunkAPI.rejectWithValue(error);
+  //         }
+  //   }
+  // );
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
 export const comment = createSlice({
     name:"comment",
@@ -27,8 +45,8 @@ export const comment = createSlice({
       },
     reducers:{
         createComment(state, action){
-          state.data.push(action.payload);
-          axios.post("http://localhost:3001/comment", action.payload, {
+          // state.data.push(action.payload);
+          axios.post(`http://3.34.5.30:8080/api/comment?gameId=${action.payload.game}`,{content: action.payload.content}, {
             headers: {
                 Authorization: localStorage.getItem('login-token'),
                 RefreshToken: localStorage.getItem('login-token2'),
