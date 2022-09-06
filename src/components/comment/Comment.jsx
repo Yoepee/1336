@@ -4,9 +4,11 @@ import { __getComment, createComment, removeComment, updateComment } from "../..
 import styled from "styled-components";
 import axios from "axios";
 import { BsPencilFill, BsFillEraserFill } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 const Comment = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     // url경로값을 받아오기 위한 내용 (받아오고 "/" 기준으로 값을 나눠서 배열 형식으로 저장)
     let a = window.location.href.split('/')
     // 배열의 마지막 값만 있으면 되서 이렇게작성
@@ -22,7 +24,14 @@ const Comment = () => {
     const { isLoading, error, data } = useSelector((state) => state.comment);
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
-        dispatch(__getComment(game));
+        if(localStorage.getItem("token1")===null){
+            navigate("/login")
+        }
+        if(localStorage.getItem("token2")===null){
+            navigate("/login")
+        }else{
+            dispatch(__getComment(game));
+        }
     }, [dispatch]);
      //isLoading이 true이면 컴포넌트의 return값 변경
      if (isLoading) {

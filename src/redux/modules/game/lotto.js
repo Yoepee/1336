@@ -16,6 +16,8 @@ export const __lotto = createAsyncThunk(
             if(data.data.success===true){
               if(data.data.data === "로또를 구매하기 위한 포인트가 부족합니다")
                 alert("로또를 구매하기 위한 포인트가 부족합니다");
+              else if(data.data.data === "57분~03분 사이는 정산시간으로 로또구매가 불가능합니다.")
+                alert("57분~03분 사이는 정산시간으로 로또구매가 불가능합니다.")
               else
                 alert("구매에 성공하였습니다.");
             }
