@@ -50,8 +50,9 @@ const Lotto = () => {
         <LogoBox>
         <Title_logo src="https://blog.kakaocdn.net/dn/Wflzc/btrLu3dFy68/qop9TRah6EMP9r3U8tj3Wk/img.gif"></Title_logo>
         </LogoBox>
-        <StForm>
+        
             <Form>
+            <StForm>
                 <LottoBox src="">
                 <Boxchk>
                 {['checkbox'].map((type) => (
@@ -74,12 +75,21 @@ const Lotto = () => {
                     </div>
                 ))}
                 </Boxchk>
+                
                 </LottoBox>
+                <Lottobill src="">
+                </Lottobill>
+            
+                </StForm>
+
+                
+                <div>
                 <GoButton type="button" onClick={()=>{dispatch(__lotto({num1:0, num2: 0, num3: 0, num4: 0, num5: 0, num6: 0}))}}>랜덤로또</GoButton>
                 <GoButton type="button" onClick={()=>{sellLotto()}}>로또구매</GoButton>
                 <GoButton type="button" onClick={()=>{dispatch(__result())}}>당첨번호조회</GoButton>
+                </div>
             </Form>
-            </StForm>
+            
         </div>
     )
 }
@@ -87,14 +97,24 @@ const Lotto = () => {
 export default Lotto;
 
 const StForm = styled.div`
-    display: flex;
-    justify-content: center;
-`
+width:800px;
+height:550px;
+margin: 0 auto;
+margin-top: 2rem;
+margin-bottom: 1rem;
+border : 4px solid transparent;
+padding:12px 12px 12px 12px;
+background-size: 240px;
+background-color: #fff;
+display: flex;
+border-radius: 8px;
+`;
+
 
 const LogoBox = styled.div `
 width:450px;
 margin: 0 auto;
-margin-top: 4rem;
+margin-top: 1rem;
 border : 4px solid transparent;
 padding:12px 24px 24px 24px;
 background-size: 240px; 
@@ -106,6 +126,7 @@ box-sizing: border-box;
 margin-bottom: 1rem;
 `;
 
+
 const LottoBox = styled.div `
    width: 400px;
    height: 500px;
@@ -115,6 +136,17 @@ const LottoBox = styled.div `
    align-items: center;
 `;
 
+const Lottobill = styled.div `
+   width: 400px;
+   height: 500px;
+   background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdHj10F%2FbtrLBdZWW6b%2F2rqeZZCwR7X8ZVsVN46RjK%2Fimg.png");
+   display: flex;
+   margin-top:6rem;
+   justify-content: center;
+   align-items: center;
+   background-repeat: no-repeat;
+   
+`;
 const StLotto = styled.div`
     padding: 4px 6px;
     font-size: 15px;
