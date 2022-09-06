@@ -63,14 +63,14 @@ const Comment = () => {
                         <Reply>{review.content}</Reply>
                         <CkButton onClick={async()=>{
                             let change = prompt('수정할 내용을 입력해주세요.');
-                             await axios.patch(`http://3.34.5.30:8080/api/comment?gameId=${game}&id=${review.id}`, {content: change}, {
+                             await axios.patch(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {content: change}, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
                         }}><BsPencilFill/></CkButton>
                         <CkButton onClick={async()=>{
-                             await axios.delete(`http://3.34.5.30:8080/api/comment?gameId=${game}&id=${review.id}`, {
+                             await axios.delete(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),

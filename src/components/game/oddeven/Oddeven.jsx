@@ -34,7 +34,7 @@ const Oddeven = () => {
                 {check ? <p>{result}</p> : null}
                 <p>당신의 선택은 ? {choice}</p>
                 <StButton onClick={() => { setChoice("홀"); setNum(1) }}>홀</StButton>
-                <StButton onClick={() => { setChoice("짝"); setNum(2) }}>짝</StButton>
+                <StButton onClick={() => { setChoice("짝"); setNum(0) }}>짝</StButton>
             </div>
             <div>
                 <Label>

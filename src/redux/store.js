@@ -13,6 +13,7 @@ import image from './modules/img'
 
 import ranking from './modules/ranking'
 import game from './modules/game/game'
+import manager from './modules/check/manager'
 
 // import값을 .reducer로 넘겨줄시에는 밑에 리듀서에 .reducer적지 말 것
 export default configureStore({
@@ -29,6 +30,7 @@ export default configureStore({
         id : id.reducer,
         name : name.reducer,
         adult : adult.reducer,
+        manager:manager.reducer,
 
         ranking: ranking.reducer,
 
