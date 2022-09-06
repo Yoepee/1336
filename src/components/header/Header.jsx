@@ -11,7 +11,6 @@ import { __chkManager } from "../../redux/modules/check/manager";
 const Header = () => {
     let dispatch = useDispatch();
     // navigate를 통한 경로지정
-    const result = useSelector((state=>state.login))
     const admin = useSelector((state=>state.manager))
     let navigate = useNavigate();
     useEffect(()=>{

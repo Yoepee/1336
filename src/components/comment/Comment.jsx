@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { __getComment } from "../../redux/modules/comment/comment";
+import { __getComment, createComment, removeComment, updateComment } from "../../redux/modules/comment/comment";
 import styled from "styled-components";
 import axios from "axios";
 import { BsPencilFill, BsFillEraserFill } from "react-icons/bs";
@@ -45,11 +45,12 @@ const Comment = () => {
                     value={comment.content}
                     type="text" />
                 <CkButton onClick={async()=>{
-                             await axios.post(`http://3.34.5.30:8080/api/comment?gameId=${game}`, comment, {
+                            let a = await axios.post(`http://3.34.5.30:8080/api/comment?gameId=${game}`, comment, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
+                              dispatch(createComment(a.data.data));
                         }}>댓글 작성</CkButton>
             </Label>
             </div>
@@ -68,6 +69,7 @@ const Comment = () => {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
+                              dispatch(updateComment({...review,content:change}))
                         }}><BsPencilFill/></CkButton>
                         <CkButton onClick={async()=>{
                              await axios.delete(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {
@@ -75,6 +77,7 @@ const Comment = () => {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
+                              dispatch(removeComment(review.id))
                         }}><BsFillEraserFill/></CkButton>
                         </ReplyBox>   
                     )
