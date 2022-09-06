@@ -21,7 +21,14 @@ const Info = () => {
     const user = useSelector((state)=>state.member)
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
-        dispatch(__getMember(result))
+        if(localStorage.getItem("token1")===null){
+            navigate("/login")
+        }
+        if(localStorage.getItem("token2")===null){
+            navigate("/login")
+        }else{
+            dispatch(__getMember(result));
+        }
     }, [dispatch]);
 
     //  //isLoading이 true이면 컴포넌트의 return값 변경
@@ -50,7 +57,7 @@ const Info = () => {
         const formData = new FormData();
         formData.append('key', "image");
         formData.append('value', img);
-        dispatch(__image(formData));
+        // dispatch(__image(formData));
         console.log(formData)
         for (const keyValue of formData) console.log(keyValue);
     }

@@ -2,10 +2,12 @@ import { useSelector, useDispatch } from "react-redux/";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import { __getuser } from "../../redux/modules/admin";
 // 관리자페이지 핵심 기능 (아이디, 포인트 작성 후 서버전달예정)
 const Manage = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [show,setShow] = useState(false);
     const user = useSelector((state=>state.admin));
@@ -20,7 +22,14 @@ const Manage = () => {
       };
     
     useEffect(()=>{
-        dispatch(__getuser());
+        if(localStorage.getItem("token1")===null){
+            navigate("/login")
+        }
+        if(localStorage.getItem("token2")===null){
+            navigate("/login")
+        }else{
+            dispatch(__getuser());
+        }
     },[dispatch])
     return (
         <div>
