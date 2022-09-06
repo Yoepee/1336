@@ -64,12 +64,14 @@ const Info = () => {
         <div>
         <UserBox>
                 <InfoBox>
-                <input 
+                <div>
+                <Input 
                 type='file' 
                 accept='image/*' 
                 name='profile_img' 
                 onChange={onChange}/>
-                {/* <button onClick={()=>{a()}}>올려보자</button> */}
+                </div>
+                <button>올려보자</button>
                 </InfoBox>  
                 <InfoBox>
             <div>
@@ -138,6 +140,16 @@ const ButtonBox = styled.div `
 margin: auto;
 margin-top: 1rem;
 margin-bottom: 2rem;
+
+`
+
+const Input = styled.input`
+width: 150px;
+margin-top:3rem;
+margin-bottom: 1rem;
+height: 200px;
+border-radius: 50px;
+background-color: #eee;
 `
 
 
