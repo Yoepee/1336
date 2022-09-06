@@ -10,8 +10,7 @@ import { logout } from "../../redux/modules/login";
 
 import { __changeMember, __getMember, __removeMember } from "../../redux/modules/member";
 
-
-
+import { __image } from "../../redux/modules/img";
 //  유저 세부정보를 출력하는 페이지
 const Info = () => {
     let navigate = useNavigate();
@@ -40,14 +39,21 @@ const Info = () => {
     // let info = data.find((user)=>{
     //     return String(user.id) === id
     // })
-    const onImgChange = async (e)=>{
+    // const onImgChange = async (e)=>{
+    //     const formData = new FormData();
+    //     formData.append("key", "image");
+    //     formData.append("value", e.target.files[0]);
+    //     console.log(formData)
+    //     dispatch(__image(formData));
+    // }
+    const onChange = (e) => {
+        const img = e.target.files[0];
         const formData = new FormData();
-        formData.append("file", e.target.files[0]);
-        const response = await axios.patch("http://3.34.5.30:8080/api/user/Image", formData,{
-            headers: {
-              Authorization: localStorage.getItem("token1"),
-              RefreshToken: localStorage.getItem("token2")
-          }});
+        formData.append('key', "image");
+        formData.append('value', img);
+        dispatch(__image(formData));
+        console.log(formData)
+        for (const keyValue of formData) console.log(keyValue);
     }
     // const a = (e) => {
     //     e.preventDefault();
@@ -57,11 +63,10 @@ const Info = () => {
         <div>
             <div>
                 <input 
-                type="file" 
-                accept="image/*" 
-                name="file" 
-                onChange={onImgChange}
-                ref={amu}/>
+                type='file' 
+                accept='image/*' 
+                name='profile_img' 
+                onChange={onChange}/>
                 {/* <button onClick={()=>{a()}}>올려보자</button> */}
             </div>
             <InfoBox>

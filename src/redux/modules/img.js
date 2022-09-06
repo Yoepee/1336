@@ -7,7 +7,7 @@ import axios from 'axios';
     async (payload, thunkAPI) => {
         try {
           console.log(payload);
-            const data =  await axios.get("http://3.34.5.30:8080/api/user/Image/", payload,{
+            const data =  await axios.patch("http://3.34.5.30:8080/api/user/Image/", payload,{
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
