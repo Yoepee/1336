@@ -11,7 +11,6 @@ export const __getRanking = createAsyncThunk(
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
-            console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);

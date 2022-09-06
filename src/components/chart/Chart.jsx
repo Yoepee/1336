@@ -58,7 +58,6 @@ const Chart = () => {
     if(title === "승리 랭킹" && desc === "로또"){
         setDesc("전체")
     }
-    console.log(data);
     return (
         <div>
             <GameBox>
