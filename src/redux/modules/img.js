@@ -6,6 +6,7 @@ import axios from 'axios';
     "/api/user/Image/",
     async (payload, thunkAPI) => {
         try {
+          console.log(payload);
             const data =  await axios.get("http://3.34.5.30:8080/api/user/Image/", payload,{
               headers: {
                 Authorization: localStorage.getItem("token1"),

@@ -6,17 +6,19 @@ export const __lotto = createAsyncThunk(
     "/api/game/lotto",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload)
             const data =  await axios.post("http://3.34.5.30:8080/api/game/lotto", payload, {
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
-            if(data.data.success===true)
-              alert("구매에 성공하였습니다.");
+            if(data.data.success===true){
+              if(data.data.data === "로또를 구매하기 위한 포인트가 부족합니다")
+                alert("로또를 구매하기 위한 포인트가 부족합니다");
+              else
+                alert("구매에 성공하였습니다.");
+            }
             else
               alert("구매에 실패하였습니다.");
-            console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);

@@ -6,13 +6,11 @@ export const __getMember = createAsyncThunk(
     "api/user",
     async (payload, thunkAPI) => {
         try {
-          console.log(payload)
             const data =  await axios.get(`http://3.34.5.30:8080/api/user`, {
               headers: {
                   Authorization: localStorage.getItem('token1'),
                   RefreshToken: localStorage.getItem('token2'),
             }});
-            console.log(data)
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -23,13 +21,11 @@ export const __getMember = createAsyncThunk(
     "api/user",
     async (payload, thunkAPI) => {
         try {
-          console.log(payload)
             const data =  await axios.patch(`http://3.34.5.30:8080/api/user`, payload,{
               headers: {
                   Authorization: localStorage.getItem('token1'),
                   RefreshToken: localStorage.getItem('token2'),
             }});
-            console.log(data)
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
