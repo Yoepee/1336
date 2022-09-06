@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { __getComment, createComment } from "../../redux/modules/comment";
+import { __getComment } from "../../redux/modules/comment/comment";
 import styled from "styled-components";
+import axios from "axios";
+import { BsPencilFill, BsFillEraserFill } from "react-icons/bs";
 
 const Comment = () => {
     const dispatch = useDispatch();
@@ -20,7 +22,7 @@ const Comment = () => {
     const { isLoading, error, data } = useSelector((state) => state.comment);
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
-        dispatch(__getComment());
+        dispatch(__getComment(game));
     }, [dispatch]);
      //isLoading이 true이면 컴포넌트의 return값 변경
      if (isLoading) {
@@ -30,10 +32,8 @@ const Comment = () => {
     if (error) {
         return <div>{error.message}</div>;
     }
+    const copy = data?.data
     // 조건문에 넣었을 때 false가 되는 경우를 찾아보시면 좋을듯 (ex> null, undefined 등)
-    let commentList = data?.filter((review)=>{
-        return review.game === game;
-      })
     return (
         <>
         <AddInputGroup>
@@ -44,21 +44,41 @@ const Comment = () => {
                     name="comment"
                     value={comment.content}
                     type="text" />
-                <CkButton onClick={()=>dispatch(createComment(comment))}>댓글 작성</CkButton>
+                <CkButton onClick={async()=>{
+                             await axios.post(`http://3.34.5.30:8080/api/comment?gameId=${game}`, comment, {
+                                headers: {
+                                    Authorization: localStorage.getItem('token1'),
+                                    RefreshToken: localStorage.getItem('token2'),
+                              }});
+                        }}>댓글 작성</CkButton>
             </Label>
             </div>
+            </AddInputGroup>
+            <AddInputGroup>
             <div>
-               
-                {commentList?.map((review)=>{
+                {copy?.map((review,i)=>{
                     return (
-                        <ReplyBox key={review.id}>
-                        <Replier>작성자 </Replier>
+                        <ReplyBox key={i}>
+                        <Replier>{review.nickName} </Replier>
                         <Reply>{review.content}</Reply>
-                        
+                        <CkButton onClick={async()=>{
+                            let change = prompt('수정할 내용을 입력해주세요.');
+                             await axios.patch(`http://3.34.5.30:8080/api/comment?gameId=${game}&id=${review.id}`, {content: change}, {
+                                headers: {
+                                    Authorization: localStorage.getItem('token1'),
+                                    RefreshToken: localStorage.getItem('token2'),
+                              }});
+                        }}><BsPencilFill/></CkButton>
+                        <CkButton onClick={async()=>{
+                             await axios.delete(`http://3.34.5.30:8080/api/comment?gameId=${game}&id=${review.id}`, {
+                                headers: {
+                                    Authorization: localStorage.getItem('token1'),
+                                    RefreshToken: localStorage.getItem('token2'),
+                              }});
+                        }}><BsFillEraserFill/></CkButton>
                         </ReplyBox>   
                     )
                 })}
-               
             </div>
             </AddInputGroup>
         </>

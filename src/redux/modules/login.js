@@ -10,6 +10,7 @@ import axios from 'axios';
             localStorage.setItem("token1", data.headers.authorization)
             localStorage.setItem("token2", data.headers.refreshtoken)
             localStorage.setItem("name",data.data.data)
+            console.log(data);
             if(data.data.success===false)
               alert(data.data.error.message);
             return thunkAPI.fulfillWithValue(data.data);

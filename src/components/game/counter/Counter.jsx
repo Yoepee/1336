@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { __counter } from "../../../redux/modules/game/game";
 
 
 const Counter = () => {
+    const dispatch = useDispatch();
     let [count, setCount] = useState(0);
     let [timer, setTimer] = useState(30);
     let [start, setStart] = useState(false);
@@ -16,8 +19,10 @@ const Counter = () => {
             }else if(timer=0){
                 setStart(false)
             }
+        }else{
+            setTimer(30);
         }
-    }, [timer, start])
+    }, [timer, start]);
     return (
         <div>
             <LogoBox>
@@ -26,15 +31,18 @@ const Counter = () => {
             <StContainer>
             <p>{count}</p>
             {timer <= 10 ? <p style={{ color: "red" }}>남은 시간: {timer}초</p> : <p>남은 시간: {timer}초</p>}
-            <StButton onClick={()=>{setStart(true)}}>시작</StButton>
-            <div>
             <StButton onClick={() => {
-                if (timer > 0) { setCount(count + 1) }
+                if (timer > 0&&start===true) { setCount(count + 1) }
             }}>나를 눌러줘</StButton>
-            <StButton onClick={() => timer === 0 ? alert(`${count}점 등록되었습니다. `) : null}>점수 처리</StButton>
+            <div>
+            <StButton onClick={()=>{setStart(true)}}>시작</StButton>
+            <StButton onClick={() => timer === 0 ? (dispatch(__counter(count)), setCount(0)) : null}>점수 처리</StButton>
             <StButton onClick={() => {
                 if (timer === 0) { setTimer(30); setCount(0); setStart(true); }
             }}>재시작</StButton>
+            <StButton onClick={() => {
+                setStart(false); setCount(0)
+            }}>종료</StButton>
             
             </div>
             </StContainer>

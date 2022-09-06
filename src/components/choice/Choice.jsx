@@ -13,10 +13,10 @@ const Choice = () => {
             </div>
             <div>
             <GameBox>
-                <Button onClick={() => { navigate("/game/counter") }}> 카운터 </Button>
-                <Button onClick={() => { navigate("/game/oddeven") }}> 홀짝 </Button>
-                <Button onClick={() => { navigate("/game/dice") }}> 주사위 </Button>
-                <Button onClick={() => { navigate("/game/lotto") }}> 로또 </Button>
+                <Button onClick={() => { navigate("/game/4") }}> 카운터 </Button>
+                <Button onClick={() => { navigate("/game/1") }}> 홀짝 </Button>
+                <Button onClick={() => { navigate("/game/2") }}> 주사위 </Button>
+                <Button onClick={() => { navigate("/game/3") }}> 로또 </Button>
             </GameBox>
 
             </div>

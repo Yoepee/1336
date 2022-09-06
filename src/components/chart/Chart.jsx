@@ -44,27 +44,7 @@ const Chart = () => {
         //dispatch와 갱신 버튼 변동일 때만 반응
     }, [dispatch,desc])
 
-    // 버튼을 눌렀을 때 자연스럽게 나오도록 따로 작성 (백엔드랑 연결하고 조치필요) - 
-    useEffect(() => {
-        if (title === "포인트 랭킹") {
-            switch (desc) {
-                case "카운터": setArr(new Array(30).fill("b")); break;
-                case "홀짝": setArr(new Array(30).fill("c")); break;
-                case "주사위": setArr(new Array(30).fill("d")); break;
-                case "로또": setArr(new Array(30).fill("e")); break;
-                default: setArr(new Array(30).fill("a")); break;
-            }
-        }
-        if (title === "승리 랭킹") {
-            switch (desc) {
-                case "카운터": setArr(new Array(30).fill("bb")); break;
-                case "홀짝": setArr(new Array(30).fill("cc")); break;
-                case "주사위": setArr(new Array(30).fill("dd")); break;
-                case "로또": setArr(new Array(30).fill("ee")); break;
-                default: setArr(new Array(30).fill("aa")); break;
-            }
-        }
-    }, [title, desc])
+   
     //isLoading이 true이면 컴포넌트의 return값 변경
     if (isLoading) {
         return <div>로딩 중....</div>;
@@ -74,9 +54,13 @@ const Chart = () => {
         return <div>{error.message}</div>;
     }
     // 조건문에 넣었을 때 false가 되는 경우를 찾아보시면 좋을듯 (ex> null, undefined 등)
+    if(title === "승리 랭킹" && desc === "카운터"){
+        setDesc("전체")
+    }
+    if(title === "승리 랭킹" && desc === "로또"){
+        setDesc("전체")
+    }
     console.log(data);
-    console.log(data);
-
     return (
         <div>
             <GameBox>
@@ -92,10 +76,14 @@ const Chart = () => {
             <GameBox>
                 {/* 게임 세부종목을 볼 수 있음 */}
                 <Button onClick={() => setDesc("전체")}>전체</Button>
-                <Button onClick={() => setDesc("카운터")}>카운터</Button>
+                {title==="포인트 랭킹"? 
+                <Button onClick={() => setDesc("카운터")}>카운터</Button>:null
+                }
                 <Button onClick={() => setDesc("홀짝")}>홀짝</Button>
                 <Button onClick={() => setDesc("주사위")}>주사위</Button>
-                <Button onClick={() => setDesc("로또")}>로또</Button>
+                {title==="포인트 랭킹"? 
+                <Button onClick={() => setDesc("로또")}>로또</Button>:null
+                }
             </GameBox>
             </div>
             <div>
@@ -113,17 +101,73 @@ const Chart = () => {
                     </thead>
                     <tbody>
                         {/* map함수를 통한 차트 내용 출력 */}
-                        {arr?.map((a, i) => {
+                        {desc==="전체"&&title==="포인트 랭킹"? 
+                        data?.data?.totalPointList?.map((a, i) => {
                             return (
-
-                                    <tr key={i+1}>
-                                        <td><div></div>{i+1}</td>
-                                        <td>{a}</td>
-                                        <td>Otto</td>
+                                    <tr key={i}>
+                                        <td>{a.rank}</td>
+                                        <td>{a.nickName}</td>
+                                        <td>{a.totalPoint}</td>
                                     </tr>
 
                             )
-                        })}
+                        })
+                        :desc==="전체"? 
+                        data?.data?.totalWinCountList?.map((a, i) => {
+                            return (
+                                    <tr key={i}>
+                                        <td>{a.rank}</td>
+                                        <td>{a.nickName}</td>
+                                        <td>{a.totalWinCount}</td>
+                                    </tr>
+
+                            )
+                        })
+                        :desc==="카운터"?
+                        data?.data?.maxCountList?.map((a, i) => {
+                            return (
+                                    <tr key={i}>
+                                        <td>{a.rank}</td>
+                                        <td>{a.nickName}</td>
+                                        <td>{a.maxCount}</td>
+                                    </tr>
+
+                            )
+                        })
+                        :desc==="로또"?
+                        data?.data?.earnPointList?.map((a, i) => {
+                            return (
+                                    <tr key={i}>
+                                        <td>{a.rank}</td>
+                                        <td>{a.nickName}</td>
+                                        <td>{a.maxCount}</td>
+                                    </tr>
+
+                            )
+                        })
+                        :title==="포인트 랭킹"?
+                        data?.data?.earnPointList?.map((a, i) => {
+                            return (
+                                    <tr key={i}>
+                                        <td>{a.rank}</td>
+                                        <td>{a.nickName}</td>
+                                        <td>{a.earnPoint}</td>
+                                    </tr>
+
+                            )
+                        })
+                        :data?.data?.winCountList?.map((a, i) => {
+                            return (
+                                    <tr key={i}>
+                                        <td>{a.rank}</td>
+                                        <td>{a.nickName}</td>
+                                        <td>{a.totalWinCount}</td>
+                                    </tr>
+
+                            )
+                        })
+                        
+                    }
                     </tbody>
                 </Table>
                 </Group>

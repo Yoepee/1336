@@ -12,9 +12,9 @@ import styled from "styled-components";
 // 리덕스에서 필요한 함수 소환 (데이터베이스 연결후 내용변경될 예정)
 
 import { createMember, __signUp} from "../../../redux/modules/member";
-import {__chkId} from "../../../redux/modules/id"
-import {__chkName} from "../../../redux/modules/name"
-import { __chkAdult } from "../../../redux/modules/adult";
+import {__chkId} from "../../../redux/modules/check/id"
+import {__chkName} from "../../../redux/modules/check/name"
+import { __chkAdult } from "../../../redux/modules/check/adult";
 
 
 const FormSignup = () => {
