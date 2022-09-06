@@ -6,12 +6,13 @@ export const __oddeven = createAsyncThunk(
     "/api/game/oddeven",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload)
             const data =  await axios.post("http://3.34.5.30:8080/api/game/oddeven", payload, {
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
+            if(data.data.data === "소지포인트보다 많이 배팅하셨거나 배팅 포인트가 0입니다")
+              alert("소지포인트보다 많이 배팅하셨거나 배팅 포인트가 0입니다")
             if(data.data.data.result==="성공"){
             alert(`결과 : 맞추셨습니다.
             획득포인트 : ${data.data.data.getPoint}
@@ -31,12 +32,13 @@ export const __oddeven = createAsyncThunk(
     "/api/game/dice",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload)
             const data =  await axios.post("http://3.34.5.30:8080/api/game/dice", payload, {
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
+            if(data.data.data === "소지포인트보다 많이 배팅하셨거나 배팅 포인트가 0입니다")
+              alert("소지포인트보다 많이 배팅하셨거나 배팅 포인트가 0입니다")
             if(data.data.data.result===payload.number){
                 alert(`결과 : ${data.data.data.result} 맞추셨습니다.
                 획득포인트 : ${data.data.data.getPoint}
@@ -56,16 +58,15 @@ export const __oddeven = createAsyncThunk(
     "/api/game/dice",
     async (payload, thunkAPI) => {
         try {
-            console.log(payload)
             const data =  await axios.post("http://3.34.5.30:8080/api/game/counter",{count: payload}, {
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
             alert(`${data.data.data.getpoint}포인트 획득하셨습니다.`)
-            console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
+            alert("금액에 맞는 배팅을 해주세요.")
             return thunkAPI.rejectWithValue(error);
           }
     }

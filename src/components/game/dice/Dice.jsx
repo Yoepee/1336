@@ -1,24 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { __dice } from "../../../redux/modules/game/game";
 
 const Dice = () => {
     const dispatch = useDispatch();
-    let [count, setCount] = useState(Math.floor(Math.random() * 1000));
     let [choice, setChoice] = useState("");
-    let [result, setResult] = useState("골라주세요.");
-    let [check, setCheck] = useState(false);
     let [bet, setBet] = useState("");
-
-    // const test = (choice) => {
-    //     if (choice === "골라주세요.") return alert("번호를 골라주세요.");
-    //     setCount(Math.floor(Math.random() * 1000));
-    //     (count % 6) + 1 === choice ? setResult(`결과 : ${(count % 6) + 1} 정답입니다!!`)
-    //         : setResult(`결과 : ${(count % 6) + 1} 틀렸습니다!`);
-    //     setChoice("골라주세요.");
-    //     setCheck(true);
-    // }
+    let [sum, setSum] = useState(false)
+    let reg = /^[0-9]+$/;
+    useEffect(()=>{
+        if(!reg.test(bet)){
+            setSum("true");
+        }else{
+            setSum("false");
+        }
+    }, [bet])
     return (
         <> 
         <LogoBox>
@@ -28,7 +25,6 @@ const Dice = () => {
             <div>
             <Label>
                 <p>주사위</p>
-                {check ? <p>{result}</p> : null}
                 <p>당신의 선택은 ? {choice}</p>
                 </Label>
             </div>
@@ -48,9 +44,14 @@ const Dice = () => {
                     type="text" />
                 {/* <StButton>배팅하기</StButton> */}
                 </Label>
+                {sum === "true" && bet !==""?
+                <p style={{color:"red"}}>숫자만 입력해주세요.</p>
+                :null}
             </div>
             <div>
-                <GoButton onClick={() => { dispatch(__dice({point:bet,number:choice})) }}>도전</GoButton>
+                <GoButton onClick={() => { if(choice==="")alert("번호를 골라주세요.");
+                else if(bet.trim()===""||sum==="true")alert("배팅금액을 입력해주세요.");
+                else{dispatch(__dice({point:bet,number:choice}))} }}>도전</GoButton>
             </div>
 
             </StContainer> 

@@ -10,7 +10,6 @@ export const __getComment = createAsyncThunk(
                   Authorization: localStorage.getItem('token1'),
                   RefreshToken: localStorage.getItem('token2'),
             }});
-            console.log(data)
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
@@ -45,27 +44,15 @@ export const comment = createSlice({
       },
     reducers:{
         createComment(state, action){
-          // state.data.push(action.payload);
-          axios.post(`http://3.34.5.30:8080/api/comment?gameId=${action.payload.game}`,{content: action.payload.content}, {
-            headers: {
-                Authorization: localStorage.getItem('login-token'),
-                RefreshToken: localStorage.getItem('login-token2'),
-            }} );
+          state.data.data.push(action.payload);
         },
         removeComment(state, action){
-          let  index = state.data.findIndex(post =>  post.id === action.payload);
-			    state.data.splice(index,1);
-          axios.delete(`http://localhost:3001/comment/${action.payload}`);
+          let  index = state.data.data.findIndex(post =>  post.id === action.payload);
+			    state.data.data.splice(index,1);
         },
         updateComment(state, action){
-          let  index = state.data.findIndex(post =>  post.id === action.payload.id);
-			    state.data.splice(index, 1, action.payload);
-          axios.patch(`http://localhost:3001/comment/${action.payload.id}`, action.payload);
-        },
-        likeComment(state, action){
-          let index = state.data.findIndex(post => post.id === action.payload.id);
-			    state.data[index].count +=1;
-          axios.patch(`http://localhost:3001/comment/${action.payload.id}`, action.payload);
+          let  index = state.data.data.findIndex(post =>  post.id === action.payload.id);
+			    state.data.data.splice(index, 1, action.payload);
         },
     },
     // 내부에서 동작하는 함수 외 외부에서 선언해준 함수 동작을 보조하는 기능
@@ -84,6 +71,6 @@ export const comment = createSlice({
       },
 })
 
-export let {createComment, removeComment, updateComment, likeComment } = comment.actions;
+export let {createComment, removeComment, updateComment } = comment.actions;
 
 export default comment;

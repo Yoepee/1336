@@ -79,25 +79,6 @@ const StButton = styled.button`
     
     `
 
-const Label = styled.label `
-overflow: hidden;
-display: block;
-width: 100%;
-margin: 0 0 8px 0;
-border: 1px solid #eee;
-color: #8F8F91;
-`;
-
-const Input = styled.input`
-width: 55%;
-height: 25px;
-line-height: 28px;
-padding: 0px 0px 2px 5px;
-border: 0 none;
-color: #8F8F91;
-
-`;
-
 const LogoBox = styled.div `
 width:450px;
 margin: 0 auto;

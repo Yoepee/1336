@@ -11,9 +11,9 @@ import styled from "styled-components";
 
 // 리덕스에서 필요한 함수 소환 (데이터베이스 연결후 내용변경될 예정)
 
-import { createMember, __signUp} from "../../../redux/modules/member";
-import {__chkId} from "../../../redux/modules/check/id"
-import {__chkName} from "../../../redux/modules/check/name"
+import { __signUp } from "../../../redux/modules/member";
+import { __chkId } from "../../../redux/modules/check/id"
+import { __chkName } from "../../../redux/modules/check/name"
 import { __chkAdult } from "../../../redux/modules/check/adult";
 
 
@@ -27,6 +27,15 @@ const FormSignup = () => {
     const [check, setCheck] = useState(false);
     const [pw, setPw] = useState("")
     const [date, setDate] = useState(new Date());
+
+    const [chkid, setChkid] = useState(false);
+    const [chkpw, setChkpw] = useState(false);
+    const [chkname, setChkname] = useState(false);
+
+    let regId = /^[0-9a-z]+$/;
+    let regPw = /^(?=.*[a-zA-Z])((?=.*\d)|(?=.*\W)).{6,20}$/
+    let regName = /^[0-9가-힣a-zA-Z]+$/;;
+
     let initialState = {
         id: "",
         nickName: "",
@@ -42,135 +51,150 @@ const FormSignup = () => {
     // form을 통한 제줄이라 submit
     const onSubmitHandler = (event) => {
         event.preventDefault();
-
-        if(userid.data.success&&username.data.success&&useradult.data.success){
-            //member을 데이터베이스에 보내줘야하는 동작과 동일하게 전달 (api참조)
-            // dispatch(createMember(member));
-            dispatch(__signUp(member));
-            // 값을 보낸 후에는 초기값으로 초기화
-            setMember(initialState);
-            navigate("/login")
-            // 로그인이 완료 되었으면 로그인페이지로 이동
-            // 회원가입 성공여부를 받아서 메세지로 띄워주면 끝날듯
+        if (!chkid && !chkname && !chkpw) {
+            if (userid.data.success && username.data.success && useradult.data.success) {
+                //member을 데이터베이스에 보내줘야하는 동작과 동일하게 전달 (api참조)
+                // dispatch(createMember(member));
+                dispatch(__signUp(member));
+                // 값을 보낸 후에는 초기값으로 초기화
+                setMember(initialState);
+                navigate("/login")
+                // 로그인이 완료 되었으면 로그인페이지로 이동
+                // 회원가입 성공여부를 받아서 메세지로 띄워주면 끝날듯
+            }
+            else {
+                alert("중복확인 및 성인인증을 해주세요.");
+            }
+        }else{
+            alert("양식에 맞는 정보인지 확인해주세요.");
         }
-        else{
-            alert("중복확인 및 성인인증을 해주세요.");
-        }
 
-      };
+    };
+    useEffect(() => {
+        if (member.id !== "" && !regId.test(member.id))
+            setChkid(true);
+        else
+            setChkid(false);
+    }, [member.id])
+    useEffect(() => {
+        if (member.nickName !== "" && !regName.test(member.nickName))
+            setChkname(true);
+        else
+            setChkname(false);
+    }, [member.nickName])
+    useEffect(() => {
+        if (pw !== "" && member.passWord !== "" && member.passWord !== pw)
+            setChkpw(true);
+        else {
+            if (!regPw.test(pw))
+                setChkpw(true);
+            if (!regPw.test(member.passWord))
+                setChkpw(true);
+            setChkpw(false);
+        }
+    }, [pw])
     // 달력 체크 후 달력사라지기
-      useEffect(()=>{
+    useEffect(() => {
         setCheck(false);
-      },[date]) 
-    //   useEffect(()=>{
-    //     if(userid.data.success)alert(userid?.data.data)
-    //     else if(userid.data.error!==null&&userid.data.error) alert(userid?.data?.error.message)
-    //   },[userid])
-    //   useEffect(()=>{
-    //     if(username.data.success)alert(username?.data.data)
-    //     // else if(username.data.error!==null&&username.data.error) alert(username?.data?.error.message)
-    //   },[username]) 
-    //   useEffect(()=>{
-    //     if(useradult.data.success)alert(useradult?.data.data);
-    //     // else if(useradult.data.error!==null&&useradult.data.error) alert(useradult?.data?.error.message)
-    //   },[useradult]) 
+    }, [date])
+
     return (
         <AddInputGroup>
-        <form onSubmit={onSubmitHandler} className="add-form">
-            <div>
-            <Label>
-                <Input placeholder="아이디"
-                    onChange={onChangeHandler}
-                    name="id"
-                    value={member.id}
-                    type="text" />
-                <CkButton type="button" 
-                 onClick={()=>{
-                    dispatch(__chkId({id:member.id}));
-                    console.log(member.id);
-                }}>중복확인</CkButton>
-            </Label>
-            {member.id.length<2 && member.id.trim()!==""?
-                    <p style={{color:"red"}}>2자 이상 입력해주세요.</p>:null}
-            </div>
-            <div>
-                <Label>
-                <Input placeholder="비밀번호"
-                    onChange={onChangeHandler}
-                    name="passWord"
-                    value={member.passWord}
-                    type="password" />
-                </Label>
-            </div>
-            <div>
-            <Label>
-                <Input placeholder="비밀번호 확인"
-                    onChange={(e)=>{setPw(e.target.value)}}
-                    name="passwordConfirm"
-                    value={pw}
-                    type="password" />
-             </Label>
-             {pw.trim()!=="" && member.passWord.trim()!=="" && member.passWord !== pw?
-                    <p style={{color:"red"}}>패스워드가 일치하지 않습니다.</p>
-                    :null}
-            </div>
-            {
-
-            }
-            <div>
-            <Label>
-                <Input placeholder="닉네임"
-                    onChange={onChangeHandler}
-                    name="nickName"
-                    value={member.nickName}
-                    type="text" />
-                <CkButton type="button" 
-                onClick={()=>{
-                    dispatch(__chkName({nickName:member.nickName}));
-                    console.log(member.nickName)
-                }}>중복확인</CkButton>
-          </Label>
-            {member.nickName.length<2 && member.nickName.trim()!==""?
-                    <p style={{color:"red"}}>2자 이상 입력해주세요.</p>:null}
-            </div>
-            <div>
-            <Label>
-                <Input placeholder="생년월일"
-                    onChange={onChangeHandler}
-                    onClick={()=>{setCheck(true);console.log(check);}}
-                    name="birthDate"
-                    value={moment(date).format("YYYY-MM-DD")}
-                    type="text" readOnly />
-
-                {/* form 내부에서 버튼 type은 submit으로 누르면 새로고침 기능동작 */}
-                {/* type="button"으로 지정해주면 새로고침 동작x */}
-
-                <CkButton type="button" onClick={() => { 
-                    setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
-                    dispatch(__chkAdult({birthDate: moment(date).format("YYYYMMDD")}));
-                    }}>성인인증</CkButton>
-                </Label>
-                {check?
+            <form onSubmit={onSubmitHandler} className="add-form">
                 <div>
-                    <CalenderForm>
-                    <Calendar onChange={setDate} value={date} name="birthDate" />
-                    </CalenderForm>
+                    <Label>
+                        <Input placeholder="아이디"
+                            onChange={onChangeHandler}
+                            name="id"
+                            value={member.id}
+                            type="text" />
+                        <CkButton type="button"
+                            onClick={() => {
+                                dispatch(__chkId({ id: member.id }));
+                                console.log(member.id);
+                            }}>중복확인</CkButton>
+                    </Label>
+                    {chkid ?
+                        <p style={{ color: "red" }}>아이디를 확인해주세요.(영문,숫자)</p> : null}
                 </div>
-                :null
+                <div>
+                    <Label>
+                        <Input placeholder="비밀번호"
+                            onChange={onChangeHandler}
+                            name="passWord"
+                            value={member.passWord}
+                            type="password" />
+                    </Label>
+                </div>
+                <div>
+                    <Label>
+                        <Input placeholder="비밀번호 확인"
+                            onChange={(e) => { setPw(e.target.value) }}
+                            name="passwordConfirm"
+                            value={pw}
+                            type="password" />
+                    </Label>
+                    {chkpw ?
+                        <p style={{ color: "red" }}>패스워드를 확인해주세요.</p>
+                        : null}
+                </div>
+                {
+
                 }
-            </div>
-            
-            <div>
-                <Button>회원가입</Button>
-                <Button type="button" onClick={()=>{navigate("/login")}}>취소</Button>
-            </div>
-        </form>
+                <div>
+                    <Label>
+                        <Input placeholder="닉네임"
+                            onChange={onChangeHandler}
+                            name="nickName"
+                            value={member.nickName}
+                            type="text" />
+                        <CkButton type="button"
+                            onClick={() => {
+                                dispatch(__chkName({ nickName: member.nickName }));
+                                console.log(member.nickName)
+                            }}>중복확인</CkButton>
+                    </Label>
+                    {chkname ?
+                        <p style={{ color: "red" }}>닉네임을 확인해주세요.(한글,영문,숫자)</p> : null}
+                </div>
+                <div>
+                    <Label>
+                        <Input placeholder="생년월일"
+                            onChange={onChangeHandler}
+                            onClick={() => { setCheck(true); console.log(check); }}
+                            name="birthDate"
+                            value={moment(date).format("YYYY-MM-DD")}
+                            type="text" readOnly />
+
+                        {/* form 내부에서 버튼 type은 submit으로 누르면 새로고침 기능동작 */}
+                        {/* type="button"으로 지정해주면 새로고침 동작x */}
+
+                        <CkButton type="button" onClick={() => {
+                            setMember({ ...member, birthDate: moment(date).format("YYYYMMDD") });
+                            dispatch(__chkAdult({ birthDate: moment(date).format("YYYYMMDD") }));
+                        }}>성인인증</CkButton>
+                    </Label>
+                    {check ?
+                        <div>
+                            <CalenderForm>
+                                <Calendar onChange={setDate} value={date} name="birthDate" />
+                            </CalenderForm>
+                        </div>
+                        : null
+                    }
+                </div>
+
+                <div>
+                    <Button>회원가입</Button>
+                    <Button type="button" onClick={() => { navigate("/login") }}>취소</Button>
+                </div>
+            </form>
         </AddInputGroup>
     )
 }
 export default FormSignup;
 
-const AddInputGroup = styled.div `
+const AddInputGroup = styled.div`
 width:450px;
 margin: 0 auto;
 margin-top: 4rem;
@@ -181,14 +205,14 @@ background-size: 240px;
 
 `;
 
-const CalenderForm = styled.div `
+const CalenderForm = styled.div`
 margin: 0 auto;
 margin-top: 2rem;
 padding:4px 24px 12px 24px;
     
 `
 
-const Label = styled.label `
+const Label = styled.label`
     overflow: hidden;
     display: block;
     width: 100%;
@@ -207,7 +231,7 @@ const Input = styled.input`
     
 `;
 
-const Button = styled.button `
+const Button = styled.button`
     border: 1px solid #333;
     background: #333;
     color: #fff;

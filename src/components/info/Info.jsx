@@ -2,10 +2,16 @@ import { useNavigate} from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux/";
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
+
 import axios from "axios"
 import { __image } from "../../redux/modules/img";
 
-import { __getMember } from "../../redux/modules/member";
+import { logout } from "../../redux/modules/login";
+
+import { __changeMember, __getMember, __removeMember } from "../../redux/modules/member";
+
+
+
 //  유저 세부정보를 출력하는 페이지
 const Info = () => {
     let navigate = useNavigate();
@@ -87,7 +93,16 @@ const Info = () => {
                 <p>최대 카운트  : {user?.data?.data?.highestCountOfCounter}</p></Label>
             </div>
             <div>
-                <Button onClick={()=>{navigate("/login")}}>회원탈퇴</Button>
+
+                <Button onClick={()=>{let change = prompt('수정할 닉네임을 입력해주세요.');
+            dispatch(__changeMember({nickName:change}))}}>회원수정</Button>
+            <Button onClick={()=>{if(window.confirm("정말로 삭제하시겠습니까?")===true){
+                dispatch(__removeMember());
+                dispatch(logout());
+                navigate("/login");
+            }else{return false;}
+            }}>회원삭제</Button>
+
             </div>
             </InfoBox>
         </div>

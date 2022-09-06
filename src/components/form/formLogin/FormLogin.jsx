@@ -15,7 +15,6 @@ const FormLogin = () => {
         id: "",
         passWord: ""
     }
-    console.log(result)
     let [member, setMember] = useState(initialState);
     // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
     const onChangeHandler = (event) => {

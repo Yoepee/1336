@@ -44,7 +44,6 @@ const Lotto = () => {
             dispatch(__lotto({num1:arr[0], num2: arr[1], num3: arr[2], num4: arr[3], num5: arr[4], num6: arr[5]}))
         }
     }
-    console.log(arr);
     return (
         
         <div>
