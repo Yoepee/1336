@@ -41,7 +41,7 @@ const Lotto = () => {
         if(check!==6)
             alert("6개를 선택해주세요.")
         else{
-            dispatch(__lotto({num1:arr[0], num2: arr[1], num3: arr[2], num4: arr[3], num5: arr[4], num6: arr[5]}))
+            dispatch(__lotto({num1:Number(arr[0]), num2: Number(arr[1]), num3: Number(arr[2]), num4: Number(arr[3]), num5: Number(arr[4]), num6: Number(arr[5])}))
         }
     }
     return (
@@ -75,6 +75,7 @@ const Lotto = () => {
                 ))}
                 </Boxchk>
                 </LottoBox>
+                <GoButton type="button" onClick={()=>{dispatch(__lotto({num1:0, num2: 0, num3: 0, num4: 0, num5: 0, num6: 0}))}}>랜덤로또</GoButton>
                 <GoButton type="button" onClick={()=>{sellLotto()}}>로또구매</GoButton>
                 <GoButton type="button" onClick={()=>{dispatch(__result())}}>당첨번호조회</GoButton>
             </Form>
