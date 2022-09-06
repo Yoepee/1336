@@ -26,7 +26,7 @@ const Counter = () => {
     return (
         <div>
             <LogoBox>
-            <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FmVKkd%2FbtrLlEKEVIX%2Fq26DpMhttrso3fCsOUT7e0%2Fimg.jpg"></Title_logo>
+            <Title_logo src="https://blog.kakaocdn.net/dn/ejBGoz/btrLzkyzUPt/ubqDQCLQx5dZUj69MT22V1/img.gif"></Title_logo>
             </LogoBox>
             <StContainer>
             <p>{count}</p>
