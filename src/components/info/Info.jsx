@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import axios from "axios"
-import { __image } from "../../redux/modules/img";
+//mport { __image } from "../../redux/modules/img";
 
 import { logout } from "../../redux/modules/login";
 
@@ -60,16 +60,20 @@ const Info = () => {
     //     amu.current.click();
     // }
     return (
+
         <div>
-            <div>
-                <input 
+        <UserBox>
+                <InfoBox>
+                <div>
+                <Input 
                 type='file' 
                 accept='image/*' 
                 name='profile_img' 
                 onChange={onChange}/>
-                {/* <button onClick={()=>{a()}}>올려보자</button> */}
-            </div>
-            <InfoBox>
+                </div>
+                <button>올려보자</button>
+                </InfoBox>  
+                <InfoBox>
             <div>
            {/* 옵셔널 체이닝을 통한 없는 데이터 나올 때 페이지 에러가 나지않도록함 */}
                 <Label>
@@ -97,8 +101,10 @@ const Info = () => {
                 <Label>
                 <p>최대 카운트  : {user?.data?.data?.highestCountOfCounter}</p></Label>
             </div>
-            <div>
+            </InfoBox>
+            </UserBox>  
 
+            <ButtonBox>
                 <Button onClick={()=>{let change = prompt('수정할 닉네임을 입력해주세요.');
             dispatch(__changeMember({nickName:change}))}}>회원수정</Button>
             <Button onClick={()=>{if(window.confirm("정말로 삭제하시겠습니까?")===true){
@@ -107,22 +113,55 @@ const Info = () => {
                 navigate("/login");
             }else{return false;}
             }}>회원삭제</Button>
-
-            </div>
-            </InfoBox>
+            </ButtonBox>
+      
         </div>
+        
     )
 }
 
 export default Info;
 
-const InfoBox = styled.div `
-width:450px;
+const UserBox = styled.div `
+width:800px;
+height:450px;
 margin: 0 auto;
-margin-top: 4rem;
-border : 4px solid #eee;
+margin-top: 2rem;
+margin-bottom: 1rem;
+border : 4px solid transparent;
+padding:12px 12px 12px 12px;
+background-size: 240px;
+background-color: #eee;
+display: flex;
+border-radius: 8px;
+`;
+
+const ButtonBox = styled.div `
+margin: auto;
+margin-top: 1rem;
+margin-bottom: 2rem;
+
+`
+
+const Input = styled.input`
+width: 150px;
+margin-top:3rem;
+margin-bottom: 1rem;
+height: 200px;
+border-radius: 50px;
+background-color: #eee;
+`
+
+
+const InfoBox = styled.div `
+width:300px;
+height: 380px;
+margin: 0 auto;
+margin-top: 1rem;
+border : 4px solid #fff;
+background-color: #fff;
 border-radius: 12px;
-padding:12px 24px 24px 24px;
+padding:12px 12px 12px 12px;
 background-size: 240px;
 
 `;
@@ -133,18 +172,21 @@ const Label = styled.label `
     margin: 0 0 8px 0;
     border: 1px solid #eee;
     color: #8F8F91;
+    text-align: left;
 `;
 
 const Button = styled.button `
     border: 1px solid #333;
     background: #333;
     color: #fff;
+    border-radius: 20px;
     font-size: 17px;
     padding: 13px 0;
-    margin: 15px 0 0;
-    width: 400px;
+    margin: 15px 0 0 15px;
+    width: 100px;
     display: inline-block;
     text-align: center;
     font-weight: 400;
     text-transform: uppercase;
 `;
+
