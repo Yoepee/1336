@@ -66,6 +66,7 @@ export const __oddeven = createAsyncThunk(
             console.log(data);
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
+            alert("금액에 맞는 배팅을 해주세요.")
             return thunkAPI.rejectWithValue(error);
           }
     }

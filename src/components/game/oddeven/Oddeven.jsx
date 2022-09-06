@@ -1,27 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
 import { __oddeven } from "../../../redux/modules/game/game";
 
 const Oddeven = () => {
     const dispatch = useDispatch();
-    let [count, setCount] = useState(Math.random);
     let [choice, setChoice] = useState("");
     let [number, setNum] = useState(null)
-    let [result, setResult] = useState("골라주세요.");
-    let [check, setCheck] = useState(false);
     let [bet, setBet] = useState("");
+    let [sum, setSum] = useState(false)
+    let reg = /^[0-9]+$/;
+    useEffect(()=>{
+        if(!reg.test(bet)){
+            setSum("true");
+        }else{
+            setSum("false");
+        }
+    }, [bet])
 
-    // 홀짝을 골라서 정답이 나오는지 알 수 있는 알고리즘
-    // const test = (choice) => {
-    //     if (number === null) return alert("홀, 짝을 골라주세요.");
-    //     setCount(Math.floor(Math.random() * 1000));
-    //     console.log(count)
-    //     count % 2 === number ? setResult("정답입니다!!") : setResult("틀렸습니다!");
-    //     setChoice("골라주세요.");
-    //     setNum(null)
-    //     setCheck(true);
-    // }
     return (
         <>
         <LogoBox>
@@ -31,10 +27,9 @@ const Oddeven = () => {
         <StContainer>
             <div>
                 <p>홀짝</p>
-                {check ? <p>{result}</p> : null}
                 <p>당신의 선택은 ? {choice}</p>
                 <StButton onClick={() => { setChoice("홀"); setNum(1) }}>홀</StButton>
-                <StButton onClick={() => { setChoice("짝"); setNum(0) }}>짝</StButton>
+                <StButton onClick={() => { setChoice("짝"); setNum(2) }}>짝</StButton>
             </div>
             <div>
                 <Label>
@@ -45,9 +40,14 @@ const Oddeven = () => {
                     type="text" />
                 {/* <StButton>배팅하기</StButton> */}
                 </Label>
-            </div>
+                {sum === "true" && bet !==""?
+                <p style={{color:"red"}}>숫자만 입력해주세요.</p>
+                :null}
             <div>
-                <GoButton onClick={() => { dispatch(__oddeven({point:bet,number:number})) }}>도전</GoButton>
+            </div>
+                <GoButton onClick={() => { if(choice==="")alert("번호를 골라주세요.");
+                    else if(bet.trim()===""||sum==="true")alert("배팅금액을 입력해주세요.");
+                    else{dispatch(__oddeven({point:bet,number:number}))} }}>도전</GoButton>
                 
             
             </div>

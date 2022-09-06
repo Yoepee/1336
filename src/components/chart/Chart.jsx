@@ -16,8 +16,6 @@ const Chart = () => {
     const [desc, setDesc] = useState("전체");
     // database에 접근하여 가져옴 (redux랑 연결)
     const { isLoading, error, data } = useSelector((state) => state.ranking);
-    // 현재 ""이 들어가 있는 30칸 짜리 배열 생성
-    let [arr, setArr] = useState(new Array(30).fill(""));
 
     //값에 따라 필요한 함수를 통해 필요한 내용만 받아오도록... (현재 이걸 통해 작업하면 새로고침되는듯) (백엔드랑 연결하고 조치필요)
     useEffect(() => {
@@ -101,6 +99,7 @@ const Chart = () => {
                     </thead>
                     <tbody>
                         {/* map함수를 통한 차트 내용 출력 */}
+                        {/* 삼항연산자로 해당조건에 걸리는 부분 출력 위에서부터 적용된다고 보면됨 */}
                         {desc==="전체"&&title==="포인트 랭킹"? 
                         data?.data?.totalPointList?.map((a, i) => {
                             return (
