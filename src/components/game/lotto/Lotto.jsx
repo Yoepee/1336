@@ -49,7 +49,7 @@ const Lotto = () => {
         
         <div>
         <LogoBox>
-        <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fb8biDm%2FbtrLhuiHAfk%2FMQ9K80EacwCII7bbKkvzuk%2Fimg.jpg"></Title_logo>
+        <Title_logo src="https://blog.kakaocdn.net/dn/Wflzc/btrLu3dFy68/qop9TRah6EMP9r3U8tj3Wk/img.gif"></Title_logo>
         </LogoBox>
         <StForm>
             <Form>
