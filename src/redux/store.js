@@ -14,6 +14,7 @@ import image from './modules/img'
 import ranking from './modules/ranking'
 import game from './modules/game/game'
 import manager from './modules/check/manager'
+import lotto from './modules/game/lotto'
 
 // import값을 .reducer로 넘겨줄시에는 밑에 리듀서에 .reducer적지 말 것
 export default configureStore({
@@ -21,6 +22,7 @@ export default configureStore({
         //comment : 댓글, lotto : 생성예정, member : 유저 정보 , table : 랭킹 차트
         // lotto : lotto.reducer,
         game: game.reducer,
+        lotto: lotto.reducer,
 
         comment : comment.reducer,
         member : member.reducer,
