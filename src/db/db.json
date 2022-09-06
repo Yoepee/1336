@@ -4,50 +4,6 @@
   "comment": [],
   "ranking": [],
   "login": [
-    {
-      "success": true,
-      "data": "",
-      "error": null,
-      "id": 2
-    },
-    {
-      "success": true,
-      "data": "aaaa",
-      "error": null,
-      "id": 3
-    },
-    {
-      "success": true,
-      "data": "test2",
-      "error": null,
-      "id": 4
-    },
-    {
-      "success": true,
-      "data": "qwerrr",
-      "error": null,
-      "id": 5
-    },
-    {
-      "success": true,
-      "data": "qwerrr",
-      "error": null,
-      "id": 6
-    },
-    {
-      "success": false,
-      "data": null,
-      "error": {
-        "code": "Not Found Member",
-        "message": "존재하지 않는 ID입니다."
-      },
-      "id": 7
-    },
-    {
-      "success": true,
-      "data": "qwerrr",
-      "error": null,
-      "id": 8
-    }
   ]
+  
 }
