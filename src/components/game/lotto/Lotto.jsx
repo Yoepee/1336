@@ -1,18 +1,21 @@
 
 import styled from "styled-components";
 import { Form } from 'react-bootstrap';
-import {useState} from "react"
-import { useDispatch } from "react-redux";
+import {useEffect, useState} from "react"
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
-import { __lotto, __result } from "../../../redux/modules/game/lotto";
+import { __lotto, __myresult, __lottoresult } from "../../../redux/modules/game/lotto";
 
 const Lotto = () => {
     let dispatch = useDispatch();
+    let {data} = useSelector((state)=>state.lotto)
     // es6문법 숫자배열 만들기
     let range = [...Array(20)].map((v, i) => i);
     // var range2 = [...Array(5).keys()].map(i => i);
     // var range3 = Array.from({length: 5}, (v,i) => i);
     let [check, setCheck] = useState(0);
+    let [result,setResult] = useState(false);
     let [arr, setArr] = useState([]);
     // 체크박스 제한걸기
     const countChecked = (e) => {
@@ -44,6 +47,10 @@ const Lotto = () => {
             dispatch(__lotto({num1:Number(arr[0]), num2: Number(arr[1]), num3: Number(arr[2]), num4: Number(arr[3]), num5: Number(arr[4]), num6: Number(arr[5])}))
         }
     }
+    useEffect(()=>{
+        dispatch(__myresult())
+    },[dispatch])
+
     return (
         
         <div>
@@ -75,9 +82,42 @@ const Lotto = () => {
                 ))}
                 </Boxchk>
                 </LottoBox>
+                {result?
+                <InfoBox>
+                <div>
+                <Label>
+                <p>회차 : {data?.data[0]?.no} </p>
+                </Label>
+                <Label>
+                {data?.data[0]?.luckyNum ==="아직 실행되지않은 회차입니다."?<p>당첨번호 : {data?.data[0]?.luckyNum} </p>
+                :<p>당첨번호 : {data?.data[0]?.luckyNum[0]}, {data?.data[0]?.luckyNum[1]}, {data?.data[0]?.luckyNum[2]}, {data?.data[0]?.luckyNum[3]}, {data?.data[0]?.luckyNum[4]}, {data?.data[0]?.luckyNum[5]}</p>}
+                </Label>
+                <Label>
+                <p>보너스 번호 : {data?.data[0]?.bonusNum} </p>
+                </Label>
+                <Label>
+                <p>나의 번호 : {data?.data[0]?.myNum[0]}, {data?.data[0]?.myNum[1]}, {data?.data[0]?.myNum[2]}, {data?.data[0]?.myNum[3]}, {data?.data[0]?.myNum[4]}, {data?.data[0]?.myNum[5]}</p>
+                </Label>
+                <Label>
+                {data?.data[0]?.rank==="아직 실행되지않은 회차입니다."?<p>당첨 등수 : {data?.data[0]?.rank} </p>
+                :<p>당첨 등수 : {data?.data[0]?.rank} </p>}
+                </Label>
+                <Label>
+                <p>획득 점수 : {data?.data[0]?.earnPoint} </p>
+                </Label>
+                </div>
+                <button onClick={()=>{if(result) {setResult(false)} else {setResult(true)}}}>버리기</button>
+                </InfoBox>  
+                :null}
+                <div>
                 <GoButton type="button" onClick={()=>{dispatch(__lotto({num1:0, num2: 0, num3: 0, num4: 0, num5: 0, num6: 0}))}}>랜덤로또</GoButton>
                 <GoButton type="button" onClick={()=>{sellLotto()}}>로또구매</GoButton>
-                <GoButton type="button" onClick={()=>{dispatch(__result())}}>당첨번호조회</GoButton>
+                </div>
+                <div>
+                <GoButton type="button" onClick={()=>{dispatch(__lottoresult())}}>당첨번호조회</GoButton>
+                <GoButton type="button" onClick={()=>{dispatch(__myresult())
+                if(result) {setResult(false)} else {setResult(true)}}}>당첨결과</GoButton>
+                </div>
             </Form>
             </StForm>
         </div>
@@ -150,3 +190,25 @@ const StLotto = styled.div`
     padding:12px 24px 24px 24px;
     background-size: 240px; 
     `;
+
+    const InfoBox = styled.div `
+width:350px;
+height: 380px;
+margin: 0 auto;
+margin-top: 1rem;
+border : 4px solid #fff;
+background-color: #fff;
+border-radius: 12px;
+padding:12px 12px 12px 12px;
+background-size: 240px;
+
+`;
+const Label = styled.label `
+    overflow: hidden;
+    display: block;
+    width: 100%;
+    margin: 0 0 8px 0;
+    border: 1px solid #eee;
+    color: #8F8F91;
+    text-align: left;
+`;
