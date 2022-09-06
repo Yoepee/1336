@@ -3,10 +3,8 @@ import { useState, useEffect } from "react"
 import { Table } from 'react-bootstrap';
 import { useSelector, useDispatch } from "react-redux/";
 
-
 import styled from "styled-components";
 import { __getRanking, __getGame } from "../../redux/modules/ranking";
-
 
 const Chart = () => {
     //module 함수선언을 위한 dispatch
