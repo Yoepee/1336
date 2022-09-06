@@ -10,7 +10,6 @@ import { logout } from "../../redux/modules/login";
 
 import { __changeMember, __getMember, __removeMember } from "../../redux/modules/member";
 
-import { __image } from "../../redux/modules/img";
 //  유저 세부정보를 출력하는 페이지
 const Info = () => {
     let navigate = useNavigate();

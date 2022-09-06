@@ -6,11 +6,13 @@ export const __lotto = createAsyncThunk(
     "/api/game/lotto",
     async (payload, thunkAPI) => {
         try {
+          console.log(payload)
             const data =  await axios.post("http://3.34.5.30:8080/api/game/lotto", payload, {
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
+            console.log(data);
             if(data.data.success===true){
               if(data.data.data === "로또를 구매하기 위한 포인트가 부족합니다")
                 alert("로또를 구매하기 위한 포인트가 부족합니다");
