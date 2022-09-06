@@ -7,7 +7,6 @@ const Choice = () => {
     return (
         <div>
                 <StButton onClick={() => { navigate("/chart") }}> 랭킹보기 </StButton>
-                <StButton onClick={() => { navigate("/admin/:id") }}> 관리자 </StButton>
             <div>
 
             </div>
