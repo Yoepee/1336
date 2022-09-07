@@ -4,7 +4,9 @@ import LoginHeader from "../components/header/LoginHeader";
 const Signup = () => {
     return (
         <div>
+            {/* 로그인 유무 검사기능 없는 헤더 */}
             <LoginHeader/>
+            {/* 회원가입 컴포넌트 */}
             <FormSignup />
            
         </div>

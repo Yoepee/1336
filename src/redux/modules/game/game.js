@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 // async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
+// 홀짝 선택, 배팅금액을 보내서 게임결과를 받아옴
 export const __oddeven = createAsyncThunk(
     "/api/game/oddeven",
     async (payload, thunkAPI) => {
@@ -28,6 +29,7 @@ export const __oddeven = createAsyncThunk(
           }
     }
   );
+  // 주사위 선택, 배팅금액을 보내서 게임결과를 받아옴
   export const __dice = createAsyncThunk(
     "/api/game/dice",
     async (payload, thunkAPI) => {
@@ -54,6 +56,7 @@ export const __oddeven = createAsyncThunk(
           }
     }
   );
+  // 카운터 버튼을 통한 점수를 보내 결과를 받아옴
   export const __counter = createAsyncThunk(
     "/api/game/dice",
     async (payload, thunkAPI) => {
@@ -86,41 +89,7 @@ export const game = createSlice({
     },
     // 내부에서 동작하는 함수 외 외부에서 선언해준 함수 동작을 보조하는 기능
     extraReducers: {
-        [__oddeven.pending]: (state) => {
-          state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
-        },
-        [__oddeven.fulfilled]: (state, action) => {
-          state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-          state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
-        },
-        [__oddeven.rejected]: (state, action) => {
-          state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
-          state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
-        },
-        
-        [__dice.pending]: (state) => {
-            state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
-          },
-          [__dice.fulfilled]: (state, action) => {
-            state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
-          },
-          [__dice.rejected]: (state, action) => {
-            state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
-          },
-
-          [__counter.pending]: (state) => {
-            state.isLoading = true; // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
-          },
-          [__counter.fulfilled]: (state, action) => {
-            state.isLoading = false; // 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.data = action.payload; // Store에 있는 todos에 서버에서 가져온 todos를 넣습니다.
-          },
-          [__counter.rejected]: (state, action) => {
-            state.isLoading = false; // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
-            state.error = action.payload; // catch 된 error 객체를 state.error에 넣습니다.
-          },
+      //  결과를 보내는 형식이 post이고 데이터 저장이 필요없다고 판단으로 액스트라 리듀서 제거
       },
 })
 

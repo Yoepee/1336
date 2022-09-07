@@ -22,11 +22,13 @@ const Manage = () => {
       };
     
     useEffect(()=>{
+        // 토큰이 없으면 로그인페이지로 방출
         if(localStorage.getItem("token1")===null){
             navigate("/login")
         }
         if(localStorage.getItem("token2")===null){
             navigate("/login")
+        // 유저정보를 받아오는 내용
         }else{
             dispatch(__getuser());
         }
@@ -53,17 +55,20 @@ const Manage = () => {
                 </Label>
             </div>
             <div>
+                {/* 포인트 지급은 post로 바로 전송 */}
                 <Button onClick={async()=>{
                              await axios.post(`http://3.34.5.30:8080/api/adminPage/${member.id}`, {point:member.point}, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
+                                    // 성공시 지급완료 메세지 출력
                               }}).then(()=>{alert("지급이 완료되었습니다.")});
                         }}>지급하기</Button>
             </div>
             </InfoBox>
             <InfoBox>
             <div>
+                {/* 유저목록 버튼을 클릭하면 유저 아이디 및 포인트 정보 출력 */}
                 {show === true?
                 <>
                 <ReplyBox>
@@ -82,6 +87,7 @@ const Manage = () => {
                 :null
                 }
             </div>
+            {/* 유저목록을 보여줌 */}
             <Button onClick={()=>{show===true?setShow(false):setShow(true)}}>유저목록</Button>
             </InfoBox>
         </div>

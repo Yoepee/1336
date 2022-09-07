@@ -1,33 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
   
-export const __getid = createAsyncThunk(
-    "member/getMember",
-    async (payload, thunkAPI) => {
-        try {
-            const data =  await axios.get("http://localhost:3001/member", {
-              headers: {
-                  Authorization: localStorage.getItem('login-token'),
-                  RefreshToken: localStorage.getItem('login-token2'),
-            }}).then(()=>{
-              alert(data.success)
-            });
-            return thunkAPI.fulfillWithValue(data.data);
-          } catch (error) {
-            return thunkAPI.rejectWithValue(error);
-          }
-    }
-  );
-
+// 아이디 중복검사
   export const __chkId = createAsyncThunk(
     "api/member/chkId",
     async (payload, thunkAPI) => {
         try {
             console.log(payload);
             const data =  await axios.post("http://3.34.5.30:8080/api/member/chkId", payload);
+            // 검사 성공시 메세지 출력
             if(data.data.success===true)
               alert(data.data.data);
             else
+            // 실패시 에러 메세지 출력
               alert(data.data.error.message);
             console.log(data);
             return thunkAPI.fulfillWithValue(data.data);

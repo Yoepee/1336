@@ -6,12 +6,13 @@ const Choice = () => {
     let navigate = useNavigate();
     return (
         <div>
-            
+            {/* img 로고 경로지정 */}
                 <Chart_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FLHzXN%2FbtrLxZHXxbQ%2FFQL1KdYmGgo7ImbcxuxdC0%2Fimg.png" onClick={() => { navigate("/chart") }}></Chart_logo>
             <div>
 
             </div>
             <div>
+                {/* 버튼클릭시 게임페이지 이동 */}
             <GameBox>
                 <Button onClick={() => { navigate("/game/4") }}> 카운터 </Button>
                 <Button onClick={() => { navigate("/game/1") }}> 홀짝 </Button>

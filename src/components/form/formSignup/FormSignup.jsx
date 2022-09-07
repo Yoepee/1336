@@ -51,7 +51,9 @@ const FormSignup = () => {
     // form을 통한 제줄이라 submit
     const onSubmitHandler = (event) => {
         event.preventDefault();
+        // 아이디 닉네임 비밀번호 유효성검사 (한글, 숫자, 영어, 특수문자, 글자길이 등)
         if (!chkid && !chkname && !chkpw) {
+            // 중복검사 및 성인인증 성공여부 유효성검사
             if (userid.data.success && username.data.success && useradult.data.success) {
                 //member을 데이터베이스에 보내줘야하는 동작과 동일하게 전달 (api참조)
                 // dispatch(createMember(member));
@@ -72,18 +74,21 @@ const FormSignup = () => {
         }
 
     };
+    // 아이디의 state가 변할때마다 유효성검사 시행
     useEffect(() => {
         if (member.id !== "" && !regId.test(member.id))
             setChkid(true);
         else
             setChkid(false);
     }, [member.id])
+    // 닉네임의 state가 변할때마다 유효성검사 시행
     useEffect(() => {
         if (member.nickName !== "" && !regName.test(member.nickName))
             setChkname(true);
         else
             setChkname(false);
     }, [member.nickName])
+    // 패스워드의 state가 변할때마다 유효성검사 시행
     useEffect(() => {
         if (pw !== "" && member.passWord !== "" && member.passWord !== pw)
             setChkpw(true);
@@ -116,6 +121,7 @@ const FormSignup = () => {
                                 console.log(member.id);
                             }}>중복확인</CkButton>
                     </Label>
+                    {/* 유효성검사에서 걸리면 해당 구문 출력하도록 설정 */}
                     {chkid ?
                         <p style={{ color: "red" }}>아이디를 확인해주세요.(영문,숫자)</p> : null}
                 </div>
@@ -136,6 +142,7 @@ const FormSignup = () => {
                             value={pw}
                             type="password" />
                     </Label>
+                    {/* 유효성검사에서 걸리면 해당 구문 출력하도록 설정 */}
                     {chkpw ?
                         <p style={{ color: "red" }}>패스워드를 확인해주세요.</p>
                         : null}
@@ -156,6 +163,7 @@ const FormSignup = () => {
                                 console.log(member.nickName)
                             }}>중복확인</CkButton>
                     </Label>
+                    {/* 유효성검사에서 걸리면 해당 구문 출력하도록 설정 */}
                     {chkname ?
                         <p style={{ color: "red" }}>닉네임을 확인해주세요.(한글,영문,숫자)</p> : null}
                 </div>

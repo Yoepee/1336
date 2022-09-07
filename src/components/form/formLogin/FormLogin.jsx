@@ -8,6 +8,7 @@ import { __login} from "../../../redux/modules/login";
 
 
 const FormLogin = () => {
+    // 로그인 정보 호출
     let result = useSelector((state)=>state.login)
     let navigate = useNavigate();
     let dispatch = useDispatch();
@@ -18,13 +19,16 @@ const FormLogin = () => {
     let [member, setMember] = useState(initialState);
     // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
     const onChangeHandler = (event) => {
+        // name과 value를 input의 event.target으로 지정 (파라미터 참조)
         const { name, value } = event.target;
+        // 수정되는 내용과 member이 가진 값을 매칭하여 state변경
         setMember({ ...member, [name]: value });
       };
     const onSubmit = ()=>{
         dispatch(__login(member));
     }
     useEffect(()=>{
+        // 로그인에 성공하면 메인페이지로 이동
         if (result.data.success) {
             navigate('/');
         }
@@ -53,8 +57,9 @@ const FormLogin = () => {
             
             <div>
 
-                {/* 현재 테스트용도로 navigate로 경로지정 */}
+                {/* 로그인 버튼 클릭시 axios로 로그인api호출 */}
                 <Button onClick={()=>{onSubmit()}}>로그인</Button>
+                {/* 회원가입은 경로이동 */}
                 <Button onClick={()=>{navigate("/signup")}}>회원가입</Button>
                
 

@@ -24,12 +24,14 @@ const Comment = () => {
     const { isLoading, error, data } = useSelector((state) => state.comment);
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
+        // 토큰이 없으면 정보를 받아오지않고 로그인페이지로 방출
         if(localStorage.getItem("token1")===null){
             navigate("/login")
         }
         if(localStorage.getItem("token2")===null){
             navigate("/login")
         }else{
+            // 토큰 보유시에만 댓글 정보를 호출
             dispatch(__getComment(game));
         }
     }, [dispatch]);
@@ -53,12 +55,14 @@ const Comment = () => {
                     name="comment"
                     value={comment.content}
                     type="text" />
+                    {/* 댓글 작성은 post형식으로 작성 */}
                 <CkButton onClick={async()=>{
                             let a = await axios.post(`http://3.34.5.30:8080/api/comment?gameId=${game}`, comment, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
+                            //   리덕스를 이용하여 자연스러운 state 변경
                               dispatch(createComment(a.data.data));
                         }}>댓글 작성</CkButton>
             </Label>
@@ -70,23 +74,34 @@ const Comment = () => {
                         <ReplyBox key={i}>
                         <Replier>{review.nickName} </Replier>
                         <Reply>{review.content}</Reply>
+
                         <EdButton onClick={async()=>{
+                        {/* 댓글 수정은 patch형식으로 작성 */}
+                        
+
                             let change = prompt('수정할 내용을 입력해주세요.');
                              await axios.patch(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {content: change}, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
+                              //   리덕스를 이용하여 자연스러운 state 변경
                               dispatch(updateComment({...review,content:change}))
+
                         }}></EdButton>
                         <DeButton onClick={async()=>{
+                        }}></DeButton>
+                        {/* 댓글 삭제는 delete 형식으로 작성 */}
+                        <CkButton onClick={async()=>{
+
                              await axios.delete(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
+                              //   리덕스를 이용하여 자연스러운 state 변경
                               dispatch(removeComment(review.id))
-                        }}></DeButton>
+                        }}></CkButton>
                         </ReplyBox>   
                     )
                 })}

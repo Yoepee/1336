@@ -4,7 +4,9 @@ import Chart from "../components/chart/Chart"
 const Ranking = () => {
     return (
         <>
+        {/* 로그인 유무 검사 헤더 */}
         <Header/>
+        {/* 랭킹 목록 선택 및 랭킹 목록 */}
         <Chart/>
         </>
     )

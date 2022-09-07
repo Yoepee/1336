@@ -13,6 +13,7 @@ const Header = () => {
     // navigate를 통한 경로지정
     const admin = useSelector((state=>state.manager))
     let navigate = useNavigate();
+    // 해당 페이지 도착 후 관리자 유무 확인
     useEffect(()=>{
         if(localStorage.getItem("token1")===null){
             navigate("/login")
@@ -30,6 +31,7 @@ const Header = () => {
              <Title_logo src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fs9yqx%2FbtrLkuA8r9v%2Fvd5HwKxEMOtvcuv1w2xiMK%2Fimg.png" onClick={() => { navigate("/") }}></Title_logo>
                 <div>
                 {localStorage.getItem("name")}님 반갑습니다.
+                {/* 해당 계정이 관리자계정일시 관리자 메뉴 출력 */}
                 {admin?.data?.data === true&&localStorage.getItem("token1")!==null? <StHeadbtn onClick={() => { navigate("/admin/:id") }}> 관리자 </StHeadbtn>:null}
                 <StHeadbtn onClick={() => { navigate("/user") }}>마이페이지</StHeadbtn>
                 <StHeadbtn onClick={() => { dispatch(logout()); dispatch(__logout());}}>로그아웃</StHeadbtn>

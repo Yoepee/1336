@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import bg from "../../img/HeaderImg.jpg"
 
-// 상세페이지, 로그아웃 연결되는 페이지
+// 로그인, 회원가입 페이지의 헤더 (정보를 불러오는 기능이 제거)
 const LoginHeader = () => {
     // navigate를 통한 경로지정
     let navigate = useNavigate();
