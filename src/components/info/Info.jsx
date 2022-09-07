@@ -14,7 +14,6 @@ import { __changeMember, __getMember, __removeMember } from "../../redux/modules
 const Info = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
-    const amu = useRef();
 
     // 데이터받아오기
     const result= localStorage.getItem("name")
