@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Form } from 'react-bootstrap';
 import {useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 import { __lotto, __myresult, __lottoresult } from "../../../redux/modules/game/lotto";
 

@@ -3,11 +3,11 @@ import axios from 'axios';
 
 // async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
   export const __image = createAsyncThunk(
-    "/api/user/Image/",
+    "/api/user/image/",
     async (payload, thunkAPI) => {
         try {
           console.log(payload);
-            const data =  await axios.patch("http://3.34.5.30:8080/api/user/Image/", payload,{
+            const data =  await axios.patch("http://3.34.5.30:8080/api/user/image", payload,{
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")

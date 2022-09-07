@@ -1,21 +1,22 @@
 import { useNavigate} from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux/";
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import axios from "axios"
 //mport { __image } from "../../redux/modules/img";
 
 import { logout } from "../../redux/modules/login";
-
+import { __image } from "../../redux/modules/img";
 import { __changeMember, __getMember, __removeMember } from "../../redux/modules/member";
 
 //  유저 세부정보를 출력하는 페이지
 const Info = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
-    const amu = useRef();
-
+    const imageInput = useRef();
+    const [formData] = useState(new FormData());
+    const [imageSrc, setImageSrc] = useState("");
     // 데이터받아오기
     const result= localStorage.getItem("name")
     const user = useSelector((state)=>state.member)
@@ -30,54 +31,79 @@ const Info = () => {
             dispatch(__getMember(result));
         }
     }, [dispatch]);
+    const imageUpload = (fileBlob) => {
+        // console.log("fileblob is", fileBlob);
+        formData.append('image', fileBlob);
 
-    //  //isLoading이 true이면 컴포넌트의 return값 변경
-    //  if (isLoading) {
-    //     return <div>로딩 중....</div>;
-    // }
-    // //error이 true이면 컴포넌트의 return값 변경
-    // if (error) {
-    //     return <div>{error.message}</div>;
-    // }
-    // 조건문에 넣었을 때 false가 되는 경우를 찾아보시면 좋을듯 (ex> null, undefined 등)
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(fileBlob);
+        return new Promise((resolve) => {
+            reader.onload = () => {
+                setImageSrc(reader.result);
+                resolve();
+            }
+        });
+
+    };
+    const onClickImageUpload = () => {
+        imageInput.current.click();
+    };
+    const addHandler = async() => {
+        console.log(typeof (formData));
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+
+        await axios({
+            method: "PATCH",
+            url: "http://3.34.5.30:8080/api/user/image",          //백앤드 서버로 변경함
+            mode: "cors",
+            headers: {
+                "Authorization": localStorage.getItem("token1"),
+                "RefreshToken": localStorage.getItem("token2"),
+                "Content-Type": "multipart/form-data"
+            },
+            data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
+        })
+
+
+    };
     
-    // params에서 제공하는 url id값과 데이터베이스에서 보내준 정보와 대조 (아마 연결하고나서는 다르게 써야할듯)
-    // let info = data.find((user)=>{
-    //     return String(user.id) === id
-    // })
-    // const onImgChange = async (e)=>{
-    //     const formData = new FormData();
-    //     formData.append("key", "image");
-    //     formData.append("value", e.target.files[0]);
-    //     console.log(formData)
-    //     dispatch(__image(formData));
-    // }
-    const onChange = (e) => {
-        const img = e.target.files[0];
-        const formData = new FormData();
-        formData.append('key', "image");
-        formData.append('value', img);
-        // dispatch(__image(formData));
-        console.log(formData)
-        for (const keyValue of formData) console.log(keyValue);
-    }
-    // const a = (e) => {
-    //     e.preventDefault();
-    //     amu.current.click();
-    // }
+    
     return (
 
         <div>
         <UserBox>
                 <InfoBox>
                 <div>
+                <div className="preview">
+                        {imageSrc && (
+                            <img
+                                src={imageSrc}
+                                alt="preview-img"
+                                width="50%"
+                                height="60%"
+                            />
+                        )}
+                    </div>
                 <Input 
-                type='file' 
-                accept='image/*' 
-                name='profile_img' 
-                onChange={onChange}/>
+                id="imagefile"
+                name="imagefile"
+                type="file"
+                accept="image/*"
+                ref={imageInput}
+                style={{ display: "none" }}
+                onChange={(e) => {
+                    imageUpload(e.target.files[0])
+                }}
+                />
                 </div>
-                <button>올려보자</button>
+                <button onClick={onClickImageUpload}>올려보자</button>
+                <button onClick={()=>{addHandler()}}>올려보자2</button>
                 </InfoBox>  
                 <InfoBox>
             <div>
