@@ -9,7 +9,9 @@ const Oddeven = () => {
     let [number, setNum] = useState(null)
     let [bet, setBet] = useState("");
     let [sum, setSum] = useState(false)
+    // 숫자만 배팅금액으로 입력하도록 하는 유효성검사
     let reg = /^[0-9]+$/;
+    // 숫자가 아니면 경고메세지가 출력되도록 조건문
     useEffect(()=>{
         if(!reg.test(bet)){
             setSum("true");
@@ -38,8 +40,8 @@ const Oddeven = () => {
                     name="bet"
                     value={bet}
                     type="text" />
-                {/* <StButton>배팅하기</StButton> */}
                 </Label>
+                {/* 배팅금액이 유효성검사에 걸리면 나오게 되는 경고문구 */}
                 {sum === "true" && bet !==""?
                 <p style={{color:"red"}}>숫자만 입력해주세요.</p>
                 :null}

@@ -5,7 +5,9 @@ import Manage from "../components/manage/Manage"
 const Admin = () => {
     return (
         <>
+        {/* 로그인 유무 검사 헤더 */}
         <Header/>
+        {/* 유저목록 및 포인트 지급 컴포넌트 */}
         <Manage/>
         </>
     )

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-// async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
+// 전체 게임에 대한 총합 랭킹 정보
 export const __getRanking = createAsyncThunk(
     "/api/ranking",
     async (payload, thunkAPI) => {
@@ -18,7 +18,7 @@ export const __getRanking = createAsyncThunk(
     }
   );
   
-
+// 게임별 랭킹 정보 받아오기
   export const __getGame = createAsyncThunk(
     "/api/ranking/game",
     async (payload, thunkAPI) => {

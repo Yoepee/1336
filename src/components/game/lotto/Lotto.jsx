@@ -18,6 +18,7 @@ const Lotto = () => {
     let [arr, setArr] = useState([]);
     // 체크박스 제한걸기
     const countChecked = (e) => {
+        // 6개까지 체크여부 확인
         if(check>5){
             // 해당인자가 있는지 확인
             let index= arr.findIndex((a) => a === e.target.value)
@@ -27,13 +28,17 @@ const Lotto = () => {
                 alert("최대 6개까지 선택 가능합니다.")
             }
         }
+        // 체크확인을 위한 count (몇개 찍었는지 보는내용)
         if(e.target.checked){
             if(check<6){
                 setCheck(check+1);
+                // 선택한 체크박스를 배열형식으로 저장
                 setArr([...arr,e.target.value])
             }
+        // 체크를 눌렀다가 해제했을 때 동작하는 내용
         }else{
             setCheck(check-1)
+            // 배열형식으로 저장된 내용을 수정하는 부분 (체크 해제된 내용을 찾아서 배열에서 제거)
             let index= arr.findIndex((a) => a === e.target.value)
             let copy = arr;
             console.log(copy.splice(index,1))
@@ -43,10 +48,12 @@ const Lotto = () => {
         if(check!==6)
             alert("6개를 선택해주세요.")
         else{
+            // 보내주는 형태에 맞게 전송
             dispatch(__lotto({num1:Number(arr[0]), num2: Number(arr[1]), num3: Number(arr[2]), num4: Number(arr[3]), num5: Number(arr[4]), num6: Number(arr[5])}))
         }
     }
     useEffect(()=>{
+        // 랜더링이 되면 본인의 최근 당첨결과를 불러오는 액션 동작
         dispatch(__myresult())
     },[dispatch])
 
@@ -60,6 +67,7 @@ const Lotto = () => {
             <Form>
                 <LottoBox src="">
                 <Boxchk>
+                {/* 맵함수를 통한 체크박스 복사 */}
                 {['checkbox'].map((type) => (
                     <div key={`inline-${type}`} className="mb-3">
                         {range.map((num,i) => {
@@ -81,6 +89,7 @@ const Lotto = () => {
                 ))}
                 </Boxchk>
                 </LottoBox>
+                {/* 본인의 당첨번호 클릭을 누르면 나오는 부분 */}
                 {result?
                 <InfoBox>
                 <div>

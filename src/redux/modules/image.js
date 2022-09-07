@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-// async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
+// 이미지를 등록하는 api
 export const __image = createAsyncThunk(
   "/api/user/image/",
   async (payload, thunkAPI) => {
@@ -25,6 +25,7 @@ export const __image = createAsyncThunk(
     }
   }
 );
+// 계정이 가지고 있는 이미지정보를 가져오는 api
 export const __getimage = createAsyncThunk(
   "/api/user/image/",
   async (payload, thunkAPI) => {

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
-
+// 닉네임 중복검사
 export const __chkName = createAsyncThunk(
     "api/member/chkName",
     async (payload, thunkAPI) => {
