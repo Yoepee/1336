@@ -67,16 +67,16 @@ const Info = () => {
                 <Input src={img?.data?.data}/>
                 </div>
                 {upload?
-                <input 
+                <Input 
                 type='file' 
                 accept='image/*' 
                 name='profile_img' 
                 onChange={onChange}/>
                 :null}
-                <button onClick={()=>{
+                < CkButton onClick={()=>{
                     if(!upload) {setUpload(true);}
                     else {setUpload(false);}
-                }}>올려보자</button>
+                }}>프로필사진업로드</ CkButton>
                 </InfoBox>  
                 <InfoBox>
             <div>
@@ -153,10 +153,22 @@ const Input = styled.img`
 width: 150px;
 margin-top:3rem;
 margin-bottom: 1rem;
-height: 200px;
-border-radius: 50px;
-background-color: #eee;
+height: 150px;
+border-radius: 110px;
+background-size: 150px;
+background-repeat: no-repeat;
+background-image:url("https://d2u3dcdbebyaiu.cloudfront.net/uploads/atch_img/309/59932b0eb046f9fa3e063b8875032edd_crop.jpeg");
 `
+
+const CkButton = styled.button`
+    border: 1px;
+    margin: 15px 10px 15px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: baseline;
+    box-sizing: border-box;
+    text-transform: uppercase;
+`;
 
 
 const InfoBox = styled.div `
