@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import axios from "axios"
-import { __image } from "../../redux/modules/image";
+import { __image, __getimage } from "../../redux/modules/image";
 
 import { logout } from "../../redux/modules/login";
 
@@ -19,7 +19,8 @@ const Info = () => {
     const result= localStorage.getItem("name")
     const user = useSelector((state)=>state.member)
     const img = useSelector((state)=>state.image)
-    const [file, setFile]=useState("");
+    var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
+    const [upload,setUpload] = useState(false)
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
         if(localStorage.getItem("token1")===null){
@@ -29,39 +30,44 @@ const Info = () => {
             navigate("/login")
         }else{
             dispatch(__getMember(result));
+            dispatch(__getimage());
         }
     }, [dispatch]);
 
-    
     const onChange = async(e) => {
         const img = e.target.files[0];
+        if(!img.name.match(fileForm)){
+            alert("이미지파일(.jpg, .png, .bmp)만 올려주세요.")
+            return
+        }
         const formData = new FormData();
         formData.append('image',img);
         dispatch(__image(formData));
+        setUpload(false);
         // 폼데이터 들어가는 형식을 보기위한 내용
         // for (var pair of formData.entries()) {
         //     console.log(pair[0] + ', ' + pair[1]);
         // }
     }
-    console.log(img)
-    useEffect(()=>{
-        
-    })
-
     return (
 
         <div>
         <UserBox>
                 <InfoBox>
                 <div>
-                <Input/>
+                <Input src={img?.data?.data}/>
                 </div>
+                {upload?
                 <input 
                 type='file' 
                 accept='image/*' 
                 name='profile_img' 
                 onChange={onChange}/>
-                {/* <button>올려보자</button> */}
+                :null}
+                <button onClick={()=>{
+                    if(!upload) {setUpload(true);}
+                    else {setUpload(false);}
+                }}>올려보자</button>
                 </InfoBox>  
                 <InfoBox>
             <div>
@@ -133,7 +139,7 @@ margin-bottom: 2rem;
 
 `
 
-const Input = styled.div`
+const Input = styled.img`
 width: 150px;
 margin-top:3rem;
 margin-bottom: 1rem;
