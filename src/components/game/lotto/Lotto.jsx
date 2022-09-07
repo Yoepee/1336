@@ -90,13 +90,13 @@ const Lotto = () => {
                 ))}
                 </Boxchk>
                 </LottoBox>
-<<<<<<< HEAD
+
                 
                 <InfoBox src="">
                
-=======
+
                 {/* 본인의 당첨번호 클릭을 누르면 나오는 부분 */}
->>>>>>> 991021506c5f610a02d87af3449a4409ad828ffb
+
                 {result?
                
                <HaHa>
