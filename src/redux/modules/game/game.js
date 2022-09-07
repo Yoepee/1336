@@ -14,11 +14,13 @@ export const __oddeven = createAsyncThunk(
             }});
             if(data.data.data === "소지포인트보다 많이 배팅하셨거나 배팅 포인트가 0입니다")
               alert("소지포인트보다 많이 배팅하셨거나 배팅 포인트가 0입니다")
+            if(data.data.data === "홀(1) 짝(2)을 걸어주세요")
+              alert("홀, 짝을 걸어주세요")
             if(data.data.data.result==="성공"){
-            alert(`결과 : 맞추셨습니다.
-            획득포인트 : ${data.data.data.getPoint}
-            현재포인트 : ${data.data.data.nowPoint}`)
-            }
+              alert(`결과 : 맞추셨습니다.
+              획득포인트 : ${data.data.data.getPoint}
+              현재포인트 : ${data.data.data.nowPoint}`)
+              }
             else if(data.data.data.result==="실패"){
                 alert(`결과 : 틀리셨습니다.`)
             }

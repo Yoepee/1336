@@ -44,7 +44,6 @@ const Dice = () => {
                     name="bet"
                     value={bet}
                     type="text" />
-                {/* <StButton>배팅하기</StButton> */}
                 </Label>
                 {/* 배팅금액이 유효성검사에 걸리게 되면 경고문구 출력 */}
                 {sum === "true" && bet !==""?

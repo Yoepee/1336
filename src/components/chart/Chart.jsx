@@ -146,7 +146,7 @@ const Chart = () => {
                                                     <tr key={i}>
                                                         <td>{a.rank}</td>
                                                         <td>{a.nickName}</td>
-                                                        <td>{a.maxCount}</td>
+                                                        <td>{a.earnPoint}</td>
                                                     </tr>
 
                                                 )

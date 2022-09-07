@@ -6,7 +6,7 @@ import styled from "styled-components";
 import axios from "axios"
 import { __image, __getimage } from "../../redux/modules/image";
 
-import { logout } from "../../redux/modules/login";
+import { logout, __logout } from "../../redux/modules/login";
 
 import { __changeMember, __getMember, __removeMember } from "../../redux/modules/member";
 
@@ -67,7 +67,7 @@ const Info = () => {
                 <Input src={img?.data?.data}/>
                 </div>
                 {upload?
-                <Input 
+                <input 
                 type='file' 
                 accept='image/*' 
                 name='profile_img' 
@@ -114,9 +114,11 @@ const Info = () => {
                 <Button onClick={()=>{let change = prompt('수정할 닉네임을 입력해주세요.');
             dispatch(__changeMember({nickName:change}))}}>회원수정</Button>
             <Button onClick={()=>{if(window.confirm("정말로 삭제하시겠습니까?")===true){
-                dispatch(__removeMember());
+                dispatch(__logout());
                 dispatch(logout());
+                dispatch(__removeMember());
                 navigate("/login");
+                // window.location.replace("/login")
             }else{return false;}
             }}>회원삭제</Button>
             </ButtonBox>

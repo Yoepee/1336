@@ -64,6 +64,7 @@ const Comment = () => {
                               }});
                             //   리덕스를 이용하여 자연스러운 state 변경
                               dispatch(createComment(a.data.data));
+                              setComment(initialState)
                         }}>댓글 작성</CkButton>
             </Label>
             </AddInputGroup>
@@ -74,11 +75,10 @@ const Comment = () => {
                         <ReplyBox key={i}>
                         <Replier>{review.nickName} </Replier>
                         <Reply>{review.content}</Reply>
-
+                        {localStorage.getItem("name") === review.nickName?
+                        <>
                         <EdButton onClick={async()=>{
                         {/* 댓글 수정은 patch형식으로 작성 */}
-                        
-
                             let change = prompt('수정할 내용을 입력해주세요.');
                              await axios.patch(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {content: change}, {
                                 headers: {
@@ -87,13 +87,9 @@ const Comment = () => {
                               }});
                               //   리덕스를 이용하여 자연스러운 state 변경
                               dispatch(updateComment({...review,content:change}))
-
-                        }}></EdButton>
-                        <DeButton onClick={async()=>{
-                        }}></DeButton>
+                        }}/>
                         {/* 댓글 삭제는 delete 형식으로 작성 */}
-                        <CkButton onClick={async()=>{
-
+                        <DeButton onClick={async()=>{
                              await axios.delete(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
@@ -101,7 +97,9 @@ const Comment = () => {
                               }});
                               //   리덕스를 이용하여 자연스러운 state 변경
                               dispatch(removeComment(review.id))
-                        }}></CkButton>
+                        }}/>
+                        </>
+                        :null}
                         </ReplyBox>   
                     )
                 })}
