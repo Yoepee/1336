@@ -9,7 +9,7 @@ import id from './modules/check/id'
 import name from './modules/check/name'
 import adult from './modules/check/adult'
 
-import image from './modules/img'
+import image from './modules/image'
 
 import ranking from './modules/ranking'
 import game from './modules/game/game'

@@ -1,25 +1,26 @@
 import { useNavigate} from "react-router-dom";
 import { useSelector, useDispatch} from "react-redux/";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
 import axios from "axios"
-//mport { __image } from "../../redux/modules/img";
+import { __image } from "../../redux/modules/image";
 
 import { logout } from "../../redux/modules/login";
-import { __image } from "../../redux/modules/img";
+
 import { __changeMember, __getMember, __removeMember } from "../../redux/modules/member";
 
 //  유저 세부정보를 출력하는 페이지
 const Info = () => {
     let navigate = useNavigate();
     let dispatch = useDispatch();
-    const imageInput = useRef();
-    const [formData] = useState(new FormData());
-    const [imageSrc, setImageSrc] = useState("");
+    const amu = useRef();
+
     // 데이터받아오기
     const result= localStorage.getItem("name")
     const user = useSelector((state)=>state.member)
+    const img = useSelector((state)=>state.image)
+    const [file, setFile]=useState("");
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
         if(localStorage.getItem("token1")===null){
@@ -31,79 +32,37 @@ const Info = () => {
             dispatch(__getMember(result));
         }
     }, [dispatch]);
-    const imageUpload = (fileBlob) => {
-        // console.log("fileblob is", fileBlob);
-        formData.append('image', fileBlob);
 
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
-
-        const reader = new FileReader();
-        reader.readAsDataURL(fileBlob);
-        return new Promise((resolve) => {
-            reader.onload = () => {
-                setImageSrc(reader.result);
-                resolve();
-            }
-        });
-
-    };
-    const onClickImageUpload = () => {
-        imageInput.current.click();
-    };
-    const addHandler = async() => {
-        console.log(typeof (formData));
-        for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        }
-
-        await axios({
-            method: "PATCH",
-            url: "http://3.34.5.30:8080/api/user/image",          //백앤드 서버로 변경함
-            mode: "cors",
-            headers: {
-                "Authorization": localStorage.getItem("token1"),
-                "RefreshToken": localStorage.getItem("token2"),
-                "Content-Type": "multipart/form-data"
-            },
-            data: formData, // data 전송시에 반드시 생성되어 있는 formData 객체만 전송 하여야 한다.
-        })
-
-
-    };
     
-    
+    const onChange = async(e) => {
+        const img = e.target.files[0];
+        const formData = new FormData();
+        formData.append('image',img);
+        dispatch(__image(formData));
+        // 폼데이터 들어가는 형식을 보기위한 내용
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
+    }
+    console.log(img)
+    useEffect(()=>{
+        
+    })
+
     return (
 
         <div>
         <UserBox>
                 <InfoBox>
                 <div>
-                <div className="preview">
-                        {imageSrc && (
-                            <img
-                                src={imageSrc}
-                                alt="preview-img"
-                                width="50%"
-                                height="60%"
-                            />
-                        )}
-                    </div>
-                <Input 
-                id="imagefile"
-                name="imagefile"
-                type="file"
-                accept="image/*"
-                ref={imageInput}
-                style={{ display: "none" }}
-                onChange={(e) => {
-                    imageUpload(e.target.files[0])
-                }}
-                />
+                <Input/>
                 </div>
-                <button onClick={onClickImageUpload}>올려보자</button>
-                <button onClick={()=>{addHandler()}}>올려보자2</button>
+                <input 
+                type='file' 
+                accept='image/*' 
+                name='profile_img' 
+                onChange={onChange}/>
+                {/* <button>올려보자</button> */}
                 </InfoBox>  
                 <InfoBox>
             <div>
@@ -175,7 +134,7 @@ margin-bottom: 2rem;
 
 `
 
-const Input = styled.input`
+const Input = styled.div`
 width: 150px;
 margin-top:3rem;
 margin-bottom: 1rem;
@@ -221,4 +180,3 @@ const Button = styled.button `
     font-weight: 400;
     text-transform: uppercase;
 `;
-
