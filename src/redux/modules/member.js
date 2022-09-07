@@ -26,6 +26,10 @@ export const __getMember = createAsyncThunk(
                   Authorization: localStorage.getItem('token1'),
                   RefreshToken: localStorage.getItem('token2'),
             }});
+            console.log(data)
+            localStorage.setItem("token1", data.headers.authorization)
+            localStorage.setItem("token2", data.headers.refreshtoken)
+            localStorage.setItem("name",data.data.data.nickName)
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {
             return thunkAPI.rejectWithValue(error);
