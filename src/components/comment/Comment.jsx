@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { __getComment, createComment, removeComment, updateComment } from "../../redux/modules/comment/comment";
 import styled from "styled-components";
 import axios from "axios";
-import { BsPencilFill, BsFillEraserFill } from "react-icons/bs";
+//import { BsPencilFill, BsFillEraserFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 
 const Comment = () => {
@@ -46,7 +46,7 @@ const Comment = () => {
     return (
         <>
         <AddInputGroup>
-            <div>
+
             <Label>
                 <Input placeholder="내용"
                     onChange={(e)=>{setComment({...comment,content:e.target.value})}}
@@ -62,7 +62,6 @@ const Comment = () => {
                               dispatch(createComment(a.data.data));
                         }}>댓글 작성</CkButton>
             </Label>
-            </div>
             </AddInputGroup>
             <AddInputGroup>
             <div>
@@ -71,7 +70,7 @@ const Comment = () => {
                         <ReplyBox key={i}>
                         <Replier>{review.nickName} </Replier>
                         <Reply>{review.content}</Reply>
-                        <CkButton onClick={async()=>{
+                        <EdButton onClick={async()=>{
                             let change = prompt('수정할 내용을 입력해주세요.');
                              await axios.patch(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {content: change}, {
                                 headers: {
@@ -79,15 +78,15 @@ const Comment = () => {
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
                               dispatch(updateComment({...review,content:change}))
-                        }}><BsPencilFill/></CkButton>
-                        <CkButton onClick={async()=>{
+                        }}></EdButton>
+                        <DeButton onClick={async()=>{
                              await axios.delete(`http://3.34.5.30:8080/api/comment?id=${review.id}`, {
                                 headers: {
                                     Authorization: localStorage.getItem('token1'),
                                     RefreshToken: localStorage.getItem('token2'),
                               }});
                               dispatch(removeComment(review.id))
-                        }}><BsFillEraserFill/></CkButton>
+                        }}></DeButton>
                         </ReplyBox>   
                     )
                 })}
@@ -112,8 +111,10 @@ const AddInputGroup = styled.div `
 width:500px;
 margin: 0 auto;
 margin-top: 1rem;
+margin-bottom: 2rem;
+
 border : 4px solid transparent;
-padding:12px 24px 24px 24px;
+padding:12px 24px 12px 12px;
 background-size: 300px;
 `;
 
@@ -130,7 +131,7 @@ const Label = styled.label `
 
 const CkButton = styled.button`
     border: 1px;
-    margin: 15px 0 0;
+    margin: 15px 10px 15px;
     display: inline-block;
     text-align: center;
     vertical-align: baseline;
@@ -163,6 +164,34 @@ const Reply = styled.div`
     font-weight: 400;
     font-size: 18px;
 `
+
+const EdButton = styled.button`
+width: 30px;
+height: 30px;
+background: none;
+background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FmnuSj%2FbtrLzESBOTR%2FJaHDiIBq3ugrEF07d1JnyK%2Fimg.png);
+border : 4px solid transparent; 
+display: flex;
+flex-direction: row;
+align-items: center;
+margin: 15px 5px 15px;
+background-repeat: no-repeat;
+`;
+
+const DeButton = styled.button`
+width: 30px;
+height: 30px;
+background: none;
+background-image: url(https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FObzhp%2FbtrLDP6mFdx%2FZsSu7Y0tgSdtSXqKj32iU0%2Fimg.png);
+border : 4px solid transparent; 
+display: flex;
+flex-direction: row;
+align-items: center;
+margin: 15px 5px 15px;
+background-repeat: no-repeat;
+`;
+
+
 
 
 

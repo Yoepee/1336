@@ -82,23 +82,13 @@ const Lotto = () => {
                     </div>
                 ))}
                 </Boxchk>
-                
                 </LottoBox>
-<<<<<<< HEAD
-                <Lottobill src="">
-                </Lottobill>
-            
-                </StForm>
-
                 
-                <div>
-                <GoButton type="button" onClick={()=>{dispatch(__lotto({num1:0, num2: 0, num3: 0, num4: 0, num5: 0, num6: 0}))}}>랜덤로또</GoButton>
-                <GoButton type="button" onClick={()=>{sellLotto()}}>로또구매</GoButton>
-                <GoButton type="button" onClick={()=>{dispatch(__result())}}>당첨번호조회</GoButton>
-=======
+                <InfoBox src="">
+               
                 {result?
-                <InfoBox>
-                <div>
+               
+               <HaHa>
                 <Label>
                 <p>회차 : {data?.data[0]?.no} </p>
                 </Label>
@@ -119,10 +109,12 @@ const Lotto = () => {
                 <Label>
                 <p>획득 점수 : {data?.data[0]?.earnPoint} </p>
                 </Label>
-                </div>
-                <button onClick={()=>{if(result) {setResult(false)} else {setResult(true)}}}>버리기</button>
-                </InfoBox>  
+                </HaHa>
                 :null}
+                
+                </InfoBox>
+                </StForm>
+                <ButtonBox>
                 <div>
                 <GoButton type="button" onClick={()=>{dispatch(__lotto({num1:0, num2: 0, num3: 0, num4: 0, num5: 0, num6: 0}))}}>랜덤로또</GoButton>
                 <GoButton type="button" onClick={()=>{sellLotto()}}>로또구매</GoButton>
@@ -131,8 +123,8 @@ const Lotto = () => {
                 <GoButton type="button" onClick={()=>{dispatch(__lottoresult())}}>당첨번호조회</GoButton>
                 <GoButton type="button" onClick={()=>{dispatch(__myresult())
                 if(result) {setResult(false)} else {setResult(true)}}}>당첨결과</GoButton>
->>>>>>> 11654106a7bb6370118d5db367802ff4312fe2dd
                 </div>
+                </ButtonBox>
             </Form>
             
         </div>
@@ -143,7 +135,7 @@ export default Lotto;
 
 const StForm = styled.div`
 width:800px;
-height:550px;
+height:500px;
 margin: 0 auto;
 margin-top: 2rem;
 margin-bottom: 1rem;
@@ -155,11 +147,20 @@ display: flex;
 border-radius: 8px;
 `;
 
+const HaHa = styled.div`
+width: 300px;
+height: 240px;
+margin-top: 7rem;
+justify-content: left;
+align-content:left; 
+    
+`
+
 
 const LogoBox = styled.div `
 width:450px;
 margin: 0 auto;
-margin-top: 1rem;
+margin-top: 4rem;
 border : 4px solid transparent;
 padding:12px 24px 24px 24px;
 background-size: 240px; 
@@ -171,7 +172,6 @@ box-sizing: border-box;
 margin-bottom: 1rem;
 `;
 
-
 const LottoBox = styled.div `
    width: 400px;
    height: 500px;
@@ -181,17 +181,6 @@ const LottoBox = styled.div `
    align-items: center;
 `;
 
-const Lottobill = styled.div `
-   width: 400px;
-   height: 500px;
-   background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FdHj10F%2FbtrLBdZWW6b%2F2rqeZZCwR7X8ZVsVN46RjK%2Fimg.png");
-   display: flex;
-   margin-top:6rem;
-   justify-content: center;
-   align-items: center;
-   background-repeat: no-repeat;
-   
-`;
 const StLotto = styled.div`
     padding: 4px 6px;
     font-size: 15px;
@@ -210,7 +199,7 @@ const StLotto = styled.div`
     padding: 8px 15px;
     font-size: 20px;
     border-radius: 5px;
-    border: 1px solid ;
+    border: 1px solid transparent;
     margin: 15px 8px 15px;
     background: #ffcc01;
     color: #c00a0a;
@@ -228,24 +217,35 @@ const StLotto = styled.div`
     background-size: 240px; 
     `;
 
-    const InfoBox = styled.div `
+const InfoBox = styled.div `
 width:350px;
-height: 380px;
-margin: 0 auto;
-margin-top: 1rem;
+height: 470px;
+margin-top: 2rem;
 border : 4px solid #fff;
-background-color: #fff;
-border-radius: 12px;
+background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbyObGD%2FbtrLAqlWNVl%2FbeGeZjgyMXTxEy5PcFXkhK%2Fimg.png");
+background-repeat: no-repeat;
 padding:12px 12px 12px 12px;
-background-size: 240px;
+background-size: 350px;
 
 `;
 const Label = styled.label `
+
     overflow: hidden;
+    height: 35px;
     display: block;
-    width: 100%;
-    margin: 0 0 8px 0;
-    border: 1px solid #eee;
-    color: #8F8F91;
+    width: 290px;
+    display: inline-block;
+    justify-content: center;
+    margin:  2px 6px 4px 10px;
+    border: 1px solid transparent;
+    color: black;
     text-align: left;
+    font-family :'Song Myung', serif;
+    font-size: 22px;
 `;
+
+const ButtonBox = styled.div`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+`
