@@ -3,6 +3,7 @@ import axios from 'axios';
 
 // async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
   export const __login = createAsyncThunk(
+    // 로그인을 시행하여 토큰 및 닉네임 정보를 받아옴
     "api/member/login",
     async (payload, thunkAPI) => {
         try {
@@ -18,6 +19,7 @@ import axios from 'axios';
           }
     }
   );
+  // 로그아웃을 통해 서버에서도 로그아웃 인지 및 토큰갱신
   export const __logout = createAsyncThunk(
     "/api/logout",
     async (payload, thunkAPI) => {
@@ -43,6 +45,7 @@ export const login = createSlice({
         isLoading: false
       },
     reducers:{
+      // 로그아웃을 하면서 로컬 스토리지의 토큰 및 닉네임 저장내용 삭제
       logout(state){
         localStorage.removeItem("token1")
         localStorage.removeItem("token2")

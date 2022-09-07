@@ -4,7 +4,9 @@ import Info from "../components/info/Info"
 const User = () => {
     return (
         <>
+        {/* 로그인 유무 검사 헤더 */}
         <Header/>
+        {/* 유저정보 컴포넌트 */}
         <Info/>
         </>
     )

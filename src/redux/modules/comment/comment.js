@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
+// 댓글 받아오는 내용
 // async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
 export const __getComment = createAsyncThunk(
     "/api/comment",
@@ -16,23 +17,8 @@ export const __getComment = createAsyncThunk(
           }
     }
   );
-  // export const __postComment = createAsyncThunk(
-  //   "/api/comment",
-  //   async (payload, thunkAPI) => {
-  //       try {
-  //         console.log(payload.game);
-  //         console.log({content: payload.content})
-            // const data =  await axios.post(`http://3.34.5.30:8080/api/comment?gameId=${payload.game}`, {content: payload.content}, {
-            //   headers: {
-            //       Authorization: localStorage.getItem('token1'),
-            //       RefreshToken: localStorage.getItem('token2'),
-            // }});
-  //           return;
-  //         } catch (error) {
-  //           return thunkAPI.rejectWithValue(error);
-  //         }
-  //   }
-  // );
+
+// 리덕스를 통한 댓글의 자연스러운 state변화 출력하도록 생성
 // createSlice를 통한 redux 생성 - store에서 사용할 수 있는 내용들을 담고 있음
 export const comment = createSlice({
     name:"comment",
@@ -43,13 +29,16 @@ export const comment = createSlice({
         isLoading: false
       },
     reducers:{
+        // 댓글 작성
         createComment(state, action){
           state.data.data.push(action.payload);
         },
+        // 댓글 삭제
         removeComment(state, action){
           let  index = state.data.data.findIndex(post =>  post.id === action.payload);
 			    state.data.data.splice(index,1);
         },
+        // 댓글 수정
         updateComment(state, action){
           let  index = state.data.data.findIndex(post =>  post.id === action.payload.id);
 			    state.data.data.splice(index, 1, action.payload);

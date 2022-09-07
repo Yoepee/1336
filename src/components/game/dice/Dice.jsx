@@ -8,7 +8,9 @@ const Dice = () => {
     let [choice, setChoice] = useState("");
     let [bet, setBet] = useState("");
     let [sum, setSum] = useState(false)
+    // 배팅금액의 유효성검사 (숫자 작성 정규식)
     let reg = /^[0-9]+$/;
+    // 배팅금액이 유효성검사에 걸리게 되면 경고문구 출력
     useEffect(()=>{
         if(!reg.test(bet)){
             setSum("true");
@@ -44,13 +46,17 @@ const Dice = () => {
                     type="text" />
                 {/* <StButton>배팅하기</StButton> */}
                 </Label>
+                {/* 배팅금액이 유효성검사에 걸리게 되면 경고문구 출력 */}
                 {sum === "true" && bet !==""?
                 <p style={{color:"red"}}>숫자만 입력해주세요.</p>
                 :null}
             </div>
             <div>
+                {/* 번호를 고르지않으면 경고메세지 출력 */}
                 <GoButton onClick={() => { if(choice==="")alert("번호를 골라주세요.");
+                // 배팅금액을 지정하지않으면 경고메세지 출력
                 else if(bet.trim()===""||sum==="true")alert("배팅금액을 입력해주세요.");
+                // 번호 및 배팅금액이 지정되야만 동작하도록 설정
                 else{dispatch(__dice({point:bet,number:choice}))} }}>도전</GoButton>
             </div>
 

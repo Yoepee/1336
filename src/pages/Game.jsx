@@ -6,6 +6,7 @@ import Comment from "../components/comment/Comment"
 const Game = () => {
     return (
         <>
+        {/* 로그인 유무 검사 헤더 */}
         <Header/>
         {/* Outlet을 통해 중첩라우터에 대한 내용을 담을 위치 지정 */}
         <Outlet></Outlet>

@@ -1,25 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-// async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
+// 로또 구매
 export const __lotto = createAsyncThunk(
     "/api/game/lotto",
     async (payload, thunkAPI) => {
         try {
-          console.log(payload)
             const data =  await axios.post("http://3.34.5.30:8080/api/game/lotto", payload, {
               headers: {
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
-            console.log(data);
             if(data.data.success===true){
               if(data.data.data === "로또를 구매하기 위한 포인트가 부족합니다")
                 alert("로또를 구매하기 위한 포인트가 부족합니다");
               else if(data.data.data === "57분~03분 사이는 정산시간으로 로또구매가 불가능합니다.")
                 alert("57분~03분 사이는 정산시간으로 로또구매가 불가능합니다.")
               else
-                alert("구매에 성공하였습니다.");
+                alert("구매에 성공하였습니다. 1000포인트 지출");
             }
             else
               alert("구매에 실패하였습니다.");
@@ -29,6 +27,7 @@ export const __lotto = createAsyncThunk(
           }
     }
   );
+  // 자신의 로또 결과 받아오기
   export const __myresult = createAsyncThunk(
     "/api/game/lottomyresult",
     async (payload, thunkAPI) => {
@@ -38,7 +37,6 @@ export const __lotto = createAsyncThunk(
                 Authorization: localStorage.getItem("token1"),
                 RefreshToken: localStorage.getItem("token2")
             }});
-            console.log(data);
             
             return thunkAPI.fulfillWithValue(data.data);
           } catch (error) {

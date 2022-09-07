@@ -19,15 +19,18 @@ const Info = () => {
     const result= localStorage.getItem("name")
     const user = useSelector((state)=>state.member)
     const img = useSelector((state)=>state.image)
+    // 이미지파일을 검사하는 정규식
     var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf)$/;
     const [upload,setUpload] = useState(false)
     // useEffect를 통한 불필요한 비동기 동작 제어
     useEffect(() => {
+        // 토큰이 존재하지않으면 로그인창으로 방출
         if(localStorage.getItem("token1")===null){
             navigate("/login")
         }
         if(localStorage.getItem("token2")===null){
             navigate("/login")
+        // 토큰 내용을 확인하여 이미지 및 정보를 불러옴
         }else{
             dispatch(__getMember(result));
             dispatch(__getimage());
@@ -35,14 +38,20 @@ const Info = () => {
     }, [dispatch]);
 
     const onChange = async(e) => {
+        // input file에서 선택된 file을 img로 지정
         const img = e.target.files[0];
+        // 이미지 파일이 아니면 이후 동작을 생략하고 경고문구 출력
         if(!img.name.match(fileForm)){
             alert("이미지파일(.jpg, .png, .bmp)만 올려주세요.")
             return
         }
+        // 폼데이터 형식 선언
         const formData = new FormData();
+        // api에서 요구하는 key값과 value값 지정 (key : "image", value: 이미지파일)
         formData.append('image',img);
+        // 이미지만 보내면되기때문에 더이상 append하지않고 이미지파일 전송
         dispatch(__image(formData));
+        // 사진을 선택하고 사진선택기능 숨기기
         setUpload(false);
         // 폼데이터 들어가는 형식을 보기위한 내용
         // for (var pair of formData.entries()) {
@@ -101,6 +110,7 @@ const Info = () => {
             </UserBox>  
 
             <ButtonBox>
+                {/* alert를 통한 수정내용 받아오기 */}
                 <Button onClick={()=>{let change = prompt('수정할 닉네임을 입력해주세요.');
             dispatch(__changeMember({nickName:change}))}}>회원수정</Button>
             <Button onClick={()=>{if(window.confirm("정말로 삭제하시겠습니까?")===true){

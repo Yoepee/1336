@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
-
+// 성인인증
 export const __chkAdult = createAsyncThunk(
     "api/member/chkAdult",
     async (payload, thunkAPI) => {

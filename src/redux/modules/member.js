@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from 'axios';
 
-// async를 통한 비동기로 데이터를 받아오는 과정 (미들웨어 공부하시면 좋을듯)
+// 마이페이지 본인 정보 받아오기
 export const __getMember = createAsyncThunk(
     "api/user",
     async (payload, thunkAPI) => {
@@ -17,6 +17,7 @@ export const __getMember = createAsyncThunk(
           }
     }
   );
+  // 본인정보 수정하기 (닉네임 변경)
   export const __changeMember = createAsyncThunk(
     "api/user",
     async (payload, thunkAPI) => {
@@ -36,7 +37,7 @@ export const __getMember = createAsyncThunk(
           }
     }
   );
-
+  // 회원탈퇴 기능
   export const __removeMember = createAsyncThunk(
     "api/user",
     async (payload, thunkAPI) => {
@@ -54,7 +55,7 @@ export const __getMember = createAsyncThunk(
     }
   );
   
-
+// 회원가입
   export const __signUp = createAsyncThunk(
     "api/member/signup",
     async (payload, thunkAPI) => {
