@@ -57,6 +57,8 @@ const FormSignup = () => {
             if (userid.data.success && username.data.success && useradult.data.success) {
                 //member을 데이터베이스에 보내줘야하는 동작과 동일하게 전달 (api참조)
                 // dispatch(createMember(member));
+                //if(password === passwordConfirm)
+
                 dispatch(__signUp(member));
                 // 값을 보낸 후에는 초기값으로 초기화
                 setMember(initialState);

@@ -63,8 +63,9 @@ const Lotto = () => {
         <LogoBox>
         <Title_logo src="https://blog.kakaocdn.net/dn/Wflzc/btrLu3dFy68/qop9TRah6EMP9r3U8tj3Wk/img.gif"></Title_logo>
         </LogoBox>
-        <StForm>
+        
             <Form>
+            <StForm>
                 <LottoBox src="">
                 <Boxchk>
                 {/* 맵함수를 통한 체크박스 복사 */}
@@ -89,10 +90,16 @@ const Lotto = () => {
                 ))}
                 </Boxchk>
                 </LottoBox>
+
+                
+                <InfoBox src="">
+               
+
                 {/* 본인의 당첨번호 클릭을 누르면 나오는 부분 */}
+
                 {result?
-                <InfoBox>
-                <div>
+               
+               <HaHa>
                 <Label>
                 <p>회차 : {data?.data[0]?.no} </p>
                 </Label>
@@ -113,10 +120,12 @@ const Lotto = () => {
                 <Label>
                 <p>획득 점수 : {data?.data[0]?.earnPoint} </p>
                 </Label>
-                </div>
-                <button onClick={()=>{if(result) {setResult(false)} else {setResult(true)}}}>버리기</button>
-                </InfoBox>  
+                </HaHa>
                 :null}
+                
+                </InfoBox>
+                </StForm>
+                <ButtonBox>
                 <div>
                 <GoButton type="button" onClick={()=>{dispatch(__lotto({num1:0, num2: 0, num3: 0, num4: 0, num5: 0, num6: 0}))}}>랜덤로또</GoButton>
                 <GoButton type="button" onClick={()=>{sellLotto()}}>로또구매</GoButton>
@@ -126,8 +135,9 @@ const Lotto = () => {
                 <GoButton type="button" onClick={()=>{dispatch(__myresult())
                 if(result) {setResult(false)} else {setResult(true)}}}>당첨결과</GoButton>
                 </div>
+                </ButtonBox>
             </Form>
-            </StForm>
+            
         </div>
     )
 }
@@ -135,9 +145,28 @@ const Lotto = () => {
 export default Lotto;
 
 const StForm = styled.div`
-    display: flex;
-    justify-content: center;
+width:800px;
+height:500px;
+margin: 0 auto;
+margin-top: 2rem;
+margin-bottom: 1rem;
+border : 4px solid transparent;
+padding:12px 12px 12px 12px;
+background-size: 240px;
+background-color: #fff;
+display: flex;
+border-radius: 8px;
+`;
+
+const HaHa = styled.div`
+width: 300px;
+height: 240px;
+margin-top: 7rem;
+justify-content: left;
+align-content:left; 
+    
 `
+
 
 const LogoBox = styled.div `
 width:450px;
@@ -181,7 +210,7 @@ const StLotto = styled.div`
     padding: 8px 15px;
     font-size: 20px;
     border-radius: 5px;
-    border: 1px solid ;
+    border: 1px solid transparent;
     margin: 15px 8px 15px;
     background: #ffcc01;
     color: #c00a0a;
@@ -199,24 +228,35 @@ const StLotto = styled.div`
     background-size: 240px; 
     `;
 
-    const InfoBox = styled.div `
+const InfoBox = styled.div `
 width:350px;
-height: 380px;
-margin: 0 auto;
-margin-top: 1rem;
+height: 470px;
+margin-top: 2rem;
 border : 4px solid #fff;
-background-color: #fff;
-border-radius: 12px;
+background-image: url("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbyObGD%2FbtrLAqlWNVl%2FbeGeZjgyMXTxEy5PcFXkhK%2Fimg.png");
+background-repeat: no-repeat;
 padding:12px 12px 12px 12px;
-background-size: 240px;
+background-size: 350px;
 
 `;
 const Label = styled.label `
+
     overflow: hidden;
+    height: 35px;
     display: block;
-    width: 100%;
-    margin: 0 0 8px 0;
-    border: 1px solid #eee;
-    color: #8F8F91;
+    width: 290px;
+    display: inline-block;
+    justify-content: center;
+    margin:  2px 6px 4px 10px;
+    border: 1px solid transparent;
+    color: black;
     text-align: left;
+    font-family :'Song Myung', serif;
+    font-size: 22px;
 `;
+
+const ButtonBox = styled.div`
+   display: flex;
+   justify-content: center;
+   align-items: center;
+`
